@@ -62,9 +62,17 @@ class Chantier
     #[ORM\ManyToMany(targetEntity: CategorieChantier::class, inversedBy: 'chantiers')]
     private $category;
 
+    #[ORM\ManyToMany(targetEntity: Materiel::class, inversedBy: 'chantiers')]
+    private $materiel;
+
+    #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
+    private $devis;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->materiel = new ArrayCollection();
+        $this->devis = new ArrayCollection();
     }
 
    
@@ -264,6 +272,60 @@ class Chantier
     public function removeCategory(CategorieChantier $category): self
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Materiel>
+     */
+    public function getMateriel(): Collection
+    {
+        return $this->materiel;
+    }
+
+    public function addMateriel(Materiel $materiel): self
+    {
+        if (!$this->materiel->contains($materiel)) {
+            $this->materiel[] = $materiel;
+        }
+
+        return $this;
+    }
+
+    public function removeMateriel(Materiel $materiel): self
+    {
+        $this->materiel->removeElement($materiel);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Devis>
+     */
+    public function getDevis(): Collection
+    {
+        return $this->devis;
+    }
+
+    public function addDevi(Devis $devi): self
+    {
+        if (!$this->devis->contains($devi)) {
+            $this->devis[] = $devi;
+            $devi->setChantier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDevi(Devis $devi): self
+    {
+        if ($this->devis->removeElement($devi)) {
+            // set the owning side to null (unless already changed)
+            if ($devi->getChantier() === $this) {
+                $devi->setChantier(null);
+            }
+        }
 
         return $this;
     }

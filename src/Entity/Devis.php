@@ -27,6 +27,9 @@ class Devis
     #[ORM\Column(type: 'string', nullable: true)]
     private $paiement;
 
+    #[ORM\ManyToOne(targetEntity: Chantier::class, inversedBy: 'devis')]
+    private $chantier;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Devis
     public function setPaiement(?string $paiement): self
     {
         $this->paiement = $paiement;
+
+        return $this;
+    }
+
+    public function getChantier(): ?Chantier
+    {
+        return $this->chantier;
+    }
+
+    public function setChantier(?Chantier $chantier): self
+    {
+        $this->chantier = $chantier;
 
         return $this;
     }
