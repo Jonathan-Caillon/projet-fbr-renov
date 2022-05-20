@@ -7,24 +7,47 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ["groups" =>["user:read"]],
+    denormalizationContext: ["groups" =>["user:write"]]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+        #[Groups(
+        ["user:read"],
+    )]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+        #[Groups(
+        ["user:read", "user:write"]
+    )]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(
+        ["user:read", "user:write"]
+    )]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(
+        ["user:read"]
+    )]
     private $password;
+    
+    #[SerializedName("password")]
+    #[Groups(
+        ["user:write"]
+    )]
+    private $plainPassword;
 
     public function getId(): ?int
     {
@@ -87,12 +110,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+        /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 }
