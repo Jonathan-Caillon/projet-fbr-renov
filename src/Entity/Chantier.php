@@ -68,11 +68,15 @@ class Chantier
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
     private $devis;
 
+    #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: ImageChantier::class)]
+    private $imageChantiers;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->materiel = new ArrayCollection();
         $this->devis = new ArrayCollection();
+        $this->imageChantiers = new ArrayCollection();
     }
 
    
@@ -324,6 +328,36 @@ class Chantier
             // set the owning side to null (unless already changed)
             if ($devi->getChantier() === $this) {
                 $devi->setChantier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ImageChantier>
+     */
+    public function getImageChantiers(): Collection
+    {
+        return $this->imageChantiers;
+    }
+
+    public function addImageChantier(ImageChantier $imageChantier): self
+    {
+        if (!$this->imageChantiers->contains($imageChantier)) {
+            $this->imageChantiers[] = $imageChantier;
+            $imageChantier->setChantier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImageChantier(ImageChantier $imageChantier): self
+    {
+        if ($this->imageChantiers->removeElement($imageChantier)) {
+            // set the owning side to null (unless already changed)
+            if ($imageChantier->getChantier() === $this) {
+                $imageChantier->setChantier(null);
             }
         }
 

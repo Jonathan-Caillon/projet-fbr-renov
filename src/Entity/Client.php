@@ -44,9 +44,13 @@ class Client
     #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Depannage::class)]
+    private $depannages;
+
     public function __construct()
     {
         $this->chantier = new ArrayCollection();
+        $this->depannages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,6 +180,36 @@ class Client
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Depannage>
+     */
+    public function getDepannages(): Collection
+    {
+        return $this->depannages;
+    }
+
+    public function addDepannage(Depannage $depannage): self
+    {
+        if (!$this->depannages->contains($depannage)) {
+            $this->depannages[] = $depannage;
+            $depannage->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepannage(Depannage $depannage): self
+    {
+        if ($this->depannages->removeElement($depannage)) {
+            // set the owning side to null (unless already changed)
+            if ($depannage->getClient() === $this) {
+                $depannage->setClient(null);
+            }
+        }
 
         return $this;
     }
