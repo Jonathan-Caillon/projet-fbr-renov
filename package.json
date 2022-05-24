@@ -23,6 +23,7 @@
         "test:unit": "vitest --environment jsdom"
     },
     "dependencies": {
+        "form-data": "^4.0.0",
         "vue": "^3.2.32",
         "vue-loader": "^17.0.0",
         "vue-router": "^4.0.14",
