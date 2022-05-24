@@ -2,34 +2,34 @@
   <main>
      <form id="formulaire" @submit.prevent="send">
       <label>Intitulé : </label>
-      <input v-model="intitule" type="text" name="intitule" /><br />
+      <input v-model="intitule" type="text" name="intitule" required /><br />
 
       <label>Adresse: </label>
-      <input v-model="adresse" type="text" name="adresse" /><br />
+      <input v-model="adresse" type="text" name="adresse" required /><br />
 
       <label>Ville: </label>
-      <input v-model="ville" type="text" name="ville" /><br />
+      <input v-model="ville" type="text" name="ville" required /><br />
 
       <label>Code Postal: </label>
-      <input v-model="codePostal" type="text" name="codePostal" /><br />
+      <input v-model="codePostal" type="text" name="codePostal" required /><br />
 
       <label>Date de creation: </label>
-      <input v-model="date" type="date" name="date" /><br />
+      <input v-model="date" type="date" name="date" required /><br />
 
       <label>Durée de Travaux: </label>
-      <input v-model="dureeTravaux" type="number" name="dureeTravaux" /><br />
+      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
 
       <label>Travaux supplémentaire: </label>
       <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
 
       <label>Distance: </label>
-      <input v-model="distance" type="number" name="distance" /><br />
+      <input v-model="distance" type="number" name="distance" required /><br />
 
       <label>Note Personnelle: </label>
-      <input v-model="notePerso" type="text" name="notePerso" /><br />
+      <textarea v-model="notePerso" type="text" name="notePerso" /><br />
 
       <label>Note Client: </label>
-      <input v-model="noteClient" type="text" name="noteClient" /><br />
+      <textarea v-model="noteClient" type="text" name="noteClient" /><br />
 
       <label>Urgent: </label>
       <input
@@ -48,7 +48,7 @@
         v-model="typeChantier"
         type="radio"
         name="typeChantier"
-        value="Intérieur"
+        value="Intérieur" checked
       />
       <label>Intérieur</label>
       <input
