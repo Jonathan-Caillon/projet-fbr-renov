@@ -26,10 +26,10 @@
       <input v-model="distance" type="number" name="distance" required /><br />
 
       <label>Note Personnelle: </label>
-      <textarea v-model="notePerso" type="text" name="notePerso" /><br />
+      <textarea v-model="notePerso" type="text" name="notePerso"></textarea><br />
 
       <label>Note Client: </label>
-      <textarea v-model="noteClient" type="text" name="noteClient" /><br />
+      <textarea v-model="noteClient" type="text" name="noteClient" ></textarea><br />
 
       <label>Urgent: </label>
       <input
