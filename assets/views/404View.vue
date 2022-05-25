@@ -180,9 +180,11 @@ main {
   height: 100vh;
   overflow: hidden;
   font-size: 12px;
+  background-color: #2c3338;
   font-family: 'Open Sans', sans-serif;
   letter-spacing: 0.2px;
   color: #fff;
+
 }
 .inspiration {
   position: fixed;

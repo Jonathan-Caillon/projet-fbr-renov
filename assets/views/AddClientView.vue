@@ -26,11 +26,10 @@
 
       <label>Raison sociale: </label>
       <input v-model="raisonSociale" type="text" name="raisonSociale" ><br />
+      
       <button type="submit">Envoyer</button>
 
-       <!-- <span v-for="client of clients"
-       :key="client.id"></span> -->
-        <a :href="'/addChantier/' +dataId">Créer un chantier</a>
+        <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
       
     </form>
     
@@ -86,8 +85,8 @@ export default {
             if(response.status === 201){
                 const data = await response.json();
                 console.log("Success:", data);
-                console.log(data.id)
-                this.dataId = data.id
+                // console.log(data.id)
+                // this.dataId = data.id
             }
         }
         )
