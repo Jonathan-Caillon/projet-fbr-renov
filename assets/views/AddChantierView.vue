@@ -32,32 +32,19 @@
       <textarea v-model="noteClient" type="text" name="noteClient" ></textarea><br />
 
       <label>Urgent: </label>
-      <input
-        v-model="urgent"
-        type="radio"
-        name="urgent"
-        value="false"
-        checked
-      />
+      <input v-model="urgent" type="radio" name="urgent" value="false" checked/>
       <label>Non </label>
+
       <input v-model="urgent" type="radio" name="urgent" value="true" />
       <label>Oui </label> <br />
 
       <label>Type Chantier: </label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Intérieur" checked
-      />
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="interieur"/>
       <label>Intérieur</label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Extérieur"
-      />
+
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="exterieur"/>
       <label>Extérieur </label>
+
       <button type="submit">Envoyer</button>
     </form>
   </main>
@@ -87,7 +74,8 @@ export default {
       let urgentForm = false;
       if (this.urgent == "true") {
         urgentForm = true;
-      }  
+      }
+
       let form = {
         intitule: this.intitule,
         adresse: this.adresse,
@@ -101,8 +89,9 @@ export default {
         noteClient: this.noteClient,
         urgent: urgentForm,
         typeChantier: this.typeChantier,
-      };
 
+      };
+       
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
