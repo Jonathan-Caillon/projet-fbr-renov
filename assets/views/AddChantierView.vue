@@ -14,14 +14,24 @@
       <label>Ville* : </label>
       <input v-model="ville" type="text" name="ville" required /><br />
 
-      <label>Code Postal* : </label>
-      <input v-model="codePostal" type="text" name="codePostal" required /><br />
+      <label>Code Postal: </label>
+      <input
+        v-model="codePostal"
+        type="text"
+        name="codePostal"
+        required
+      /><br />
 
       <label>Date de creation* : </label>
       <input v-model="date" type="date" name="date" required /><br />
 
-      <label>Durée de Travaux* : </label>
-      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
+      <label>Durée de Travaux: </label>
+      <input
+        v-model="dureeTravaux"
+        type="number"
+        name="dureeTravaux"
+        required
+      /><br />
 
       <label>Travaux supplémentaire: </label>
       <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
@@ -30,11 +40,14 @@
       <input v-model="distance" type="number" name="distance" required /><br />
 
       <label>Note Personnelle: </label>
-      <textarea v-model="notePerso" type="text" name="notePerso"></textarea><br />
+      <textarea v-model="notePerso" type="text" name="notePerso"></textarea
+      ><br />
 
       <label>Note Client: </label>
-      <textarea v-model="noteClient" type="text" name="noteClient" ></textarea><br />
+      <textarea v-model="noteClient" type="text" name="noteClient"></textarea
+      ><br />
 
+<div>
       <label>Urgent: </label>
       <div>
         <input
@@ -49,25 +62,24 @@
       <div>
       <input v-model="urgent" type="radio" name="urgent" value="true" />
       <label>Oui </label></div> <br />
-
+    </div>
+   <div>
       <label>Type Chantier: </label>
-        <div>
-          <input
-            v-model="typeChantier"
-            type="radio"
-            name="typeChantier"
-            value="Intérieur" checked
-          />
-          <label>Intérieur</label>
-        </div>
-        <div>
-          <input
-            v-model="typeChantier"
-            type="radio"
-            name="typeChantier"
-            value="Extérieur"
-          />
-          <label>Extérieur </label>
+      <input
+        v-model="typeChantier"
+        type="radio"
+        name="typeChantier"
+        value="Intérieur"
+        checked
+      />
+      <label>Intérieur</label>
+      <input
+        v-model="typeChantier"
+        type="radio"
+        name="typeChantier"
+        value="Extérieur"
+      />
+      <label>Extérieur </label>
       </div>
       <button type="submit">Envoyer</button>
     </form>
@@ -77,7 +89,6 @@
 <script>
 export default {
   data() {
-
     return {
       intitule: null,
       adresse: null,
@@ -98,7 +109,7 @@ export default {
       let urgentForm = false;
       if (this.urgent == "true") {
         urgentForm = true;
-      }  
+      }
       let form = {
         intitule: this.intitule,
         adresse: this.adresse,
@@ -126,13 +137,12 @@ export default {
         body: JSON.stringify(form),
       };
       await fetch("/api/chantiers", myData)
-        .then( async (response) => {
-            if(response.status === 200){
-                const data = await response.json();
-                console.log("Success:", data);
-            }
-        }
-        )
+        .then(async (response) => {
+          if (response.status === 200) {
+            const data = await response.json();
+            console.log("Success:", data);
+          }
+        })
         .catch((error) => {
           console.error("Error:", error);
         });
