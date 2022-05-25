@@ -1,15 +1,19 @@
 <template>
   <main>
     <div class="card">
-      <h1>Se connecter</h1>
-      <form id="formulaire">
-        <div class="row"><label>Email : </label> <input name="email" /></div>
-
+      <h1>FBR rénovation immobilière</h1>
+      <form @submit.prevent="sendUser">
         <div class="row">
-          <label>Password : </label> <input name="password" />
+          <label for="email">Email</label>
+          <input id="email" v-model="email" type="text" required />
         </div>
 
-        <button type="submit">Sauvegarder</button>
+        <div class="row">
+          <label for="password">Password</label>
+          <input id="password" v-model="password" type="password" required />
+        </div>
+
+        <button type="submit">Se connecter</button>
       </form>
     </div>
   </main>
@@ -17,33 +21,42 @@
 
 <script>
 export default {
-  async mounted() {
-    formulaire.onsubmit = async (e) => {
-      e.preventDefault();
-      var form = document.querySelector("#formulaire");
-
-      let data = {
-        email: form.querySelector('input[name="email"]').value,
-        password: form.querySelector('input[name="password"]').value,
-      };
-
-      await fetch("/api/login", {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }).then(async (response) => {
-        if (response.status === 200) {
-          const data = await response.json();
-          const token = data.token;
-          window.localStorage.setItem("access_token", token);
-          console.log(token);
-        } else {
-          console.log("Invalid user");
-        }
-      });
+  data() {
+    return {
+      email: null,
+      password: null,
     };
+  },
+  methods: {
+    async sendUser() {
+      let form = {
+        email: this.email,
+        password: this.password,
+      };
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let myData = {
+        method: "POST",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+        body: JSON.stringify(form),
+      };
+      await fetch("/api/login", myData)
+        .then(async (response) => {
+          if (response.status === 200) {
+            const data = await response.json();
+            const token = data.token;
+            window.localStorage.setItem("access_token", token);
+            console.log(token);
+          }
+        })
+        .catch((error) => {
+          console.error("Invalid user:", error);
+        });
+    },
   },
 };
 </script>
@@ -93,9 +106,17 @@ export default {
     & button:hover {
       background-color: #0095e8;
     }
+    & label {
+      font-weight: bold;
+    }
   }
   & .row {
     margin-bottom: 2.5rem;
+  }
+}
+@media (max-width: 992px) {
+  .card {
+    width: 100%;
   }
 }
 </style>
