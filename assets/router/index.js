@@ -35,7 +35,7 @@ const router = createRouter({
     },
   
     {
-      path: "/addChantier/:nom",
+      path: "/addChantier",
       name: "addChantier",
       props: true,
       // route level code-splitting

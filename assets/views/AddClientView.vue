@@ -27,7 +27,7 @@
       <label>Raison sociale: </label>
       <input v-model="raisonSociale" type="text" name="raisonSociale" ><br />
       
-      <button type="submit">Envoyer</button>
+      <button type="submit">Ajouter</button>
 
         <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
       

@@ -64,13 +64,7 @@
     </div>
    <div>
       <label>Type Chantier: </label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Intérieur"
-        checked
-      />
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur"/>
       <label>Intérieur</label>
 
       <input v-model="typeChantier" type="radio" name="typeChantier" value="exterieur"/>
