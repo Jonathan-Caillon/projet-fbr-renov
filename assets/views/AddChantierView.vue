@@ -131,4 +131,17 @@ export default {
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap');
+
+body {
+   max-height: 100vh;
+   width: 100vw;
+   overflow: hidden;
+   font-family: 'Poppins', sans-serif;
+}
+form{
+  padding: 0 25% 0 25%;
+}
+
 </style>
