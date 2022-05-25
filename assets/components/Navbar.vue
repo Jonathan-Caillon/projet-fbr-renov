@@ -51,7 +51,7 @@ import IconTrade from "./icons/IconTrade.vue";
 </template>
 
 
-<style>
+<style scoped>
 /* ----- LOGO ----- */
 
 header {
@@ -78,7 +78,9 @@ h1 {
 body {
    max-height: 100vh;
    width: 100vw;
-   overflow: hidden;
+   overflow: auto;
+   background-color: #2c3338;
+   scroll-behavior: smooth;
    font-family: 'Poppins', sans-serif;
 }
 
@@ -104,7 +106,7 @@ body {
 
 .navbar .menu-items {
   display: flex;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding:0;
 }
 
@@ -179,8 +181,9 @@ body {
 .navbar .menu-items {
   padding-top: 120px;
   background-color: #181c32;
-  height: 100vh;
-  width: 100%;
+  height: 100vh; /* a modifier */ 
+  width: 100%; 
+  /* border-radius: 5px; */
   transform: translate(-150%);
   display: flex;
   flex-direction: column;
