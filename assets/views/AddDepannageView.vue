@@ -2,7 +2,7 @@
   <main>
     
      <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un depannage: </h1>
+       <h1 class="titre" >Ajouter un depannage : </h1>
       <label>Intitulé* : </label>
       <input v-model="intitule" type="text" name="intitule" required ><br />
 
@@ -26,17 +26,16 @@
       </select>
 
       <label>Prix* : </label>
-      <input v-model="prixDepannage" type="number" name="prixDepannage"><br />
+      <input v-model="prixDepannage" type="number" step="0.01" name="prixDepannage"><br />
 
       <label>distance* : </label>
-      <input v-model="distance" type="number" name="distance" ><br />
+      <input v-model="distance" type="number" step="0.01" name="distance" ><br />
 
       <label>note Personnelle : </label>
       <textarea v-model="notePerso" type="text" name="notePerso" ></textarea><br />
       
       <button type="submit">Envoyer</button>
 
-        <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
       
     </form>
     
@@ -89,9 +88,8 @@ export default {
         .then( async (response) => {
             if(response.status === 201){
                 const data = await response.json();
+                location.reload();
                 console.log("Success:", data);
-                // console.log(data.id)
-                // this.dataId = data.id
             }
         }
         )

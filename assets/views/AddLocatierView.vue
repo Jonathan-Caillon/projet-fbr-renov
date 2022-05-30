@@ -2,14 +2,11 @@
   <main>
     
      <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau client : </h1>
-      <label>Nom* : </label>
+       <h1 class="titre" >Ajouter un nouveau locatier : </h1>
 
-      <input v-model="nom" type="text" name="nom" required ><br />
-    
-      <label>Prénom* : </label>
-      <input v-model="prenom" type="text" name="prenom" required ><br />
-      
+      <label>Intitule* : </label>
+      <input v-model="intitule" type="text" name="intitule" required ><br />
+  
       <label>Ville* : </label>
       <input v-model="ville" type="text" name="ville" required ><br />
 
@@ -22,15 +19,16 @@
       <label>Téléphone* : </label>
       <input v-model="telephone" type="telephone" name="telephone" required ><br />
 
+      <label>Site internet : </label>
+      <input v-model="siteInternet" type="siteInternet" placeholder="https://www.fbrrenovation.fr" name="siteInternet"><br />
+
       <label>E-mail : </label>
-      <input v-model="mail" type="email" name="email"><br />
+      <input v-model="email" type="email" name="email"><br />
 
-      <label>Raison sociale : </label>
-      <input v-model="raisonSociale" type="text" name="raisonSociale" ><br />
+      <label>Note Personnelle : </label>
+      <textarea v-model="notePerso" type="text" name="notePerso" ></textarea><br />
       
-      <button type="submit">Ajouter</button>
-
-        <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
+      <button type="submit">Envoyer</button>
       
     </form>
     
@@ -42,32 +40,29 @@ export default {
     data() {
 
     return {
-      nom: null,
-      prenom: null,
+      intitule: null,
       ville: null,
       adresse: null,
       codePostal: null,
       telephone: null,
+      siteInternet: null,
       email: null,
-      raisonSociale: null,
-      dataId:"",
+      notePerso: null
+      
     };
   },
   methods: {
     async send() {
-      let urgentForm = false;
-      if (this.urgent == "true") {
-        urgentForm = true;
-      }  
       let form = {
-        nom: this.nom,
-        prenom: this.prenom,
+        intitule: this.intitule,
         ville: this.ville,
         adresse: this.adresse,
         codePostal: this.codePostal,
         telephone: this.telephone,
-        email: this.mail,
-        raisonSociale: this.raisonSociale
+        siteInternet: this.siteInternet,
+        email: this.email,
+        notePerso: this.notePerso
+        
       };
 
       const headers = new Headers({
@@ -81,14 +76,12 @@ export default {
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/clients", myData)
+      await fetch("/api/locatiers", myData)
         .then( async (response) => {
             if(response.status === 201){
                 const data = await response.json();
                 location.reload();
                 console.log("Success:", data);
-                // console.log(data.id)
-                // this.dataId = data.id
             }
         }
         )
@@ -154,7 +147,7 @@ input {
   font-family: 'Poppins', sans-serif;
 }
 
-/* textarea {
+textarea {
   background-color: #52575e; 
   border-radius: 5px;
   border: 1px solid rgb(139, 132, 132);
@@ -163,7 +156,7 @@ input {
   color: #fff;
   font-family: 'Poppins', sans-serif;
 
-} */
+}
 
 button {
   margin: 20px 0 40px 0;
