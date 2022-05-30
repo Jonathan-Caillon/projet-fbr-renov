@@ -3,7 +3,7 @@
 
     
      <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau chantier: </h1>
+       <h1 class="titre" >Ajouter un nouveau chantier : </h1>
 
       <label>Intitulé* : </label>
       <input v-model="intitule" type="text" name="intitule" required /><br />
@@ -29,10 +29,10 @@
       <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
 
       <label>Travaux supplémentaire: </label>
-      <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
+      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" /><br />
 
       <label>Distance* : </label>
-      <input v-model="distance" type="number" name="distance" required /><br />
+      <input v-model="distance" type="number" step="0.01" name="distance" required /><br />
 
       <label>Note Personnelle: </label>
       <textarea v-model="notePerso" type="text" name="notePerso"></textarea
@@ -124,6 +124,7 @@ export default {
         .then(async (response) => {
           if (response.status === 200) {
             const data = await response.json();
+            location.reload();
             console.log("Success:", data);
           }
         })
