@@ -2,14 +2,13 @@
   <main>
     
      <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau client: </h1>
-      <label>Nom* : </label>
+       <h1 class="titre" >Ajouter un depannage: </h1>
+      <label>Intitulé* : </label>
+      <input v-model="intitule" type="text" name="intitule" required ><br />
 
-      <input v-model="nom" type="text" name="nom" required ><br />
-    
-      <label>Prénom* : </label>
-      <input v-model="prenom" type="text" name="prenom" required ><br />
-      
+      <label>Numéro d'intervention* : </label>
+      <input v-model="numeroIntervention" type="number" name="numeroIntervention" required ><br />
+
       <label>Ville* : </label>
       <input v-model="ville" type="text" name="ville" required ><br />
 
@@ -19,16 +18,23 @@
       <label>Code Postal* : </label>
       <input v-model="codePostal" type="text" name="codePostal" required ><br />
 
-      <label>Téléphone* : </label>
-      <input v-model="telephone" type="telephone" name="telephone" required ><br />
+       <label>Horaire* : </label>
+      <select v-model="horaireDepannage" type="text" name="horaireDepannage" >
+          <option>Jour</option>
+          <option>Nuit</option>
+          <option>Week-end</option>
+      </select>
 
-      <label>E-mail : </label>
-      <input v-model="mail" type="email" name="email"><br />
+      <label>Prix* : </label>
+      <input v-model="prixDepannage" type="number" name="prixDepannage"><br />
 
-      <label>Raison sociale : </label>
-      <input v-model="raisonSociale" type="text" name="raisonSociale" ><br />
+      <label>distance* : </label>
+      <input v-model="distance" type="number" name="distance" ><br />
+
+      <label>note Personnelle : </label>
+      <textarea v-model="notePerso" type="text" name="notePerso" ></textarea><br />
       
-      <button type="submit">Ajouter</button>
+      <button type="submit">Envoyer</button>
 
         <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
       
@@ -42,32 +48,30 @@ export default {
     data() {
 
     return {
-      nom: null,
-      prenom: null,
+      intitule: null,
       ville: null,
       adresse: null,
       codePostal: null,
-      telephone: null,
-      email: null,
-      raisonSociale: null,
-      dataId:"",
+      prixDepannage: null,
+      horaireDepannage:"",
+      distance: null,
+      notePerso: null,
+      
     };
   },
   methods: {
     async send() {
-      let urgentForm = false;
-      if (this.urgent == "true") {
-        urgentForm = true;
-      }  
+      
       let form = {
-        nom: this.nom,
-        prenom: this.prenom,
+        intitule: this.intitule,
+        numeroIntervention: this.numeroIntervention,
         ville: this.ville,
         adresse: this.adresse,
         codePostal: this.codePostal,
-        telephone: this.telephone,
-        email: this.mail,
-        raisonSociale: this.raisonSociale
+        prixDepannage: this.prixDepannage,
+        horaireDepannage: this.horaireDepannage,
+        distance: this.distance,
+        notePerso: this.notePerso
       };
 
       const headers = new Headers({
@@ -81,7 +85,7 @@ export default {
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/clients", myData)
+      await fetch("/api/depannages", myData)
         .then( async (response) => {
             if(response.status === 201){
                 const data = await response.json();
@@ -143,7 +147,7 @@ label {
   font-size: 20px;
 }
 
-input {
+input, select, textarea {
   background-color: #52575e; 
   border-radius: 5px;
   border: 1px solid rgb(139, 132, 132);
@@ -152,17 +156,6 @@ input {
   color: #fff;
   font-family: 'Poppins', sans-serif;
 }
-
-/* textarea {
-  background-color: #52575e; 
-  border-radius: 5px;
-  border: 1px solid rgb(139, 132, 132);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-
-} */
 
 button {
   margin: 20px 0 40px 0;

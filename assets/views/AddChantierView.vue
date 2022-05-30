@@ -26,12 +26,7 @@
       <input v-model="date" type="date" name="date" required /><br />
 
       <label>Durée de Travaux: </label>
-      <input
-        v-model="dureeTravaux"
-        type="number"
-        name="dureeTravaux"
-        required
-      /><br />
+      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
 
       <label>Travaux supplémentaire: </label>
       <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
@@ -50,12 +45,7 @@
 <div>
       <label>Urgent: </label>
       <div>
-        <input
-          v-model="urgent"
-          type="radio"
-          name="urgent"
-          value="false"
-        />
+        <input v-model="urgent" type="radio" name="urgent" value="false" checked />
         <label>Non </label>
       </div>
       <div>
@@ -64,10 +54,10 @@
     </div>
    <div>
       <label>Type Chantier: </label>
-      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur"/>
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
       <label>Intérieur</label>
 
-      <input v-model="typeChantier" type="radio" name="typeChantier" value="exterieur"/>
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
       <label>Extérieur </label>
       </div>
       <button type="submit">Envoyer</button>
@@ -90,7 +80,7 @@ export default {
       notePerso: null,
       noteClient: null,
       urgent: null,
-      typeChantier: null,
+      typeChantier: "",
     };
   },
   methods: {
@@ -98,6 +88,10 @@ export default {
       let urgentForm = false;
       if (this.urgent == "true") {
         urgentForm = true;
+      }
+      let typeCHantierForm = "Interieur";
+      if (this.typeChantier == "Exterieur") {
+        typeCHantierForm = "Exterieur";
       }
       let form = {
         intitule: this.intitule,
@@ -111,7 +105,7 @@ export default {
         notePerso: this.notePerso,
         noteClient: this.noteClient,
         urgent: urgentForm,
-        typeChantier: this.typeChantier,
+        typeChantier: typeCHantierForm,
 
       };
        
