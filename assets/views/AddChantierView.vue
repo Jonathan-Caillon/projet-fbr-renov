@@ -5,15 +5,29 @@
      <form id="formulaire" @submit.prevent="send">
        <h1 class="titre" >Ajouter un nouveau chantier: </h1>
 
+    <div class="element-3">
+
+      <div class="flex-column">
       <label>Intitulé* : </label>
       <input v-model="intitule" type="text" name="intitule" required /><br />
+      </div> 
 
+      <div class="flex-column">
       <label>Adresse* : </label>
       <input v-model="adresse" type="text" name="adresse" required /><br />
+      </div>
 
+
+      <div class="flex-column">
       <label>Ville* : </label>
       <input v-model="ville" type="text" name="ville" required /><br />
+      </div>
 
+    </div>
+
+    <div class="element-3">
+
+      <div class="flex-column">
       <label>Code Postal: </label>
       <input
         v-model="codePostal"
@@ -21,10 +35,15 @@
         name="codePostal"
         required
       /><br />
+      </div>
 
+      <div class="flex-column">
       <label>Date de creation* : </label>
       <input v-model="date" type="date" name="date" required /><br />
+      </div>
 
+
+      <div class="flex-column">
       <label>Durée de Travaux: </label>
       <input
         v-model="dureeTravaux"
@@ -32,24 +51,34 @@
         name="dureeTravaux"
         required
       /><br />
+      </div>
 
+    </div>
+
+    <div class="element-2">
+
+      <div class="flex-column">
       <label>Travaux supplémentaire: </label>
       <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
+      </div>
 
+      <div class="flex-column">
       <label>Distance* : </label>
       <input v-model="distance" type="number" name="distance" required /><br />
+      </div>
 
-      <label>Note Personnelle: </label>
+    </div> 
+
+      <label>Note Personnelle : </label>
       <textarea v-model="notePerso" type="text" name="notePerso"></textarea
       ><br />
 
-      <label>Note Client: </label>
+      <label>Note Client : </label>
       <textarea v-model="noteClient" type="text" name="noteClient"></textarea
       ><br />
 
-<div>
-      <label>Urgent: </label>
-      <div>
+     <div>
+      <label>Urgent : </label> 
         <input
           v-model="urgent"
           type="radio"
@@ -58,13 +87,14 @@
           checked
         />
         <label>Non </label>
-      </div>
-      <div>
-      <input v-model="urgent" type="radio" name="urgent" value="true" />
-      <label>Oui </label></div> <br />
-    </div>
-   <div>
-      <label>Type Chantier: </label>
+      
+        <input v-model="urgent" type="radio" name="urgent" value="true" />
+        <label>Oui </label>
+      </div> <br />
+    
+
+     <div>
+      <label>Type Chantier : </label>
       <input
         v-model="typeChantier"
         type="radio"
@@ -81,6 +111,7 @@
       />
       <label>Extérieur </label>
       </div>
+
       <button type="submit">Envoyer</button>
     </form>
   </main>
@@ -153,15 +184,10 @@ export default {
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap');
-
-body {
-  
-   background-color: #2c3338;
-}
-
 main {
-  margin-bottom: 20px;
+  /* padding: 1.2rem; */
+  padding: 0 0 20px 230px;
+  width: 100%;
 }
 
 .titre {
@@ -173,6 +199,50 @@ main {
   margin-bottom: 50px;
   border-bottom:  2px solid #fff
 
+}
+
+.flex-column{
+  display:flex;
+  flex-direction: column;
+}
+
+
+.element-2{
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-bottom: 20px;
+  pointer-events: auto;
+  border: 0 solid rgba(0,0,0,.2);
+  border-radius: 0.475rem;
+  /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
+  outline: 0;
+}
+
+.element-2 input {
+  padding: 20px;
+  margin: 20px;
+  width: 80%;
+
+}
+
+ 
+.element-3{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-bottom: 20px;
+  pointer-events: auto;
+  border: 0 solid rgba(0,0,0,.2);
+  border-radius: 0.475rem;
+  /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
+  outline: 0;
+}
+
+.element-3 input {
+  padding: 20px;
+  margin: 20px;
 }
 
 form {
@@ -225,7 +295,14 @@ button {
   border: none;
   border-radius: 5px;
  
+}
+
+@media screen and (max-width: 1089px) {
+  main {
+    padding-left:50px; 
+  }
  
+
 }
 
 
