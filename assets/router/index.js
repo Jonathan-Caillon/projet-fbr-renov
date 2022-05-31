@@ -26,8 +26,8 @@ const router = createRouter({
       component: () => import("../views/TestView.vue"),
     },
     {
-      path: "/addClient",
-      name: "addClient",
+      path: "/add-client",
+      name: "add-client",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -35,8 +35,8 @@ const router = createRouter({
     },
   
     {
-      path: "/addChantier",
-      name: "addChantier",
+      path: "/add-chantier",
+      name: "add-chantier",
       props: true,
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -44,8 +44,8 @@ const router = createRouter({
       component: () => import("../views/AddChantierView.vue"),
     },
     {
-      path: "/addDepannage",
-      name: "addDepannage",
+      path: "/add-depannage",
+      name: "add-depannage",
       props: true,
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -53,13 +53,22 @@ const router = createRouter({
       component: () => import("../views/AddDepannageView.vue"),
     },
     {
-      path: "/addLocatier",
-      name: "addLocatier",
+      path: "/add-locatier",
+      name: "add-locatier",
       props: true,
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AddLocatierView.vue"),
+    },
+    {
+      path: "/add-materiel",
+      name: "add-materiel",
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/AddMaterielView.vue"),
     },
     {
       path: "/login",
