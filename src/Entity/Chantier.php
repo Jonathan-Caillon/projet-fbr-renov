@@ -62,21 +62,21 @@ class Chantier
     #[ORM\ManyToMany(targetEntity: CategorieChantier::class, inversedBy: 'chantiers')]
     private $category;
 
-    #[ORM\ManyToMany(targetEntity: Materiel::class, inversedBy: 'chantiers')]
-    private $materiel;
-
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
     private $devis;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: ImageChantier::class)]
     private $imageChantiers;
 
+    #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Location::class)]
+    private $locations;
+    
     public function __construct()
     {
         $this->category = new ArrayCollection();
-        $this->materiel = new ArrayCollection();
         $this->devis = new ArrayCollection();
         $this->imageChantiers = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
    
@@ -281,30 +281,6 @@ class Chantier
     }
 
     /**
-     * @return Collection<int, Materiel>
-     */
-    public function getMateriel(): Collection
-    {
-        return $this->materiel;
-    }
-
-    public function addMateriel(Materiel $materiel): self
-    {
-        if (!$this->materiel->contains($materiel)) {
-            $this->materiel[] = $materiel;
-        }
-
-        return $this;
-    }
-
-    public function removeMateriel(Materiel $materiel): self
-    {
-        $this->materiel->removeElement($materiel);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Devis>
      */
     public function getDevis(): Collection
@@ -312,22 +288,22 @@ class Chantier
         return $this->devis;
     }
 
-    public function addDevi(Devis $devi): self
+    public function addDevis(Devis $devis): self
     {
-        if (!$this->devis->contains($devi)) {
-            $this->devis[] = $devi;
-            $devi->setChantier($this);
+        if (!$this->devis->contains($devis)) {
+            $this->devis[] = $devis;
+            $devis->setChantier($this);
         }
 
         return $this;
     }
 
-    public function removeDevi(Devis $devi): self
+    public function removeDevis(Devis $devis): self
     {
-        if ($this->devis->removeElement($devi)) {
+        if ($this->devis->removeElement($devis)) {
             // set the owning side to null (unless already changed)
-            if ($devi->getChantier() === $this) {
-                $devi->setChantier(null);
+            if ($devis->getChantier() === $this) {
+                $devis->setChantier(null);
             }
         }
 
@@ -363,5 +339,36 @@ class Chantier
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Location>
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->setChantier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->removeElement($location)) {
+            // set the owning side to null (unless already changed)
+            if ($location->getChantier() === $this) {
+                $location->setChantier(null);
+            }
+        }
+
+        return $this;
+    }
+ 
 
 }

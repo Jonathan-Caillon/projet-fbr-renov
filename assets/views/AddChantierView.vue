@@ -3,7 +3,7 @@
 
     
      <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau chantier: </h1>
+       <h1 class="titre" >Ajouter un nouveau chantier : </h1>
 
       <label>Intitulé* : </label>
       <input v-model="intitule" type="text" name="intitule" required /><br />
@@ -26,18 +26,13 @@
       <input v-model="date" type="date" name="date" required /><br />
 
       <label>Durée de Travaux: </label>
-      <input
-        v-model="dureeTravaux"
-        type="number"
-        name="dureeTravaux"
-        required
-      /><br />
+      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
 
       <label>Travaux supplémentaire: </label>
-      <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
+      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" /><br />
 
       <label>Distance* : </label>
-      <input v-model="distance" type="number" name="distance" required /><br />
+      <input v-model="distance" type="number" step="0.01" name="distance" required /><br />
 
       <label>Note Personnelle: </label>
       <textarea v-model="notePerso" type="text" name="notePerso"></textarea
@@ -50,13 +45,7 @@
 <div>
       <label>Urgent: </label>
       <div>
-        <input
-          v-model="urgent"
-          type="radio"
-          name="urgent"
-          value="false"
-          checked
-        />
+        <input v-model="urgent" type="radio" name="urgent" value="false" checked />
         <label>Non </label>
       </div>
       <div>
@@ -65,20 +54,10 @@
     </div>
    <div>
       <label>Type Chantier: </label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Intérieur"
-        checked
-      />
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
       <label>Intérieur</label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Extérieur"
-      />
+
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
       <label>Extérieur </label>
       </div>
       <button type="submit">Envoyer</button>
@@ -101,7 +80,7 @@ export default {
       notePerso: null,
       noteClient: null,
       urgent: null,
-      typeChantier: null,
+      typeChantier: "",
     };
   },
   methods: {
@@ -109,6 +88,10 @@ export default {
       let urgentForm = false;
       if (this.urgent == "true") {
         urgentForm = true;
+      }
+      let typeCHantierForm = "Interieur";
+      if (this.typeChantier == "Exterieur") {
+        typeCHantierForm = "Exterieur";
       }
       let form = {
         intitule: this.intitule,
@@ -122,9 +105,10 @@ export default {
         notePerso: this.notePerso,
         noteClient: this.noteClient,
         urgent: urgentForm,
-        typeChantier: this.typeChantier,
-      };
+        typeChantier: typeCHantierForm,
 
+      };
+       
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -140,6 +124,7 @@ export default {
         .then(async (response) => {
           if (response.status === 200) {
             const data = await response.json();
+            location.reload();
             console.log("Success:", data);
           }
         })

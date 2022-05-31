@@ -20,23 +20,18 @@ class Materiel
     #[ORM\Column(type: 'string', length: 255)]
     private $nomMateriel;
 
-    #[ORM\Column(type: 'float')]
-    private $prixMateriel;
-
-    #[ORM\Column(type: 'integer')]
-    private $quantiteMateriel;
-
-    #[ORM\ManyToMany(targetEntity: Chantier::class, mappedBy: 'materiel')]
-    private $chantiers;
-
     #[ORM\ManyToOne(targetEntity: Locatier::class, inversedBy: 'materiels')]
     private $locatier;
 
+    #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Location::class)]
+    private $locations;
+
     public function __construct()
     {
-        $this->chantiers = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -54,57 +49,6 @@ class Materiel
         return $this;
     }
 
-    public function getPrixMateriel(): ?float
-    {
-        return $this->prixMateriel;
-    }
-
-    public function setPrixMateriel(float $prixMateriel): self
-    {
-        $this->prixMateriel = $prixMateriel;
-
-        return $this;
-    }
-
-    public function getQuantiteMateriel(): ?int
-    {
-        return $this->quantiteMateriel;
-    }
-
-    public function setQuantiteMateriel(int $quantiteMateriel): self
-    {
-        $this->quantiteMateriel = $quantiteMateriel;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Chantier>
-     */
-    public function getChantiers(): Collection
-    {
-        return $this->chantiers;
-    }
-
-    public function addChantier(Chantier $chantier): self
-    {
-        if (!$this->chantiers->contains($chantier)) {
-            $this->chantiers[] = $chantier;
-            $chantier->addMateriel($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChantier(Chantier $chantier): self
-    {
-        if ($this->chantiers->removeElement($chantier)) {
-            $chantier->removeMateriel($this);
-        }
-
-        return $this;
-    }
-
     public function getLocatier(): ?Locatier
     {
         return $this->locatier;
@@ -116,4 +60,36 @@ class Materiel
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Location>
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->setMateriel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->removeElement($location)) {
+            // set the owning side to null (unless already changed)
+            if ($location->getMateriel() === $this) {
+                $location->setMateriel(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

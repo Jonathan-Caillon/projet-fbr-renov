@@ -26,12 +26,49 @@ const router = createRouter({
       component: () => import("../views/ListCLientsView.vue"),
     },
     {
-      path: "/add",
-      name: "addChantier",
+      path: "/add-client",
+      name: "add-client",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/AddClientView.vue"),
+    },
+  
+    {
+      path: "/add-chantier",
+      name: "add-chantier",
+      props: true,
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AddChantierView.vue"),
+    },
+    {
+      path: "/add-depannage",
+      name: "add-depannage",
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/AddDepannageView.vue"),
+    },
+    {
+      path: "/add-locatier",
+      name: "add-locatier",
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/AddLocatierView.vue"),
+    },
+    {
+      path: "/add-materiel",
+      name: "add-materiel",
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/AddMaterielView.vue"),
     },
     {
       path: "/login",
