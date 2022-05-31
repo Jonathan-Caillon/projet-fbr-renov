@@ -3,7 +3,7 @@
 
     
      <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau chantier: </h1>
+       <h1 class="titre" >Ajouter un nouveau chantier : </h1>
 
     <div class="element-3">
 
@@ -43,31 +43,21 @@
       </div>
 
 
-      <div class="flex-column">
+      
       <label>Durée de Travaux: </label>
-      <input
-        v-model="dureeTravaux"
-        type="number"
-        name="dureeTravaux"
-        required
-      /><br />
-      </div>
+      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
 
     </div>
 
     <div class="element-2">
 
-      <div class="flex-column">
+      
       <label>Travaux supplémentaire: </label>
-      <input v-model="travauxSupl" type="number" name="travauxSupl" /><br />
-      </div>
+      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" /><br />
 
-      <div class="flex-column">
+      
       <label>Distance* : </label>
-      <input v-model="distance" type="number" name="distance" required /><br />
-      </div>
-
-    </div> 
+      <input v-model="distance" type="number" step="0.01" name="distance" required /><br />
 
       <label>Note Personnelle : </label>
       <textarea v-model="notePerso" type="text" name="notePerso"></textarea
@@ -76,39 +66,23 @@
       <label>Note Client : </label>
       <textarea v-model="noteClient" type="text" name="noteClient"></textarea
       ><br />
-
-     <div>
-      <label>Urgent : </label> 
-        <input
-          v-model="urgent"
-          type="radio"
-          name="urgent"
-          value="false"
-          checked
-        />
+</div>
+<div>
+      <label>Urgent: </label>
+      <div>
+        <input v-model="urgent" type="radio" name="urgent" value="false" checked />
         <label>Non </label>
-      
-        <input v-model="urgent" type="radio" name="urgent" value="true" />
-        <label>Oui </label>
-      </div> <br />
-    
-
-     <div>
-      <label>Type Chantier : </label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Intérieur"
-        checked
-      />
+      </div>
+      <div>
+      <input v-model="urgent" type="radio" name="urgent" value="true" />
+      <label>Oui </label></div> <br />
+    </div>
+   <div>
+      <label>Type Chantier: </label>
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
       <label>Intérieur</label>
-      <input
-        v-model="typeChantier"
-        type="radio"
-        name="typeChantier"
-        value="Extérieur"
-      />
+
+      <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
       <label>Extérieur </label>
       </div>
 
@@ -132,7 +106,7 @@ export default {
       notePerso: null,
       noteClient: null,
       urgent: null,
-      typeChantier: null,
+      typeChantier: "",
     };
   },
   methods: {
@@ -140,6 +114,10 @@ export default {
       let urgentForm = false;
       if (this.urgent == "true") {
         urgentForm = true;
+      }
+      let typeCHantierForm = "Interieur";
+      if (this.typeChantier == "Exterieur") {
+        typeCHantierForm = "Exterieur";
       }
       let form = {
         intitule: this.intitule,
@@ -153,9 +131,10 @@ export default {
         notePerso: this.notePerso,
         noteClient: this.noteClient,
         urgent: urgentForm,
-        typeChantier: this.typeChantier,
-      };
+        typeChantier: typeCHantierForm,
 
+      };
+       
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -171,6 +150,7 @@ export default {
         .then(async (response) => {
           if (response.status === 200) {
             const data = await response.json();
+            location.reload();
             console.log("Success:", data);
           }
         })
@@ -301,10 +281,7 @@ button {
   main {
     padding-left:50px; 
   }
- 
 
 }
-
-
 
 </style>

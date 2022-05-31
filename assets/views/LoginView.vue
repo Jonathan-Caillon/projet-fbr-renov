@@ -5,7 +5,7 @@
       <form @submit.prevent="sendUser">
         <div class="row">
           <label for="email">Email</label>
-          <input id="email" v-model="email" type="text" required />
+          <input id="email" v-model="email" type="email" required />
         </div>
 
         <div class="row">

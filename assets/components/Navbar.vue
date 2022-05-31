@@ -8,48 +8,48 @@ import IconRepair from "./icons/IconRepair.vue";
 import IconStat from "./icons/IconStat.vue";
 import IconHome from "./icons/IconHome.vue";
 import IconTrade from "./icons/IconTrade.vue";
-
-
 </script>
 
 <template>
-
-<!-- NAVBAR -->
+  <!-- NAVBAR -->
   <header>
-  
     <div class="wrapper">
-        <nav>
-          <div class="navbar">
-            <div class="container nav-container">
-                <input class="checkbox" type="checkbox" name="" id="" />
-                <div class="hamburger-lines">
-                  <span class="line line1"></span>
-                  <span class="line line2"></span>
-                  <span class="line line3"></span>
-                </div>  
-          
-              <div class="menu-items">
-          
-                <h1>FBR Rénovation Immobilière</h1>
-              
-                <RouterLink to="/"> <IconHome/>  Home</RouterLink>
-                <RouterLink to="/Clients"> <IconClient/>  Clients</RouterLink>
-                <RouterLink to="/add"> <IconConstruction/> Chantiers</RouterLink>
-                <RouterLink to="/Contacts"> <IconContact/>   Contacts</RouterLink>
-                <RouterLink to="/Calendrier"><IconCalendar/>  Calendrier</RouterLink>
-                <RouterLink to="/Dépannages"><IconRepair/>  Dépannages</RouterLink>
-                <RouterLink to="/Locatiers"><IconTrade /> Locatiers</RouterLink>
-                <RouterLink to="/Statistiques"><IconStat/>  Statistiques</RouterLink>
-              </div>
+      <nav>
+        <div class="navbar">
+          <div class="container nav-container">
+            <input class="checkbox" type="checkbox" name="" id="" />
+            <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+            </div>
+
+            <div class="menu-items">
+              <h1>FBR Rénovation Immobilière</h1>
+
+              <RouterLink to="/"> <IconHome /> Home</RouterLink>
+              <RouterLink to="/Clients"> <IconClient /> Clients</RouterLink>
+              <RouterLink to="/add"> <IconConstruction /> Chantiers</RouterLink>
+              <RouterLink to="/Contacts"> <IconContact /> Contacts</RouterLink>
+              <RouterLink to="/Calendrier"
+                ><IconCalendar /> Calendrier</RouterLink
+              >
+              <RouterLink to="/Dépannages"
+                ><IconRepair /> Dépannages</RouterLink
+              >
+              <RouterLink to="/Locatiers"><IconTrade /> Locatiers</RouterLink>
+              <RouterLink to="/Statistiques"
+                ><IconStat /> Statistiques</RouterLink
+              >
             </div>
           </div>
-        </nav>
+        </div>
+      </nav>
     </div>
   </header>
 
   <RouterView />
 </template>
-
 
 <style scoped>
 /* ----- LOGO ----- */
@@ -66,28 +66,28 @@ h1 {
   font-size: 1.5rem;
   display: flex;
   align-items: center;
-  padding-left: 20px; 
+  padding-left: 20px;
 }
 
 /* ----- NAVIGATEUR RESPONSIVE ----- */
 
-@import "@/base.css";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap');
+/* @import "@/base.css"; */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap");
 
 body {
-   max-height: 100vh;
-   width: 100vw;
-   overflow: auto;
-   background-color: #2c3338;
-   scroll-behavior: smooth;
-   font-family: 'Poppins', sans-serif;
+  max-height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  background-color: #2c3338;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
 }
 
-.navbar .nav-container .router-link-exact-active{
+.navbar .nav-container .router-link-exact-active {
   color: #fff;
   font-weight: bolder;
-} 
+}
 
 @media (hover: hover) {
   a:hover {
@@ -101,13 +101,12 @@ body {
   height: 62px;
   /* display: block;
   position: relative; */
-  
 }
 
 .navbar .menu-items {
   display: flex;
   /* overflow: hidden; */
-  padding:0;
+  padding: 0;
 }
 
 .navbar .nav-container li {
@@ -122,12 +121,10 @@ body {
   padding: 0.7rem;
 }
 
-
-.navbar .nav-container a:hover{
-    font-weight: bolder;
-    color: #fff;
+.navbar .nav-container a:hover {
+  font-weight: bolder;
+  color: #fff;
 }
-
 
 /* -- hamburger -- */
 .nav-container .checkbox {
@@ -177,12 +174,11 @@ body {
   transition: transform 0.4s ease-in-out;
 }
 
-
 .navbar .menu-items {
   padding-top: 120px;
   background-color: #181c32;
-  height: 100vh; /* a modifier */ 
-  width: 100%; 
+  height: 100vh; /* a modifier */
+  width: 100%;
   /* border-radius: 5px; */
   transform: translate(-150%);
   display: flex;
@@ -207,27 +203,24 @@ body {
   transform: rotate(-45deg);
 }
 
-.nav-container input[type="checkbox"]:checked ~ .logo{
+.nav-container input[type="checkbox"]:checked ~ .logo {
   display: none;
 }
 
-
 /* ----- MEDIA QUERIES ----- */
 
- @media only screen and (min-width: 1026px) {
-   header {
-   width: 30%; 
+@media only screen and (min-width: 1026px) {
+  header {
+    width: 30%;
   }
-} 
+}
 
 @media only screen and (max-width: 1025px) {
-   .navbar .nav-container a {
-      font-size: 2rem;
+  .navbar .nav-container a {
+    font-size: 2rem;
   }
-    h1 {
-      font-size:2rem;
+  h1 {
+    font-size: 2rem;
   }
-
-} 
-
+}
 </style>
