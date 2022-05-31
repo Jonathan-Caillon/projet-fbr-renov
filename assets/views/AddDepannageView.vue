@@ -28,10 +28,10 @@
       <label>Prix* : </label>
       <input v-model="prixDepannage" type="number" step="0.01" name="prixDepannage"><br />
 
-      <label>distance* : </label>
+      <label>Distance* : </label>
       <input v-model="distance" type="number" step="0.01" name="distance" ><br />
 
-      <label>note Personnelle : </label>
+      <label>Note Personnelle : </label>
       <textarea v-model="notePerso" type="text" name="notePerso" ></textarea><br />
       
       <button type="submit">Envoyer</button>
@@ -154,6 +154,7 @@ button {
   color: #fff;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
  
  
 }
