@@ -1,26 +1,45 @@
 <template>
+  <main>
+    
     <form id="formulaire" @submit.prevent="send">
-        <h1 class="titre" >Ajouter un nouveau matériel : </h1>
-        <label>Matériel* : </label>
-        <input v-model="nomMateriel" type="text" name="nomMateriel" required ><br />
+        <h1 class="titre" >Location : </h1>
+        <label>Locatier : </label>
+        <input v-model="locatier" type="text" name="locatier"><br/>
+        
+        <label>Materiel* : </label>
+        <input v-model="materiel" type="text" name="materiel" required ><br/>
 
-        <button type="submit">Envoyer</button>
+        <label>Quantité* : </label>
+        <input v-model="quantite" type="number" name="quantite" required ><br/>
+
+        <label>Prix* : </label>
+        <input v-model="prix" type="number" name="prix" required ><br/>
+
+        <button type="submit">Ajouter</button>
     </form>
+     
+     
+  </main>
 </template>
 
 <script>
 export default {
     data() {
-    return {
-        nomMateriel: null
-    
-    }
-    },
 
-    methods: {
+    return {
+    //   locatier: null,
+      materiel: null,
+      quantite: null,
+      prix: null,
+    };
+  },
+  methods: {
     async send() {
       let form = {
-        nomMateriel: this.nomMateriel 
+        locatier: this.locatier,
+        materiel: this.materiel,
+        quantite: this.quantite,
+        prix: this.prix,
       };
 
       const headers = new Headers({
@@ -34,12 +53,13 @@ export default {
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/Materiels", myData)
+      await fetch("/api/location", myData)
         .then( async (response) => {
             if(response.status === 201){
                 const data = await response.json();
                 location.reload();
                 console.log("Success:", data);
+              
             }
         }
         )
@@ -48,11 +68,9 @@ export default {
         });
     },
   },
-}
+};
 </script>
-
 <style scoped>
-
 .titre {
   display: flex;
   color: #fff;
@@ -63,7 +81,6 @@ export default {
   border-bottom:  2px solid #fff
 
 }
-
 form {
     position: relative;
     margin: 4rem;
@@ -74,14 +91,13 @@ form {
     pointer-events: auto;
     border: 0 solid rgba(0,0,0,.2);
     border-radius: 0.475rem;
+    /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
     outline: 0;
 }
-
 label {
   color: #fff;
   font-size: 20px;
 }
-
 input {
   background-color: #52575e; 
   border-radius: 5px;
@@ -91,8 +107,6 @@ input {
   color: #fff;
   font-family: 'Poppins', sans-serif;
 }
-
-
 button {
   margin: 20px 0 40px 0;
   width: 250px;
@@ -103,7 +117,5 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-
 }
-
 </style>

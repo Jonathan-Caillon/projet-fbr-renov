@@ -27,6 +27,9 @@ class Location
     #[ORM\ManyToOne(targetEntity: Materiel::class, inversedBy: 'locations')]
     private $materiel;
 
+    #[ORM\ManyToOne(targetEntity: Locatier::class, inversedBy: 'locations')]
+    private $locatier;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Location
     public function setMateriel(?Materiel $materiel): self
     {
         $this->materiel = $materiel;
+
+        return $this;
+    }
+
+    public function getLocatier(): ?Locatier
+    {
+        return $this->locatier;
+    }
+
+    public function setLocatier(?Locatier $locatier): self
+    {
+        $this->locatier = $locatier;
 
         return $this;
     }
