@@ -1,41 +1,24 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-// import Navbar from "./components/Navbar.vue";
-import Navigateur from "./components/Navigateur.vue";
-import Search from "./components/Search.vue";
-import Sidebar from "./components/Sidebar.vue"
+// import Search from "./components/Search.vue";
+import Sidebar from "./components/Sidebar.vue";
+
 </script>
 
 <template>
 
 	<div id="app">
-		<!-- Sidebar -->
-    <!-- <Navigateur /> -->
+
     <!-- <Search /> -->
 		<Sidebar />
-    <!-- <Search /> -->
-    
 		<!-- Content -->
 		<RouterView />
-	</div>
+</div>
 
 </template>
   
- <!-- <Navigateur /> 
-  <Search />
-  <RouterView /> -->
 
-
-<style lang="scss">
-
-
-button {
-	cursor: pointer;
-	appearance: none;
-	border: none;
-	outline: none;
-	background: none;
-}
+<style scoped lang="scss">
 
 #app {
 	display: flex;
