@@ -2,25 +2,28 @@
   <main>
 
     
-     <form id="formulaire" @submit.prevent="send">
+    <form id="formulaire" @submit.prevent="send">
        <h1 class="titre" >Ajouter un nouveau chantier : </h1>
 
     <div class="element-3">
 
       <div class="flex-column">
-      <label>Intitulé* : </label>
-      <input v-model="intitule" type="text" name="intitule" required /><br />
+        <label>Intitulé* : </label>
+        <input v-model="intitule" type="text" name="intitule" required />
+        <!-- <br /> -->
       </div> 
 
       <div class="flex-column">
-      <label>Adresse* : </label>
-      <input v-model="adresse" type="text" name="adresse" required /><br />
+        <label>Adresse* : </label>
+        <input v-model="adresse" type="text" name="adresse" required />
+        <!-- <br /> -->
       </div>
 
 
       <div class="flex-column">
-      <label>Ville* : </label>
-      <input v-model="ville" type="text" name="ville" required /><br />
+        <label>Ville* : </label>
+        <input v-model="ville" type="text" name="ville" required />
+        <!-- <br /> -->
       </div>
 
     </div>
@@ -28,62 +31,68 @@
     <div class="element-3">
 
       <div class="flex-column">
-      <label>Code Postal: </label>
-      <input
-        v-model="codePostal"
-        type="text"
-        name="codePostal"
-        required
-      /><br />
+        <label>Code Postal: </label>
+        <input
+          v-model="codePostal"
+          type="text"
+          name="codePostal"
+          required
+        />
+        <!-- <br /> -->
       </div>
 
       <div class="flex-column">
-      <label>Date de creation* : </label>
-      <input v-model="date" type="date" name="date" required /><br />
+        <label>Date de creation* : </label>
+        <input v-model="date" type="date" name="date" required />
+        <!-- <br /> -->
       </div>
 
-
-      
-      <label>Durée de Travaux: </label>
-      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
+      <div class="flex-column">
+        <label>Durée de Travaux: </label>
+        <input v-model="dureeTravaux" type="number" name="dureeTravaux" required />
+        <!-- <br /> -->
+      </div>
 
     </div>
 
-    <div class="element-2">
+    <div class="">
 
-      
       <label>Travaux supplémentaire: </label>
-      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" /><br />
+      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
+      <!-- <br /> -->
 
-      
       <label>Distance* : </label>
-      <input v-model="distance" type="number" step="0.01" name="distance" required /><br />
+      <input v-model="distance" type="number" step="0.01" name="distance" required />
+      <!-- <br /> -->
 
       <label>Note Personnelle : </label>
-      <textarea v-model="notePerso" type="text" name="notePerso"></textarea
-      ><br />
+      <textarea v-model="notePerso" type="text" name="notePerso"></textarea>
+      <!-- <br /> -->
 
       <label>Note Client : </label>
-      <textarea v-model="noteClient" type="text" name="noteClient"></textarea
-      ><br />
-</div>
-<div>
+      <textarea v-model="noteClient" type="text" name="noteClient"></textarea>
+      <!-- <br /> -->
+
+    </div>
+
+    <div>
       <label>Urgent: </label>
       <div>
-        <input v-model="urgent" type="radio" name="urgent" value="false" checked />
-        <label>Non </label>
+          <input v-model="urgent" type="radio" name="urgent" value="false" checked />
+          <label>Non </label>
       </div>
       <div>
-      <input v-model="urgent" type="radio" name="urgent" value="true" />
-      <label>Oui </label></div> <br />
-    </div>
-   <div>
-      <label>Type Chantier: </label>
-      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
-      <label>Intérieur</label>
+        <input v-model="urgent" type="radio" name="urgent" value="true" />
+        <label>Oui </label></div> <br />
+      </div>
 
-      <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
-      <label>Extérieur </label>
+      <div>
+        <label>Type Chantier: </label>
+        <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
+        <label>Intérieur</label>
+
+        <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
+        <label>Extérieur </label>
       </div>
 
       <button type="submit">Envoyer</button>

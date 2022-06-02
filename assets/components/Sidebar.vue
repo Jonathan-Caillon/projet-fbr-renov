@@ -115,6 +115,7 @@ aside {
   padding: 1rem;
   transition: 0.2s ease-in-out;
 }
+
 aside .flex {
   flex: 1 1 0%;
 }
@@ -196,8 +197,9 @@ aside.is-expanded h3, aside.is-expanded p {
 
 @media (max-width: 1024px) {
   aside {
-    position: absolute;
+    position: fixed;
     z-index: 99;
+    height: 100%;
   }
 }
 
