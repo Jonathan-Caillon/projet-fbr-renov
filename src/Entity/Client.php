@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-#[ApiResource()]
+#[ApiResource(attributes: ["pagination_items_per_page" => 5])]
 class Client
 {
     #[ORM\Id]

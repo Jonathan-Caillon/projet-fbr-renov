@@ -3,10 +3,14 @@
     <div class="tableau">
       <div class="tableau-title">
         <div>
-          <h3>Clients</h3>
+          <h3>Chantiers</h3>
         </div>
         <div>
-          <router-link class="add" title="Ajouter un client" to="/add-client">
+          <router-link
+            title="Ajouter un chantier"
+            class="add"
+            to="/add-chantier"
+          >
             <span
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,14 +56,11 @@
           <thead>
             <tr>
               <th>Actions</th>
-              <th>Id</th>
+              <th>Intitule</th>
               <th>Nom</th>
-              <th>Prénom</th>
-              <th>Ville</th>
-              <th>Adresse</th>
+              <th>Commune</th>
               <th>Code postal</th>
-              <th>Téléphone</th>
-              <th>Email</th>
+              <th>Urgent</th>
             </tr>
           </thead>
           <tbody>
@@ -67,8 +68,8 @@
               <td>
                 <div class="tableau-actions">
                   <router-link
-                    title="Voir page client"
-                    v-bind:to="'/client/' + item.id"
+                    title="Voir page chantier"
+                    v-bind:to="'/chantier/' + item.id"
                   >
                     <button class="link">
                       <svg
@@ -85,8 +86,8 @@
                     </button>
                   </router-link>
                   <button
-                    v-on:click="deleteClient(item.id)"
-                    title="Supprimer client"
+                    v-on:click="deleteChantier(item.id)"
+                    title="Supprimer chantier"
                     class="delete"
                   >
                     <svg
@@ -114,33 +115,17 @@
                   </button>
                 </div>
               </td>
-              <td>{{ item.id }}</td>
-              <td>{{ item.nom }}</td>
-              <td>{{ item.prenom }}</td>
+              <td>{{ item.intitule }}</td>
+              <td>NOM</td>
               <td>{{ item.ville }}</td>
-              <td>{{ item.adresse }}</td>
               <td>{{ item.codePostal }}</td>
-              <td>{{ item.telephone }}</td>
-              <td>Non</td>
+              <td v-if="item.urgent == true"><div class="urgent">Oui</div></td>
+              <td v-if="item.urgent == false">
+                <div class="nonUrgent">Non</div>
+              </td>
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class="tableau-footer">
-        <div class="pagination">
-          <button v-if="previous" v-on:click="getClient(previous)">
-            &laquo;
-          </button>
-          <button
-            v-for="(page, index) in pages"
-            :key="page"
-            v-on:click="getClient(index + 1)"
-            v-bind:class="{ active: current == index + 1 }"
-          >
-            {{ index + 1 }}
-          </button>
-          <button v-if="next" v-on:click="getClient(next)">&raquo;</button>
-        </div>
       </div>
     </div>
   </main>
@@ -154,18 +139,14 @@
 export default {
   data() {
     return {
-      previous: null,
-      next: null,
-      pages: null,
       data: null,
-      current: null,
     };
   },
   methods: {
-    async getClient(params) {
+    async getChantier() {
       const headers = new Headers({
-        "Content-Type": "application/ld+json",
-        Accept: "application/ld+json",
+        "Content-Type": "application/json",
+        Accept: "application/json",
       });
       let getData = {
         method: "GET",
@@ -173,31 +154,11 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch(`/api/clients?page=${params}`, getData)
+      await fetch("/api/chantiers", getData)
         .then(async (response) => {
           if (response.status === 200) {
-            let data = await response.json();
-            console.log("Success:", data);
-            this.current = params;
-            this.data = data["hydra:member"];
-            let page = data["hydra:totalItems"];
-            this.pages = Math.ceil(page / 5);
-            let previous = data["hydra:view"]["hydra:previous"] || null;
-            let next = data["hydra:view"]["hydra:next"] || null;
-            if (previous !== null) {
-              let previousSlice = previous.slice(12);
-              let previousParams = new URLSearchParams(previousSlice);
-              this.previous = previousParams.get("page");
-            } else {
-              this.previous = null;
-            }
-            if (next !== null) {
-              let nextSlice = next.slice(12);
-              let nextParams = new URLSearchParams(nextSlice);
-              this.next = nextParams.get("page");
-            } else {
-              this.next = null;
-            }
+            this.data = await response.json();
+            console.log("Success:", this.data);
           }
         })
         .catch((error) => {
@@ -205,7 +166,7 @@ export default {
         });
     },
 
-    async deleteClient(id) {
+    async deleteChantier(id) {
       const deleteHeaders = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -216,11 +177,11 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch("/api/clients/" + id, deletetData)
+      await fetch("/api/chantiers/" + id, deletetData)
         .then(async (response) => {
           if (response.status === 204) {
             console.log("Success");
-            this.getClient();
+            this.getChantier();
           }
         })
         .catch((error) => {
@@ -229,7 +190,7 @@ export default {
     },
   },
   mounted() {
-    this.getClient(1);
+    this.getChantier();
   },
 };
 </script>
