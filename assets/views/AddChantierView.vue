@@ -11,7 +11,7 @@
       <label>Adresse* : </label>
       <input v-model="adresse" type="text" name="adresse" required /><br />
 
-      <label>Ville* : </label>
+      <label>Commune* : </label>
       <input v-model="ville" type="text" name="ville" required /><br />
 
       <label>Code Postal: </label>
@@ -42,8 +42,8 @@
       <textarea v-model="noteClient" type="text" name="noteClient"></textarea
       ><br />
 
-<div>
-      <label>Urgent: </label>
+      <div>
+        <label>Urgent: </label>
       <div>
         <input v-model="urgent" type="radio" name="urgent" value="false" checked />
         <label>Non </label>
@@ -52,14 +52,19 @@
       <input v-model="urgent" type="radio" name="urgent" value="true" />
       <label>Oui </label></div> <br />
     </div>
-   <div>
+    <div>
       <label>Type Chantier: </label>
       <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
       <label>Intérieur</label>
 
       <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
       <label>Extérieur </label>
-      </div>
+    </div>
+      <label>Catégorie chantier : </label>
+      <select v-model="category" type="text" name="category" >
+          <option value="" disabled selected>Choisir une catégorie...</option>
+          <option v-for="cat in data" :key="cat" :value="'/api/categorie_chantiers/'+cat.id" > {{ cat.NomCategorie }} </option>
+      </select>
       <button type="submit">Envoyer</button>
     </form>
   </main>
@@ -81,9 +86,35 @@ export default {
       noteClient: null,
       urgent: null,
       typeChantier: "",
+      category: "",
+      data: ""
     };
   },
   methods: {
+    async getCategoriesChantier() {
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let getData = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+      };
+      await fetch("/api/categorie_chantiers", getData)
+        .then(async (response) => {
+          if (response.status === 200) {
+            this.data = await response.json();
+            console.log("Success:", this.data);
+            
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+
     async send() {
       let urgentForm = false;
       if (this.urgent == "true") {
@@ -106,6 +137,7 @@ export default {
         noteClient: this.noteClient,
         urgent: urgentForm,
         typeChantier: typeCHantierForm,
+        category: [this.category]
 
       };
        
@@ -132,6 +164,9 @@ export default {
           console.error("Error:", error);
         });
     },
+  },
+  mounted() {
+    this.getCategoriesChantier();
   },
 };
 </script>
@@ -179,7 +214,7 @@ label {
   font-size: 20px;
 }
 
-input {
+input, textarea, select {
   background-color: #52575e; 
   border-radius: 5px;
   border: 1px solid rgb(139, 132, 132);
@@ -188,18 +223,6 @@ input {
   color: #fff;
   font-family: 'Poppins', sans-serif;
 }
-
-textarea {
-  background-color: #52575e; 
-  border-radius: 5px;
-  border: 1px solid rgb(139, 132, 132);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-
-}
-
 button {
   margin: 20px 0 40px 0;
   width: 250px;
@@ -212,7 +235,5 @@ button {
  
  
 }
-
-
 
 </style>

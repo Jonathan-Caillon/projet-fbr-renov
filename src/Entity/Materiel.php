@@ -20,9 +20,6 @@ class Materiel
     #[ORM\Column(type: 'string', length: 255)]
     private $nomMateriel;
 
-    #[ORM\ManyToOne(targetEntity: Locatier::class, inversedBy: 'materiels')]
-    private $locatier;
-
     #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Location::class)]
     private $locations;
 
@@ -45,18 +42,6 @@ class Materiel
     public function setNomMateriel(string $nomMateriel): self
     {
         $this->nomMateriel = $nomMateriel;
-
-        return $this;
-    }
-
-    public function getLocatier(): ?Locatier
-    {
-        return $this->locatier;
-    }
-
-    public function setLocatier(?Locatier $locatier): self
-    {
-        $this->locatier = $locatier;
 
         return $this;
     }
