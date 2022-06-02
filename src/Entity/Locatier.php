@@ -41,12 +41,12 @@ class Locatier
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $notePerso;
 
-    #[ORM\OneToMany(mappedBy: 'locatier', targetEntity: Materiel::class)]
-    private $materiels;
+    #[ORM\OneToMany(mappedBy: 'locatier', targetEntity: Location::class)]
+    private $locations;
 
     public function __construct()
     {
-        $this->materiels = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,29 +151,29 @@ class Locatier
     }
 
     /**
-     * @return Collection<int, Materiel>
+     * @return Collection<int, Location>
      */
-    public function getMateriels(): Collection
+    public function getLocations(): Collection
     {
-        return $this->materiels;
+        return $this->locations;
     }
 
-    public function addMateriel(Materiel $materiel): self
+    public function addLocation(Location $location): self
     {
-        if (!$this->materiels->contains($materiel)) {
-            $this->materiels[] = $materiel;
-            $materiel->setLocatier($this);
+        if (!$this->locations->contains($location)) {
+            $this->locations[] = $location;
+            $location->setLocatier($this);
         }
 
         return $this;
     }
 
-    public function removeMateriel(Materiel $materiel): self
+    public function removeLocation(Location $location): self
     {
-        if ($this->materiels->removeElement($materiel)) {
+        if ($this->locations->removeElement($location)) {
             // set the owning side to null (unless already changed)
-            if ($materiel->getLocatier() === $this) {
-                $materiel->setLocatier(null);
+            if ($location->getLocatier() === $this) {
+                $location->setLocatier(null);
             }
         }
 

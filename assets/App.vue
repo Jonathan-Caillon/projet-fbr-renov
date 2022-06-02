@@ -1,11 +1,39 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import Navbar from "./components/Navbar.vue";
+// import Search from "./components/Search.vue";
+import Sidebar from "./components/Sidebar.vue";
+
 </script>
 
 <template>
-  <Navbar />
-  <!-- <RouterView /> -->
-</template>
 
+	<div id="app">
+
+    <!-- <Search /> -->
+		<Sidebar />
+		<!-- Content -->
+		<RouterView />
+</div>
+
+</template>
+  
+
+<style scoped lang="scss">
+
+<<<<<<< HEAD
 <style></style>
+=======
+#app {
+	display: flex;
+
+	main {
+		flex: 1 1 0;
+		padding: 2rem;
+
+		@media (max-width: 1024px) {
+			padding-left: 6rem;
+		}
+	}
+}
+</style>
+>>>>>>> 411bbf37d0b9688b7c16156572c970546f3ad5d3

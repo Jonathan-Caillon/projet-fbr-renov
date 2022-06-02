@@ -47,6 +47,9 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Depannage::class)]
     private $depannages;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $email;
+
     public function __construct()
     {
         $this->chantier = new ArrayCollection();
@@ -210,6 +213,18 @@ class Client
                 $depannage->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

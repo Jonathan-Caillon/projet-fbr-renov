@@ -2,64 +2,99 @@
   <main>
 
     
-     <form id="formulaire" @submit.prevent="send">
+    <form id="formulaire" @submit.prevent="send">
        <h1 class="titre" >Ajouter un nouveau chantier : </h1>
 
-      <label>Intitulé* : </label>
-      <input v-model="intitule" type="text" name="intitule" required /><br />
+    <div class="element-3">
 
-      <label>Adresse* : </label>
-      <input v-model="adresse" type="text" name="adresse" required /><br />
+      <div class="flex-column">
+        <label>Intitulé* : </label>
+        <input v-model="intitule" type="text" name="intitule" required />
+        <!-- <br /> -->
+      </div> 
 
-      <label>Ville* : </label>
-      <input v-model="ville" type="text" name="ville" required /><br />
+      <div class="flex-column">
+        <label>Adresse* : </label>
+        <input v-model="adresse" type="text" name="adresse" required />
+        <!-- <br /> -->
+      </div>
 
-      <label>Code Postal: </label>
-      <input
-        v-model="codePostal"
-        type="text"
-        name="codePostal"
-        required
-      /><br />
 
-      <label>Date de creation* : </label>
-      <input v-model="date" type="date" name="date" required /><br />
+      <div class="flex-column">
+        <label>Ville* : </label>
+        <input v-model="ville" type="text" name="ville" required />
+        <!-- <br /> -->
+      </div>
 
-      <label>Durée de Travaux: </label>
-      <input v-model="dureeTravaux" type="number" name="dureeTravaux" required /><br />
+    </div>
+
+    <div class="element-3">
+
+      <div class="flex-column">
+        <label>Code Postal: </label>
+        <input
+          v-model="codePostal"
+          type="text"
+          name="codePostal"
+          required
+        />
+        <!-- <br /> -->
+      </div>
+
+      <div class="flex-column">
+        <label>Date de creation* : </label>
+        <input v-model="date" type="date" name="date" required />
+        <!-- <br /> -->
+      </div>
+
+      <div class="flex-column">
+        <label>Durée de Travaux: </label>
+        <input v-model="dureeTravaux" type="number" name="dureeTravaux" required />
+        <!-- <br /> -->
+      </div>
+
+    </div>
+
+    <div class="">
 
       <label>Travaux supplémentaire: </label>
-      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" /><br />
+      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
+      <!-- <br /> -->
 
       <label>Distance* : </label>
-      <input v-model="distance" type="number" step="0.01" name="distance" required /><br />
+      <input v-model="distance" type="number" step="0.01" name="distance" required />
+      <!-- <br /> -->
 
-      <label>Note Personnelle: </label>
-      <textarea v-model="notePerso" type="text" name="notePerso"></textarea
-      ><br />
+      <label>Note Personnelle : </label>
+      <textarea v-model="notePerso" type="text" name="notePerso"></textarea>
+      <!-- <br /> -->
 
-      <label>Note Client: </label>
-      <textarea v-model="noteClient" type="text" name="noteClient"></textarea
-      ><br />
+      <label>Note Client : </label>
+      <textarea v-model="noteClient" type="text" name="noteClient"></textarea>
+      <!-- <br /> -->
 
-<div>
+    </div>
+
+    <div>
       <label>Urgent: </label>
       <div>
-        <input v-model="urgent" type="radio" name="urgent" value="false" checked />
-        <label>Non </label>
+          <input v-model="urgent" type="radio" name="urgent" value="false" checked />
+          <label>Non </label>
       </div>
       <div>
-      <input v-model="urgent" type="radio" name="urgent" value="true" />
-      <label>Oui </label></div> <br />
-    </div>
-   <div>
-      <label>Type Chantier: </label>
-      <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
-      <label>Intérieur</label>
-
-      <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
-      <label>Extérieur </label>
+        <input v-model="urgent" type="radio" name="urgent" value="true" />
+        <label>Oui </label></div> <br />
       </div>
+
+      <div>
+        <label>Type Chantier: </label>
+        <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
+        <label>Intérieur</label>
+
+        <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
+        <label>Extérieur </label>
+      </div>
+
       <button type="submit">Envoyer</button>
     </form>
   </main>
@@ -81,9 +116,35 @@ export default {
       noteClient: null,
       urgent: null,
       typeChantier: "",
+      category: "",
+      data: ""
     };
   },
   methods: {
+    async getCategoriesChantier() {
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let getData = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+      };
+      await fetch("/api/categorie_chantiers", getData)
+        .then(async (response) => {
+          if (response.status === 200) {
+            this.data = await response.json();
+            console.log("Success:", this.data);
+            
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+
     async send() {
       let urgentForm = false;
       if (this.urgent == "true") {
@@ -106,6 +167,7 @@ export default {
         noteClient: this.noteClient,
         urgent: urgentForm,
         typeChantier: typeCHantierForm,
+        category: [this.category]
 
       };
        
@@ -133,20 +195,18 @@ export default {
         });
     },
   },
+  mounted() {
+    this.getCategoriesChantier();
+  },
 };
 </script>
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap');
-
-body {
-  
-   background-color: #2c3338;
-}
-
 main {
-  margin-bottom: 20px;
+  /* padding: 1.2rem; */
+  padding: 0 0 20px 230px;
+  width: 100%;
 }
 
 .titre {
@@ -158,6 +218,50 @@ main {
   margin-bottom: 50px;
   border-bottom:  2px solid #fff
 
+}
+
+.flex-column{
+  display:flex;
+  flex-direction: column;
+}
+
+
+.element-2{
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-bottom: 20px;
+  pointer-events: auto;
+  border: 0 solid rgba(0,0,0,.2);
+  border-radius: 0.475rem;
+  /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
+  outline: 0;
+}
+
+.element-2 input {
+  padding: 20px;
+  margin: 20px;
+  width: 80%;
+
+}
+
+ 
+.element-3{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-bottom: 20px;
+  pointer-events: auto;
+  border: 0 solid rgba(0,0,0,.2);
+  border-radius: 0.475rem;
+  /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
+  outline: 0;
+}
+
+.element-3 input {
+  padding: 20px;
+  margin: 20px;
 }
 
 form {
@@ -179,7 +283,7 @@ label {
   font-size: 20px;
 }
 
-input {
+input, textarea, select {
   background-color: #52575e; 
   border-radius: 5px;
   border: 1px solid rgb(139, 132, 132);
@@ -188,18 +292,6 @@ input {
   color: #fff;
   font-family: 'Poppins', sans-serif;
 }
-
-textarea {
-  background-color: #52575e; 
-  border-radius: 5px;
-  border: 1px solid rgb(139, 132, 132);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-
-}
-
 button {
   margin: 20px 0 40px 0;
   width: 250px;
@@ -210,9 +302,13 @@ button {
   border: none;
   border-radius: 5px;
  
- 
 }
 
+@media screen and (max-width: 1089px) {
+  main {
+    padding-left:50px; 
+  }
 
+}
 
 </style>

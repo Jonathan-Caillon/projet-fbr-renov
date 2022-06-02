@@ -7,7 +7,7 @@
       <label>Intitule* : </label>
       <input v-model="intitule" type="text" name="intitule" required ><br />
   
-      <label>Ville* : </label>
+      <label>Commune* : </label>
       <input v-model="ville" type="text" name="ville" required ><br />
 
       <label>Adresse* : </label>
@@ -157,6 +157,7 @@ button {
   color: #fff;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
  
  
 }
