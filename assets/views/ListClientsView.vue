@@ -68,7 +68,7 @@
                 <div class="tableau-actions">
                   <router-link
                     title="Voir page client"
-                    v-bind:to="'/client/' + item.id"
+                    v-bind:to="'/list-client/' + item.id"
                   >
                     <button class="link">
                       <svg
@@ -121,7 +121,7 @@
               <td>{{ item.adresse }}</td>
               <td>{{ item.codePostal }}</td>
               <td>{{ item.telephone }}</td>
-              <td>Non</td>
+              <td>{{ item.email }}</td>
             </tr>
           </tbody>
         </table>
@@ -220,7 +220,7 @@ export default {
         .then(async (response) => {
           if (response.status === 204) {
             console.log("Success");
-            this.getClient();
+            this.getClient(this.current);
           }
         })
         .catch((error) => {

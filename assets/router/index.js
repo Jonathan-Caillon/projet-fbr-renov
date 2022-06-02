@@ -20,6 +20,12 @@ const router = createRouter({
       component: () => import("../views/ListClientsView.vue"),
     },
     {
+      path: "/list-clients/:id",
+      name: "list-clients-id",
+      props: true,
+      component: () => import("../views/ClientProfileView.vue"),
+    },
+    {
       path: "/list-chantiers",
       name: "list-chantiers",
       component: () => import("../views/ListChantiersView.vue"),

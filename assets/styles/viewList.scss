@@ -1,10 +1,24 @@
+$light-blue: #009ef7;
+$light-red: #f1416c;
+$light-green: #50cd89;
+$light-blue-bg: #f1faff;
+$light-red-bg: #fff5f8;
+$light-green-bg: #f1faff;
+$white: #ffffff;
+$texte-color: #181c32;
+$scrollbar-color: #ccd5e5;
+$th-color: #b5b5c3;
+$border-bottom-color: #eff2f5;
+$btn-action-bg: #f5f8fa;
+$btn-action-color: #7e8299;
+
 .tableau {
   padding: 2.25rem 2rem;
   font-family: "Poppins", sans-serif;
   box-shadow: 0px 0px 20px 0px rgb(76 87 125 / 2%);
-  background-color: #ffffff;
+  background-color: $white;
   border-radius: 0.625rem;
-  color: #181c32;
+  color: $texte-color;
   margin: 3.75rem;
   & .tableau-title {
     display: flex;
@@ -12,8 +26,8 @@
     justify-content: space-between;
     & .add {
       padding: calc(0.4rem + 1px) calc(1rem + 1px);
-      color: #009ef7;
-      background-color: #f1faff;
+      color: $light-blue;
+      background-color: $light-blue-bg;
       font-size: 0.8rem;
       font-weight: 500;
       border-radius: 0.325rem;
@@ -33,28 +47,28 @@
       }
     }
     & .add:hover {
-      color: #ffffff;
-      background-color: #009ef7;
+      color: $white;
+      background-color: $light-blue;
     }
   }
   & .tableau-content {
     overflow-x: scroll;
     scrollbar-width: thin;
-    scrollbar-color: #ccd5e5;
+    scrollbar-color: $scrollbar-color;
     & table {
       border-radius: 0.625rem;
       position: relative;
       width: 100%;
       & thead {
         & th {
-          color: #b5b5c3;
+          color: $th-color;
           text-align: start;
           padding: 1rem 0.625rem;
           font-size: 0.8rem;
           text-transform: uppercase;
           border-bottom-width: 1px;
           border-bottom-style: dashed;
-          border-bottom-color: #eff2f5;
+          border-bottom-color: $border-bottom-color;
         }
       }
       & tbody {
@@ -65,16 +79,16 @@
             padding: 1rem 0.625rem;
             border-bottom-width: 1px;
             border-bottom-style: dashed;
-            border-bottom-color: #eff2f5;
+            border-bottom-color: $border-bottom-color;
             & .tableau-actions {
               display: flex;
               width: 100%;
               gap: 6px;
               & button {
                 font-family: "Poppins", sans-serif;
-                color: #7e8299;
+                color: $btn-action-color;
                 border: none;
-                background-color: #f5f8fa;
+                background-color: $btn-action-bg;
                 padding: calc(0.6rem + 1px);
                 border-radius: 0.325rem;
                 display: inline-flex;
@@ -87,20 +101,20 @@
                 }
               }
               & button:hover {
-                color: #009ef7;
-                background-color: #f1faff;
+                color: $light-blue;
+                background-color: $light-blue-bg;
               }
               & button:focus {
-                color: #009ef7;
-                background-color: #f1faff;
+                color: $light-blue;
+                background-color: $light-blue-bg;
               }
               & button.delete:hover {
-                color: #f1416c;
-                background-color: #f1faff;
+                color: $light-red;
+                background-color: $light-blue-bg;
               }
               & button.delete:focus {
-                color: #f1416c;
-                background-color: #f1faff;
+                color: $light-red;
+                background-color: $light-blue-bg;
               }
             }
           }
@@ -108,15 +122,15 @@
             padding-left: 0;
           }
           & .urgent {
-            color: #f1416c;
-            background-color: #fff5f8;
+            color: $light-red;
+            background-color: $light-red-bg;
             padding: 0.6rem 0.8rem;
             border-radius: 0.325rem;
             text-align: center;
           }
           & .nonUrgent {
-            color: #50cd89;
-            background-color: #e8fff3;
+            color: $light-green;
+            background-color: $light-green-bg;
             padding: 0.6rem 0.8rem;
             border-radius: 0.325rem;
             text-align: center;
@@ -130,7 +144,7 @@
     height: 0.4rem;
   }
   & .tableau-content::-webkit-scrollbar-thumb {
-    background-color: #ccd5e5;
+    background-color: $scrollbar-color;
   }
   & .tableau-footer {
     width: 100%;
@@ -140,7 +154,7 @@
     & .pagination {
       display: inline-block;
       & button {
-        color: black;
+        color: $texte-color;
         float: left;
         padding: 8px 16px;
         border-radius: 0.4rem;
@@ -151,8 +165,8 @@
         transition: background-color 0.3s;
       }
       & button.active {
-        background-color: #009ef7;
-        color: white;
+        background-color: $light-blue;
+        color: $white;
       }
       & button:hover:not(.active) {
         background-color: #ddd;
@@ -162,6 +176,6 @@
 }
 @media (max-width: 767px) {
   .tableau {
-    margin: 0;
+    margin: 3.75rem 0;
   }
 }
