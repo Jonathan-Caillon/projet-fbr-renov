@@ -9,7 +9,7 @@
       <label>Numéro d'intervention* : </label>
       <input v-model="numeroIntervention" type="number" name="numeroIntervention" required ><br />
 
-      <label>Ville* : </label>
+      <label>Commune* : </label>
       <input v-model="ville" type="text" name="ville" required ><br />
 
       <label>Adresse* : </label>
@@ -20,6 +20,7 @@
 
        <label>Horaire* : </label>
       <select v-model="horaireDepannage" type="text" name="horaireDepannage" >
+          <option value="" disabled selected>Choisir un horaire... </option>
           <option>Jour</option>
           <option>Nuit</option>
           <option>Week-end</option>

@@ -4,10 +4,16 @@
     <form id="formulaire" @submit.prevent="send">
         <h1 class="titre" >Location : </h1>
         <label>Locatier : </label>
-        <input v-model="locatier" type="text" name="locatier"><br/>
+      <select v-model="locatier" type="text" name="locatier" >
+          <option value="" disabled selected>Choisir un locatier...</option>
+          <option v-for="loc in data1" :key="loc" :value="'/api/locatiers/'+loc.id" > {{ loc.intitule }} </option>
+      </select>
         
-        <label>Materiel* : </label>
-        <input v-model="materiel" type="text" name="materiel" required ><br/>
+        <label>Materiel : </label>
+      <select v-model="materiel" type="text" name="materiel" >
+          <option value="" disabled selected>Choisir un materiel...</option>
+          <option v-for="mat in data2" :key="mat" :value="'/api/materiels/'+mat.id" > {{ mat.nomMateriel }} </option>
+      </select>
 
         <label>Quantité* : </label>
         <input v-model="quantite" type="number" name="quantite" required ><br/>
@@ -27,13 +33,60 @@ export default {
     data() {
 
     return {
-    //   locatier: null,
-      materiel: null,
+      locatier: "",
+      materiel: "",
       quantite: null,
       prix: null,
+      data1: "",
+      data2: ""
     };
   },
   methods: {
+    async getLocatiers() {
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let getData1 = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+      };
+      await fetch("/api/locatiers", getData1)
+        .then(async (response) => {
+          if (response.status === 200) {
+            this.data1 = await response.json();
+            console.log("Success:", this.data1);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+    async getMateriels() {
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let getData2 = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+      };
+      await fetch("/api/materiels", getData2)
+        .then(async (response) => {
+          if (response.status === 200) {
+            this.data2 = await response.json();
+            console.log("Success:", this.data2);
+            
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
     async send() {
       let form = {
         locatier: this.locatier,
@@ -53,11 +106,10 @@ export default {
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/location", myData)
+      await fetch("/api/locations", myData)
         .then( async (response) => {
             if(response.status === 201){
                 const data = await response.json();
-                location.reload();
                 console.log("Success:", data);
               
             }
@@ -67,6 +119,10 @@ export default {
           console.error("Error:", error);
         });
     },
+  },
+  mounted() {
+    this.getLocatiers();
+    this.getMateriels();
   },
 };
 </script>
@@ -98,7 +154,7 @@ label {
   color: #fff;
   font-size: 20px;
 }
-input {
+input, select  {
   background-color: #52575e; 
   border-radius: 5px;
   border: 1px solid rgb(139, 132, 132);

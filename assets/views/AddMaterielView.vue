@@ -23,6 +23,8 @@ export default {
         nomMateriel: this.nomMateriel 
       };
 
+      console.log(form)
+
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -34,11 +36,10 @@ export default {
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/Materiels", myData)
+      await fetch("/api/materiels", myData)
         .then( async (response) => {
             if(response.status === 201){
                 const data = await response.json();
-                location.reload();
                 console.log("Success:", data);
             }
         }

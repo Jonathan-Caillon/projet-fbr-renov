@@ -41,15 +41,11 @@ class Locatier
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $notePerso;
 
-    #[ORM\OneToMany(mappedBy: 'locatier', targetEntity: Materiel::class)]
-    private $materiels;
-
     #[ORM\OneToMany(mappedBy: 'locatier', targetEntity: Location::class)]
     private $locations;
 
     public function __construct()
     {
-        $this->materiels = new ArrayCollection();
         $this->locations = new ArrayCollection();
     }
 
@@ -150,36 +146,6 @@ class Locatier
     public function setNotePerso(?string $notePerso): self
     {
         $this->notePerso = $notePerso;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Materiel>
-     */
-    public function getMateriels(): Collection
-    {
-        return $this->materiels;
-    }
-
-    public function addMateriel(Materiel $materiel): self
-    {
-        if (!$this->materiels->contains($materiel)) {
-            $this->materiels[] = $materiel;
-            $materiel->setLocatier($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMateriel(Materiel $materiel): self
-    {
-        if ($this->materiels->removeElement($materiel)) {
-            // set the owning side to null (unless already changed)
-            if ($materiel->getLocatier() === $this) {
-                $materiel->setLocatier(null);
-            }
-        }
 
         return $this;
     }

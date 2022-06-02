@@ -10,7 +10,7 @@
       <label>Prénom* : </label>
       <input v-model="prenom" type="text" name="prenom" required ><br />
       
-      <label>Ville* : </label>
+      <label>Commune* : </label>
       <input v-model="ville" type="text" name="ville" required ><br />
 
       <label>Adresse* : </label>
