@@ -7,53 +7,70 @@ use App\Repository\ChantierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ChantierRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:collection']]
+)]
 class Chantier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $intitule;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $ville;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $codePostal;
 
     #[ORM\Column(type: 'date')]
+    #[Groups(['read:collection'])]
     private $date;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['read:collection'])]
     private $dateModif;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection'])]
     private $dureeTravaux;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(['read:collection'])]
     private $travauxSupl;
 
     #[ORM\Column(type: 'float')]
+    #[Groups(['read:collection'])]
     private $distance;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['read:collection'])]
     private $notePerso;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['read:collection'])]
     private $noteClient;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
+    #[Groups(['read:collection'])]
     private $urgent; 
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $typeChantier;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'chantier')]
@@ -63,6 +80,7 @@ class Chantier
     private $category;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
+    #[Groups(['read:collection'])]
     private $devis;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: ImageChantier::class)]
@@ -78,10 +96,6 @@ class Chantier
         $this->imageChantiers = new ArrayCollection();
         $this->locations = new ArrayCollection();
     }
-
-   
-
-   
 
     public function getId(): ?int
     {

@@ -7,47 +7,61 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-#[ApiResource(attributes: ["pagination_items_per_page" => 5])]
+#[ApiResource(attributes: ["pagination_items_per_page" => 5],
+    normalizationContext: ['groups' => ['read:collection']])]
 class Client
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $prenom;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $ville;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $codePostal;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $telephone;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read:collection'])]
     private $raisonSociale;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Chantier::class)]
+    #[Groups(['read:collection'])]
     private $chantier;
-
+    
     #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[Groups(['read:collection'])]
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Depannage::class)]
+    #[Groups(['read:collection'])]
     private $depannages;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read:collection'])]
     private $email;
 
     public function __construct()
