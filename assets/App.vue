@@ -7,13 +7,12 @@ import Sidebar from "./components/Sidebar.vue";
 
 <template>
 
-	<div id="app">
 
     <!-- <Search /> -->
 		<Sidebar />
-		<!-- Content -->
+	<!-- Content -->
 		<RouterView />
-</div>
+
 
 </template>
   
