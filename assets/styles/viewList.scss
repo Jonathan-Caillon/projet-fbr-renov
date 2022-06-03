@@ -1,0 +1,181 @@
+$light-blue: #009ef7;
+$light-red: #f1416c;
+$light-green: #50cd89;
+$light-blue-bg: #f1faff;
+$light-red-bg: #fff5f8;
+$light-green-bg: #f1faff;
+$white: #ffffff;
+$texte-color: #181c32;
+$scrollbar-color: #ccd5e5;
+$th-color: #b5b5c3;
+$border-bottom-color: #eff2f5;
+$btn-action-bg: #f5f8fa;
+$btn-action-color: #7e8299;
+
+.tableau {
+  padding: 2.25rem 2rem;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0px 0px 20px 0px rgb(76 87 125 / 2%);
+  background-color: $white;
+  border-radius: 0.625rem;
+  color: $texte-color;
+  margin: 3.75rem;
+  & .tableau-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & .add {
+      padding: calc(0.4rem + 1px) calc(1rem + 1px);
+      color: $light-blue;
+      background-color: $light-blue-bg;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border-radius: 0.325rem;
+      text-decoration: none;
+      display: inline-flex;
+      text-align: center;
+      align-items: center;
+      line-height: 1.5;
+      transition: 0.15s ease;
+      & span {
+        line-height: 0;
+        margin-right: 0.5rem;
+        & svg {
+          height: 1.1rem;
+          width: 1.1rem;
+        }
+      }
+    }
+    & .add:hover {
+      color: $white;
+      background-color: $light-blue;
+    }
+  }
+  & .tableau-content {
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: $scrollbar-color;
+    & table {
+      border-radius: 0.625rem;
+      position: relative;
+      width: 100%;
+      & thead {
+        & th {
+          color: $th-color;
+          text-align: start;
+          padding: 1rem 0.625rem;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          border-bottom-width: 1px;
+          border-bottom-style: dashed;
+          border-bottom-color: $border-bottom-color;
+        }
+      }
+      & tbody {
+        & tr {
+          & td {
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 1rem 0.625rem;
+            border-bottom-width: 1px;
+            border-bottom-style: dashed;
+            border-bottom-color: $border-bottom-color;
+            & .tableau-actions {
+              display: flex;
+              width: 100%;
+              gap: 6px;
+              & button {
+                font-family: "Poppins", sans-serif;
+                color: $btn-action-color;
+                border: none;
+                background-color: $btn-action-bg;
+                padding: calc(0.6rem + 1px);
+                border-radius: 0.325rem;
+                display: inline-flex;
+                cursor: pointer;
+                text-align: center;
+                align-items: center;
+                & svg {
+                  height: 1.25rem;
+                  width: 1.25rem;
+                }
+              }
+              & button:hover {
+                color: $light-blue;
+                background-color: $light-blue-bg;
+              }
+              & button:focus {
+                color: $light-blue;
+                background-color: $light-blue-bg;
+              }
+              & button.delete:hover {
+                color: $light-red;
+                background-color: $light-blue-bg;
+              }
+              & button.delete:focus {
+                color: $light-red;
+                background-color: $light-blue-bg;
+              }
+            }
+          }
+          & td:first-child {
+            padding-left: 0;
+          }
+          & .urgent {
+            color: $light-red;
+            background-color: $light-red-bg;
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.325rem;
+            text-align: center;
+          }
+          & .nonUrgent {
+            color: $light-green;
+            background-color: $light-green-bg;
+            padding: 0.6rem 0.8rem;
+            border-radius: 0.325rem;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  & .tableau-content::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+  & .tableau-content::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-color;
+  }
+  & .tableau-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    & .pagination {
+      display: inline-block;
+      & button {
+        color: $texte-color;
+        float: left;
+        padding: 8px 16px;
+        border-radius: 0.4rem;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        margin-inline: 1px;
+        transition: background-color 0.3s;
+      }
+      & button.active {
+        background-color: $light-blue;
+        color: $white;
+      }
+      & button:hover:not(.active) {
+        background-color: #ddd;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .tableau {
+    margin: 3.75rem 0;
+  }
+}
