@@ -17,11 +17,7 @@ import Sidebar from "./components/Sidebar.vue";
 
   main {
     flex: 1 1 0;
-    padding: 2rem;
-
-    @media (max-width: 1024px) {
-      padding-left: 6rem;
-    }
+    padding: 0 0 0 calc(2rem + 32px);
   }
 }
 </style>
