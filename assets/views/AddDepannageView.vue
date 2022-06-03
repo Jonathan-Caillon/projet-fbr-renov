@@ -18,7 +18,7 @@
       <label>Code Postal* : </label>
       <input v-model="codePostal" type="text" name="codePostal" required ><br />
 
-       <label>Horaire* : </label>
+      <label>Horaire* : </label>
       <select v-model="horaireDepannage" type="text" name="horaireDepannage" >
           <option value="" disabled selected>Choisir un horaire... </option>
           <option>Jour</option>
