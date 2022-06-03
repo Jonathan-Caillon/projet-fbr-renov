@@ -2,26 +2,26 @@
   <main>
     
     <form id="formulaire" @submit.prevent="send">
-        <h1 class="titre" >Location : </h1>
-        <label>Locatier : </label>
+      <h1 class="titre" >Location : </h1>
+      <label>Locatier : </label>
       <select v-model="locatier" type="text" name="locatier" >
-          <option value="" disabled selected>Choisir un locatier...</option>
-          <option v-for="loc in data1" :key="loc" :value="'/api/locatiers/'+loc.id" > {{ loc.intitule }} </option>
+        <option value="" disabled selected>Choisir un locatier...</option>
+        <option v-for="loc in data1" :key="loc" :value="'/api/locatiers/'+loc.id" > {{ loc.intitule }} </option>
       </select>
         
-        <label>Materiel : </label>
+      <label>Materiel : </label>
       <select v-model="materiel" type="text" name="materiel" >
-          <option value="" disabled selected>Choisir un materiel...</option>
-          <option v-for="mat in data2" :key="mat" :value="'/api/materiels/'+mat.id" > {{ mat.nomMateriel }} </option>
+        <option value="" disabled selected>Choisir un materiel...</option>
+        <option v-for="mat in data2" :key="mat" :value="'/api/materiels/'+mat.id" > {{ mat.nomMateriel }} </option>
       </select>
 
-        <label>Quantité* : </label>
-        <input v-model="quantite" type="number" name="quantite" required ><br/>
+      <label>Quantité* : </label>
+      <input v-model="quantite" type="number" name="quantite" required ><br/>
 
-        <label>Prix* : </label>
-        <input v-model="prix" type="number" name="prix" required ><br/>
+      <label>Prix* : </label>
+      <input v-model="prix" type="number" name="prix" required ><br/>
 
-        <button type="submit">Ajouter</button>
+      <button type="submit">Ajouter</button>
     </form>
      
      

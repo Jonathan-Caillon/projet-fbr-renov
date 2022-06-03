@@ -93,6 +93,7 @@ const ToggleMenu = () => {
 
 		      </div>
         </div>
+        
      <div class="flex"></div> 
 	</aside>
 </template>
@@ -299,6 +300,5 @@ button.menu-toggle{
   background-color:#1e293b;
   border: none;
 }
-
 
 </style>

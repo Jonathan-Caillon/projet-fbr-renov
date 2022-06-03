@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\DevisRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DevisRepository::class)]
@@ -24,11 +26,17 @@ class Devis
     #[ORM\Column(type: 'string', length: 255)]
     private $statut;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    private $paiement;
-
     #[ORM\ManyToOne(targetEntity: Chantier::class, inversedBy: 'devis')]
     private $chantier;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $paiementAcompte;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $paiementIntermed;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $paiementFinal;
 
     public function getId(): ?int
     {
@@ -71,18 +79,6 @@ class Devis
         return $this;
     }
 
-    public function getPaiement(): ?string
-    {
-        return $this->paiement;
-    }
-
-    public function setPaiement(?string $paiement): self
-    {
-        $this->paiement = $paiement;
-
-        return $this;
-    }
-
     public function getChantier(): ?Chantier
     {
         return $this->chantier;
@@ -94,4 +90,41 @@ class Devis
 
         return $this;
     }
+
+    public function getPaiementAcompte(): ?float
+    {
+        return $this->paiementAcompte;
+    }
+
+    public function setPaiementAcompte(?float $paiementAcompte): self
+    {
+        $this->paiementAcompte = $paiementAcompte;
+
+        return $this;
+    }
+
+    public function getPaiementIntermed(): ?float
+    {
+        return $this->paiementIntermed;
+    }
+
+    public function setPaiementIntermed(?float $paiementIntermed): self
+    {
+        $this->paiementIntermed = $paiementIntermed;
+
+        return $this;
+    }
+
+    public function getPaiementFinal(): ?float
+    {
+        return $this->paiementFinal;
+    }
+
+    public function setPaiementFinal(?float $paiementFinal): self
+    {
+        $this->paiementFinal = $paiementFinal;
+
+        return $this;
+    }
+
 }
