@@ -12,6 +12,10 @@ $border-bottom-color: #eff2f5;
 $btn-action-bg: #f5f8fa;
 $btn-action-color: #7e8299;
 
+section {
+  padding-top: 80px;
+}
+
 .tableau {
   padding: 2.25rem 2rem;
   font-family: "Poppins", sans-serif;
@@ -19,7 +23,7 @@ $btn-action-color: #7e8299;
   background-color: $white;
   border-radius: 0.625rem;
   color: $texte-color;
-  margin: 3.75rem;
+  margin: 0 2rem 2rem 2rem;
   & .tableau-title {
     display: flex;
     align-items: center;
@@ -72,6 +76,9 @@ $btn-action-color: #7e8299;
         }
       }
       & tbody {
+        .urgentRow {
+          background-color: $light-red-bg;
+        }
         & tr {
           & td {
             font-size: 0.875rem;
@@ -117,9 +124,6 @@ $btn-action-color: #7e8299;
                 background-color: $light-blue-bg;
               }
             }
-          }
-          & td:first-child {
-            padding-left: 0;
           }
           & .urgent {
             color: $light-red;
@@ -176,6 +180,6 @@ $btn-action-color: #7e8299;
 }
 @media (max-width: 767px) {
   .tableau {
-    margin: 3.75rem 0;
+    margin: 0;
   }
 }

@@ -1,101 +1,114 @@
 <template>
   <main>
 
-    
     <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau chantier : </h1>
+      <h1 class="titre" >Ajouter un nouveau chantier : </h1>
 
-    <div class="element-3">
+      <div class="row-3">
+          <!-- INTITULE -->
+          <div class="group-form">
+          <label>Intitulé* : </label>
+          <input class="form" v-model="intitule" type="text" name="intitule" required />
+          </div>
+          <!-- <br /> -->
+     
+          <!-- ADRESSE -->
+          <div class="group-form">
+          <label>Adresse* : </label>
+          <input class="form" v-model="adresse" type="text" name="adresse" required />
+          </div>
+          <!-- <br /> -->
+      
+          <!-- VILLE -->
+          <div class="group-form">
+          <label>Ville* : </label>
+          <input class="form" v-model="ville" type="text" name="ville" required />
+          </div>
+          <!-- <br /> -->
+      
 
-      <div class="flex-column">
-        <label>Intitulé* : </label>
-        <input v-model="intitule" type="text" name="intitule" required />
-        <!-- <br /> -->
-      </div> 
+          <!-- CODE POSTAL -->
+          <div class="group-form">
+          <label>Code Postal: </label>
+          <input class="form" v-model="codePostal" type="text" name="codePostal" required />
+          <!-- <br /> -->
+          </div>
+     
+          <!-- DATE CREATION -->
+          <div class="group-form">
+          <label>Date de creation* : </label>
+          <input class="form" v-model="date" type="date" name="date" required />
+          <!-- <br /> -->
+          </div>
+     
+          <!-- DUREE DE TRAVAUX -->
+          <div class="group-form">
+          <label>Durée de Travaux: </label>
+          <input class="form" v-model="dureeTravaux" type="number" name="dureeTravaux" required />
+          <!-- <br /> -->
+          </div>
+        
+    
+          <!-- TRAVAUX SUPPLEMENTAIRE -->
+          <div class="group-form">
+          <label>Travaux supplémentaire: </label>
+          <input  class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
+          <!-- <br /> -->
+          </div>
 
-      <div class="flex-column">
-        <label>Adresse* : </label>
-        <input v-model="adresse" type="text" name="adresse" required />
-        <!-- <br /> -->
+          <!-- DISTANCE -->
+          <div class="group-form">
+          <label>Distance* : </label>
+          <input class="form" v-model="distance" type="number" step="0.01" name="distance" required />
+          <!-- <br /> -->
+          </div>
       </div>
 
+      <div class="row-2">
+          <!-- NOTE PERSO -->
+          <div class="group-form">
+          <label>Note Personnelle : </label>
+          <textarea v-model="notePerso" type="text" name="notePerso"></textarea>
+          <!-- <br /> -->
+          </div>
 
-      <div class="flex-column">
-        <label>Ville* : </label>
-        <input v-model="ville" type="text" name="ville" required />
-        <!-- <br /> -->
-      </div>
+          <!-- NOTE CLIENT -->
+          <div class="group-form">
+          <label>Note Client : </label>
+          <textarea v-model="noteClient" type="text" name="noteClient"></textarea>
+          <!-- <br /> -->
+          </div>
+     </div>
 
-    </div>
+      
+          <!-- URGENT -->
+          <div class="checkbox">
+            <label>Urgent: </label>
+              <div class="checkBut">
+                  <input class="p-10" v-model="urgent" type="radio" name="urgent" value="false" checked />
+                  <label class="p-10">Non </label>
+                  <input class="p-10" v-model="urgent" type="radio" name="urgent" value="true" />
+                  <label class="p-10">Oui</label>
+              </div>
+         
+              <!-- <br /> -->
+            
 
-    <div class="element-3">
+          <!-- TYPE CHANTIER -->
+         
+            <label>Type Chantier: </label>
+              <div class="checkBut">
+                <input class="p-10" v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
+                <label class="p-10">Intérieur</label>
+                <input class="p-10" v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
+                <label class="p-10">Extérieur </label>
+              </div> 
+          </div>
+     
+        <div class="center">         
+          <button type="submit">Envoyer</button>
+        </div>
 
-      <div class="flex-column">
-        <label>Code Postal: </label>
-        <input
-          v-model="codePostal"
-          type="text"
-          name="codePostal"
-          required
-        />
-        <!-- <br /> -->
-      </div>
-
-      <div class="flex-column">
-        <label>Date de creation* : </label>
-        <input v-model="date" type="date" name="date" required />
-        <!-- <br /> -->
-      </div>
-
-      <div class="flex-column">
-        <label>Durée de Travaux: </label>
-        <input v-model="dureeTravaux" type="number" name="dureeTravaux" required />
-        <!-- <br /> -->
-      </div>
-
-    </div>
-
-    <div class="">
-
-      <label>Travaux supplémentaire: </label>
-      <input v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
-      <!-- <br /> -->
-
-      <label>Distance* : </label>
-      <input v-model="distance" type="number" step="0.01" name="distance" required />
-      <!-- <br /> -->
-
-      <label>Note Personnelle : </label>
-      <textarea v-model="notePerso" type="text" name="notePerso"></textarea>
-      <!-- <br /> -->
-
-      <label>Note Client : </label>
-      <textarea v-model="noteClient" type="text" name="noteClient"></textarea>
-      <!-- <br /> -->
-
-    </div>
-
-    <div>
-      <label>Urgent: </label>
-      <div>
-          <input v-model="urgent" type="radio" name="urgent" value="false" checked />
-          <label>Non </label>
-      </div>
-      <div>
-        <input v-model="urgent" type="radio" name="urgent" value="true" />
-        <label>Oui </label></div> <br />
-      </div>
-
-      <div>
-        <label>Type Chantier: </label>
-        <input v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
-        <label>Intérieur</label>
-
-        <input v-model="typeChantier" type="radio" name="typeChantier" value="Exterieur" />
-        <label>Extérieur </label>
-      </div>
-
-      <button type="submit">Envoyer</button>
     </form>
   </main>
 </template>
@@ -202,113 +215,152 @@ export default {
 </script>
 
 <style scoped>
-
-main {
-  /* padding: 1.2rem; */
-  padding: 0 0 20px 230px;
-  width: 100%;
-}
-
-.titre {
-  display: flex;
-  color: #fff;
-  font-size: 45px;
-  padding:0;
-  padding-bottom: 1.2rem;
-  margin-bottom: 50px;
-  border-bottom:  2px solid #fff
-
-}
-
-.flex-column{
-  display:flex;
-  flex-direction: column;
-}
-
-
-.element-2{
-  width:100%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  margin-bottom: 20px;
-  pointer-events: auto;
-  border: 0 solid rgba(0,0,0,.2);
-  border-radius: 0.475rem;
-  /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
-  outline: 0;
-}
-
-.element-2 input {
-  padding: 20px;
-  margin: 20px;
-  width: 80%;
-
-}
-
  
-.element-3{
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  margin-bottom: 20px;
-  pointer-events: auto;
-  border: 0 solid rgba(0,0,0,.2);
-  border-radius: 0.475rem;
-  /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
-  outline: 0;
-}
-
-.element-3 input {
-  padding: 20px;
-  margin: 20px;
+main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 0 solid rgba(0,0,0,.2);
+    border-radius: 0.475rem;
+    box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%);
+    outline: 0;
+    /* overflow-y: auto;
+    margin-bottom: 3.75rem;
+    margin-top: 3.75rem;
+    margin-right: 10%;
+    margin-left: 15%;  */
+    padding-left: 5rem;  
 }
 
 form {
-    position: relative;
-    margin: 4rem;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    pointer-events: auto;
-    border: 0 solid rgba(0,0,0,.2);
-    border-radius: 0.475rem;
-    /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
-    outline: 0;
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  font-size: 14px;
+  color: #181c32;
+  display: flex;
+  flex-direction: column;
 }
 
-label {
-  color: #fff;
-  font-size: 20px;
+form h1 {
+  font-weight: 600;
+  line-height: 1.2;
+  color: #181c32;
+  display: block ;
+  margin-bottom: 0.75rem;
+  font-size: calc(1.3rem + .6vw);
+  text-align: center; 
 }
 
-input, textarea, select {
-  background-color: #52575e; 
-  border-radius: 5px;
-  border: 1px solid rgb(139, 132, 132);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
+form .form, textarea{
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  font-size: inherit;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  padding: 0 15px;
+  transition: 0.2s cubic-bezier(0.645,0.045,0.355,1);
+  width: 100%;
 }
-button {
-  margin: 20px 0 40px 0;
-  width: 250px;
-  padding: 10px;
-  font-family: 'Poppins', sans-serif;
+
+textarea{
+  height: 100px;
+}
+
+form .row-3{
+  display:flex;
+  flex-wrap: wrap ;
+  justify-content:flex-start ;
+  /* width:100%; */
+}
+
+form .row-2{
+  display:flex;
+  flex-wrap: wrap ;
+  justify-content:flex-start ;
+  align-items: center;
+}
+
+form .group-form{
+  margin: 1rem;
+  width:30%;
+  
+}
+
+form label {
+  font-weight: 500;
+  font-size: 1.075rem;
+  margin-bottom: .5rem;
+  color:#606266;
+}
+
+form .checkbox{
+  display:flex;
+  justify-content: space-around;
+  align-items: baseline;
+
+}
+form .checkBut {
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+}
+
+form .p-10{
+  padding:10px;
+}
+
+form button{
+  padding: 0.825rem 1.75rem;
+  font-size: 1.15rem;
+  border-radius: 0.625rem;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
   background-color: #009ef7;
-  color: #fff;
   border: none;
-  border-radius: 5px;
- 
+  color: #fff;
+  width: 250px;
 }
 
-@media screen and (max-width: 1089px) {
-  main {
-    padding-left:50px; 
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form button:hover {
+  background-color:#6672b4;
+}
+
+/* ----- MEDIA QUERIES ----- */ 
+
+/* Extra small devices (phones, 600px and down) */
+@media  (max-width:900px) {
+
+  form .group-form{
+    margin: 0;
+    width: 100%;
   }
 
+  form .row-3 {
+    flex-direction: column;
+    justify-content: space-around
+  }
+  .checkbox{
+    flex-direction: column;
+  }
 }
-
 </style>
