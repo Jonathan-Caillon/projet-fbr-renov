@@ -33,12 +33,6 @@ const router = createRouter({
         },
       ],
     },
-    // {
-    //   path: "/list-clients/:idClient/chantier/:idChantier",
-    //   name: "client-chantier-id",
-    //   props: true,
-    //   component: () => import("../views/ClientProfileView.vue"),
-    // },
     {
       path: "/list-chantiers",
       name: "list-chantiers",
