@@ -20,11 +20,25 @@ const router = createRouter({
       component: () => import("../views/ListClientsView.vue"),
     },
     {
-      path: "/list-clients/:id",
+      path: "/list-clients/:idClient",
       name: "list-clients-id",
       props: true,
       component: () => import("../views/ClientProfileView.vue"),
+      children: [
+        {
+          path: "chantier/:idChantier",
+          name: "client-chantier-id",
+          props: true,
+          component: () => import("../views/ClientChantierView.vue"),
+        },
+      ],
     },
+    // {
+    //   path: "/list-clients/:idClient/chantier/:idChantier",
+    //   name: "client-chantier-id",
+    //   props: true,
+    //   component: () => import("../views/ClientProfileView.vue"),
+    // },
     {
       path: "/list-chantiers",
       name: "list-chantiers",

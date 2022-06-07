@@ -145,6 +145,7 @@
         </div>
       </div>
     </section>
+    <router-view></router-view>
   </main>
 </template>
 

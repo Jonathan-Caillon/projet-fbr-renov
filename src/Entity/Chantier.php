@@ -11,82 +11,86 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ChantierRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['read:collection']]
+    normalizationContext: ['groups' => ['read:chantier']]
 )]
 class Chantier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $intitule;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $ville;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $codePostal;
 
     #[ORM\Column(type: 'date')]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $date;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $dateModif;
 
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $dureeTravaux;
 
     #[ORM\Column(type: 'float', nullable: true)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $travauxSupl;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $distance;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $notePerso;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $noteClient;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $urgent; 
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $typeChantier;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'chantier')]
+    #[Groups(['read:chantier'])]
     private $client;
 
     #[ORM\ManyToMany(targetEntity: CategorieChantier::class, inversedBy: 'chantiers')]
+    #[Groups(['read:chantier'])]
     private $category;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $devis;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: ImageChantier::class)]
+    #[Groups(['read:chantier'])]
     private $imageChantiers;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Location::class)]
+    #[Groups(['read:chantier'])]
     private $locations;
     
     public function __construct()
