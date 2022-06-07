@@ -1,46 +1,113 @@
 <template>
   <main>
-    
-     <form id="formulaire" @submit.prevent="send">
-       <h1 class="titre" >Ajouter un nouveau client : </h1>
-      <label>Nom* : </label>
+    <form id="formulaire" @submit.prevent="send">
+      <h1 class="titre">Ajouter un nouveau client :</h1>
 
-      <input v-model="nom" type="text" name="nom" required ><br />
-    
-      <label>Prénom* : </label>
-      <input v-model="prenom" type="text" name="prenom" required ><br />
-      
-      <label>Commune* : </label>
-      <input v-model="ville" type="text" name="ville" required ><br />
+      <div class="row-3">
+        <!--NOM-->
+        <div class="group-form">
+          <label>Nom* : </label>
+          <input class="form" v-model="nom" type="text" name="nom" required />
+        </div>
+        <!-- <br /> -->
 
-      <label>Adresse* : </label>
-      <input v-model="adresse" type="text" name="adresse" required ><br />
+        <!--PRENOM-->
+        <div class="group-form">
+          <label>Prénom* : </label>
+          <input
+            class="form"
+            v-model="prenom"
+            type="text"
+            name="prenom"
+            required
+          />
+        </div>
+        <!-- <br /> -->
 
-      <label>Code Postal* : </label>
-      <input v-model="codePostal" type="text" name="codePostal" required ><br />
+        <!--COMMUNE-->
+        <div class="group-form">
+          <label>Commune* : </label>
+          <input
+            class="form"
+            v-model="ville"
+            type="text"
+            name="ville"
+            required
+          />
+        </div>
+        <!-- <br /> -->
 
-      <label>Téléphone* : </label>
-      <input v-model="telephone" type="telephone" name="telephone" required ><br />
+        <!--ADRESSE-->
+        <div class="group-form">
+          <label>Adresse* : </label>
+          <input
+            class="form"
+            v-model="adresse"
+            type="text"
+            name="adresse"
+            required
+          />
+        </div>
+        <!-- <br /> -->
 
-      <label>E-mail : </label>
-      <input v-model="mail" type="email" name="email"><br />
+        <!--CP-->
+        <div class="group-form">
+          <label>Code Postal* : </label>
+          <input
+            class="form"
+            v-model="codePostal"
+            type="text"
+            name="codePostal"
+            required
+          />
+        </div>
+        <!-- <br /> -->
 
-      <label>Raison sociale : </label>
-      <input v-model="raisonSociale" type="text" name="raisonSociale" ><br />
-      
-      <button type="submit">Ajouter</button>
+        <!--TELEPHONE-->
+        <div class="group-form">
+          <label>Téléphone* : </label>
+          <input
+            class="form"
+            v-model="telephone"
+            type="telephone"
+            name="telephone"
+            required
+          />
+        </div>
+        <!-- <br /> -->
 
-        <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
-      
+        <!--MAIL-->
+        <div class="group-form">
+          <label>E-mail : </label>
+          <input class="form" v-model="mail" type="email" name="email" />
+        </div>
+        <!-- <br /> -->
+
+        <!--RAISON SOCIALE-->
+        <div class="group-form">
+          <label>Raison sociale : </label>
+          <input
+            class="form"
+            v-model="raisonSociale"
+            type="text"
+            name="raisonSociale"
+          />
+        </div>
+        <!-- <br /> -->
+      </div>
+
+      <div class="center">
+        <button type="submit">Ajouter</button>
+      </div>
+
+      <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
     </form>
-    
   </main>
 </template>
 
 <script>
 export default {
-    data() {
-
+  data() {
     return {
       nom: null,
       prenom: null,
@@ -50,7 +117,7 @@ export default {
       telephone: null,
       email: null,
       raisonSociale: null,
-      dataId:"",
+      dataId: "",
     };
   },
   methods: {
@@ -58,7 +125,7 @@ export default {
       let urgentForm = false;
       if (this.urgent == "true") {
         urgentForm = true;
-      }  
+      }
       let form = {
         nom: this.nom,
         prenom: this.prenom,
@@ -67,7 +134,7 @@ export default {
         codePostal: this.codePostal,
         telephone: this.telephone,
         email: this.mail,
-        raisonSociale: this.raisonSociale
+        raisonSociale: this.raisonSociale,
       };
 
       const headers = new Headers({
@@ -82,81 +149,23 @@ export default {
         body: JSON.stringify(form),
       };
       await fetch("/api/clients", myData)
-        .then( async (response) => {
-            if(response.status === 201){
-                const data = await response.json();
-                location.reload();
-                console.log("Success:", data);
-                // console.log(data.id)
-                // this.dataId = data.id
-            }
-        }
-        )
+        .then(async (response) => {
+          if (response.status === 201) {
+            const data = await response.json();
+            location.reload();
+            console.log("Success:", data);
+            // console.log(data.id)
+            // this.dataId = data.id
+          }
+        })
         .catch((error) => {
           console.error("Error:", error);
         });
     },
   },
 };
-
-
 </script>
 
 <style scoped>
-
-
-.titre {
-  display: flex;
-  color: #fff;
-  font-size: 45px;
-  padding:0;
-  padding-bottom: 1.2rem;
-  margin-bottom: 50px;
-  border-bottom:  2px solid #fff
-
-}
-
-form {
-    position: relative;
-    margin: 4rem;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    pointer-events: auto;
-    border: 0 solid rgba(0,0,0,.2);
-    border-radius: 0.475rem;
-    /* box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 10%); */
-    outline: 0;
-}
-
-label {
-  color: #fff;
-  font-size: 20px;
-}
-
-input {
-  background-color: #52575e; 
-  border-radius: 5px;
-  border: 1px solid rgb(139, 132, 132);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-}
-
-button {
-  margin: 20px 0 40px 0;
-  width: 250px;
-  padding: 10px;
-  font-family: 'Poppins', sans-serif;
-  background-color: #009ef7;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
- 
- 
-}
-
+@import "@/styles/Form.css";
 </style>
