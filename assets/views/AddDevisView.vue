@@ -26,6 +26,9 @@
         <option value="refuser">Devis refusé</option>
       </select>
 
+      <label for="document">Document : </label>
+      <input name="documents" id="documents" type="file"/>
+
       <input type="hidden" name="chantier" v-model="chantier" />
 
       <button type="submit">Envoyer</button>
@@ -53,17 +56,18 @@ export default {
     methods: {
     
     async send() {
-      
+      let doc = document.getElementById("documents").files[0];
       let form = {
         numeroDevis: this.numeroDevis,
         prixDevis: this.prixDevis,
         statut: this.statut,
         paiementAcompte: this.paiementAcompte,
         paimentIntermed: this.paimentIntermed,
-        paiementFinal: this.paiementFinal 
+        paiementFinal: this.paiementFinal ,
+        documents: this.doc
       };
 
-      console.log(this.paiementFinal)
+      console.log(this.doc)
 
       const headers = new Headers({
         "Content-Type": "application/json",

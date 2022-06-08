@@ -4,39 +4,76 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\DevisRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
+/**
+ * @Vich\Uploadable
+ */
 #[ORM\Entity(repositoryClass: DevisRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['devis:read']],
+    denormalizationContext: ['groups' => ['devis:write']],
+
+    collectionOperations: [
+        'get',
+        'post' => [
+            'input_formats' => [
+                'multipart' => ['multipart/form-data'],
+            ],
+        ],
+    ],
+    
+)]
+
 class Devis
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['devis:read'])]
     private $id;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['devis:read', 'devis:write'])]
     private $numeroDevis;
 
     #[ORM\Column(type: 'float')]
+    #[Groups(['devis:read', 'devis:write'])]
     private $prixDevis;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['devis:read', 'devis:write'])]
     private $statut;
 
     #[ORM\ManyToOne(targetEntity: Chantier::class, inversedBy: 'devis')]
     private $chantier;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(['devis:read', 'devis:write'])]
     private $paiementAcompte;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(['devis:read', 'devis:write'])]
     private $paiementIntermed;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(['devis:read', 'devis:write'])]
     private $paiementFinal;
+
+    public ?string $contentUrl = null;
+
+    /**
+     * @Vich\UploadableField(mapping="document", fileNameProperty="filePath")
+     */
+    #[Groups(['devis:read', 'devis:write'])]
+    public ?File $file = null;
+
+    #[ORM\Column(nullable: true)] 
+    public ?string $filePath = null;
 
     public function getId(): ?int
     {
@@ -126,5 +163,6 @@ class Devis
 
         return $this;
     }
+
 
 }

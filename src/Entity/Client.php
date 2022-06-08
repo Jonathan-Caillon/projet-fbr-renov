@@ -49,7 +49,7 @@ class Client
     private $raisonSociale;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Chantier::class)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection', 'read:chantier'])]
     private $chantier;
     
     #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
