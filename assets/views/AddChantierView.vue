@@ -7,59 +7,59 @@
       <div class="row-3">
           <!-- INTITULE -->
           <div class="group-form">
-          <label>Intitulé* : </label>
-          <input class="form" v-model="intitule" type="text" name="intitule" required />
+          <label class="required" >Intitulé</label>
+          <input placeholder="intitulé" class="form" v-model="intitule" type="text" name="intitule" required />
           </div>
           <!-- <br /> -->
      
           <!-- ADRESSE -->
           <div class="group-form">
-          <label>Adresse* : </label>
-          <input class="form" v-model="adresse" type="text" name="adresse" required />
+          <label class="required" >Adresse </label>
+          <input placeholder="adresse" class="form" v-model="adresse" type="text" name="adresse" required />
           </div>
           <!-- <br /> -->
       
           <!-- VILLE -->
           <div class="group-form">
-          <label>Ville* : </label>
-          <input class="form" v-model="ville" type="text" name="ville" required />
+          <label class="required" >Ville </label>
+          <input placeholder="ville" class="form" v-model="ville" type="text" name="ville" required />
           </div>
           <!-- <br /> -->
       
 
           <!-- CODE POSTAL -->
           <div class="group-form">
-          <label>Code Postal: </label>
-          <input class="form" v-model="codePostal" type="text" name="codePostal" required />
+          <label class="required" >Code Postal </label>
+          <input  placeholder="code postal" class="form" v-model="codePostal" type="text" name="codePostal" required />
           <!-- <br /> -->
           </div>
      
           <!-- DATE CREATION -->
           <div class="group-form">
-          <label>Date de creation* : </label>
+          <label class="required" >Date de creation </label>
           <input class="form" v-model="date" type="date" name="date" required />
           <!-- <br /> -->
           </div>
      
           <!-- DUREE DE TRAVAUX -->
           <div class="group-form">
-          <label>Durée de Travaux: </label>
-          <input class="form" v-model="dureeTravaux" type="number" name="dureeTravaux" required />
+          <label class="required" >Durée de Travaux </label>
+          <input placeholder="durée" class="form" v-model="dureeTravaux" type="number" name="dureeTravaux" required />
           <!-- <br /> -->
           </div>
         
     
           <!-- TRAVAUX SUPPLEMENTAIRE -->
           <div class="group-form">
-          <label>Travaux supplémentaire: </label>
-          <input  class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
+          <label>Travaux supplémentaire : </label>
+          <input  placeholder="travaus supplémentaires" class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
           <!-- <br /> -->
           </div>
 
           <!-- DISTANCE -->
           <div class="group-form">
-          <label>Distance* : </label>
-          <input class="form" v-model="distance" type="number" step="0.01" name="distance" required />
+          <label class="required"  >Distance </label>
+          <input  placeholder="Distance" class="form" v-model="distance" type="number" step="0.01" name="distance" required />
           <!-- <br /> -->
           </div>
       </div>
@@ -68,20 +68,21 @@
           <!-- NOTE PERSO -->
           <div class="group-form">
           <label>Note Personnelle : </label>
-          <textarea class="form" v-model="notePerso" type="text" name="notePerso"></textarea>
+          <textarea  class="form" v-model="notePerso" type="text" name="notePerso"></textarea>
           <!-- <br /> -->
           </div>
 
           <!-- NOTE CLIENT -->
           <div class="group-form">
           <label>Note Client : </label>
-          <textarea class="form" v-model="noteClient" type="text" name="noteClient"></textarea>
+          <textarea  class="form" v-model="noteClient" type="text" name="noteClient"></textarea>
           <!-- <br /> -->
           </div>
-     </div>
+          </div>
 
       
           <!-- URGENT -->
+        <div class="BoxCheck">
           <div class="checkbox">
             <label>Urgent: </label>
               <div class="checkBut">
@@ -90,12 +91,13 @@
                   <input class="form-check-input" v-model="urgent" type="radio" name="urgent" value="true" />
                   <label class="p-10">Oui</label>
               </div>
+            </div>
          
               <!-- <br /> -->
             
 
           <!-- TYPE CHANTIER -->
-         
+           <div class="checkbox">
             <label>Type Chantier: </label>
               <div class="checkBut">
                 <input class="form-check-input" v-model="typeChantier" type="radio" name="typeChantier" value="Intérieur" checked/>
@@ -104,6 +106,8 @@
                 <label class="p-10">Extérieur </label>
               </div> 
           </div>
+        </div>
+            
      
         <div class="center">         
           <button type="submit">Envoyer</button>
@@ -207,6 +211,7 @@ export default {
           console.error("Error:", error);
         });
     },
+    /*error*/
   },
   mounted() {
     this.getCategoriesChantier();
@@ -215,5 +220,5 @@ export default {
 </script>
 
 <style scoped>
- @import "@/styles/Form.css";
+  @import "@/styles/Form.css"; 
 </style>

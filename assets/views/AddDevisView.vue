@@ -6,8 +6,9 @@
       <div class="row-3">
         <!-- NUMERO DEVIS -->
         <div class="group-form">
-          <label>Numéro devis* : </label>
+          <label class="required" >Numéro devis </label>
           <input
+            placeholder="N°devis"
             class="form"
             v-model="numeroDevis"
             type="number"
@@ -18,8 +19,9 @@
 
         <!-- PRIX -->
         <div class="group-form">
-          <label>Prix* : </label>
+          <label class="required" >Prix</label>
           <input
+            placeholder="prix"
             class="form"
             id="prixDevis"
             v-model="prixDevis"
@@ -33,6 +35,7 @@
         <div class="group-form">
           <label>Paiement acompte : </label>
           <input
+            placeholder="acompte"
             class="form"
             id="payAc"
             v-model="paiementAcompte"
@@ -45,6 +48,7 @@
         <div class="group-form">
           <label>Paiement Intermediaire: </label>
           <input
+            placeholder="paiement intermédiaire"
             class="form"
             id="payIn"
             v-model="paiementIntermed"
@@ -57,6 +61,7 @@
         <div class="group-form">
           <label>Paiement final : </label>
           <input
+            placeholder="paiement final"
             class="form"
             readonly
             id="payF"
@@ -68,7 +73,7 @@
 
         <!-- STATUT -->
         <div class="group-form">
-          <label>Statut* : </label>
+          <label class="required" >Statut </label>
           <select v-model="statut" type="text" name="statut">
             <option value="" disabled selected>
               Choisir un statut du devis...

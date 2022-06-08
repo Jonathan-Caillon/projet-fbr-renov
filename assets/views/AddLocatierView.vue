@@ -8,37 +8,37 @@
       <div class="row-3">
         <!-- INTITULE -->
         <div class="group-form">
-          <label>Intitule* : </label>
-          <input class="form" v-model="intitule" type="text" name="intitule" required >
+          <label class="required" >Intitule </label>
+          <input placeholder="intitulé" class="form" v-model="intitule" type="text" name="intitule" required >
         </div>
          <!-- <br /> -->
 
   
         <!-- COMMUNE -->
         <div class="group-form">
-          <label>Commune* : </label>
-          <input class="form" v-model="ville" type="text" name="ville" required >
+          <label class="required" >Commune </label>
+          <input placeholder="commune" class="form" v-model="ville" type="text" name="ville" required >
         </div>
         <!-- <br /> -->
 
         <!-- ADRESSE -->
         <div class="group-form">
-          <label>Adresse* : </label>
-          <input class="form" v-model="adresse" type="text" name="adresse" required >
+          <label class="required" >Adresse </label>
+          <input placeholder="adresse" class="form" v-model="adresse" type="text" name="adresse" required >
         </div>
         <!-- <br /> -->
 
         <!-- CP -->
         <div class="group-form">
-          <label>Code Postal* : </label>
-          <input class="form" v-model="codePostal" type="text" name="codePostal" required >
+          <label class="required" >Code Postal </label>
+          <input placeholder="code postal" class="form" v-model="codePostal" type="text" name="codePostal" required >
         </div>
         <!-- <br /> -->
 
         <!-- TEL -->
         <div class="group-form">
-          <label>Téléphone* : </label>
-          <input class="form" v-model="telephone" type="telephone" name="telephone" required >
+          <label class="required" >Téléphone </label>
+          <input placeholder="téléphone" class="form" v-model="telephone" type="telephone" name="telephone" required >
         </div>
         <!-- <br /> -->
 
@@ -52,7 +52,7 @@
         <!-- MAIL -->
         <div class="group-form">
           <label>E-mail : </label>
-          <input class="form" v-model="email" type="email" name="email">
+          <input placeholder="email" class="form" v-model="email" type="email" name="email">
         </div>
         <!-- <br /> -->
       </div>

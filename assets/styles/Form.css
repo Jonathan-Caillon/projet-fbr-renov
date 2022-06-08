@@ -7,13 +7,13 @@ main {
   background-color: #181c32;
   background-clip: padding-box;
   outline: 0;
-  padding-left: 5rem;
+  padding-left: 4rem;
 }
 
 form {
   position: relative;
   width: auto;
-  margin: 4rem 2rem;
+  margin: 4rem 3rem;
   font-size: 14px;
   background-color: #fff;
   border-radius: 15px;
@@ -27,9 +27,10 @@ form h1 {
   line-height: 1.2;
   color: #181c32;
   display: block;
-  margin-bottom: 0.75rem;
+  margin: 1.5rem;
   font-size: calc(1.3rem + 0.6vw);
   text-align: center;
+
 }
 
 form .form,
@@ -46,7 +47,7 @@ textarea {
   line-height: 40px;
   padding: 0 15px;
   transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  width: 100%;
+  width: 55%;
 }
 
 textarea.form {
@@ -68,24 +69,58 @@ form .row-2 {
 }
 
 form .group-form {
-  margin: 1rem;
-  width: 30%;
+  align-items: baseline;
+  margin-top: 2.5rem;
+  width:80%;
+  justify-content: space-between;
+  display: flex;
 }
 
 form label {
   font-weight: 500;
   font-size: 1.075rem;
   margin-bottom: 0.5rem;
-  color: #606266;
+  color: #181c32;
 }
+
+.required:after {
+  content: "*";
+  position: relative;
+  font-size: inherit;
+  color: #f1416c;
+  padding-left: 0.25rem;
+  font-weight: 800;
+}
+
+input::placeholder {
+  color:#5e627869;
+  font-weight: 500;
+}
+
+input[type="date" i]{
+  color:#5e627869;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
 
 /* CHECKBOX */
 
-form .checkbox {
+form .BoxCheck {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
-  align-items: baseline;
+  align-items: center;
 }
+
+form .checkbox {
+  align-items: baseline;
+  margin-top: 2.5rem;
+  width: 80%;
+  justify-content: space-between;
+  display: flex;
+}
+
 form .checkBut {
   align-items: baseline;
   display: flex;
@@ -126,22 +161,24 @@ input[type="radio" i] {
   border-radius: 0.45em;
 }
 
+
 /* SELECT FORM */
 
 form select {
   background-color: #f5f8fa;
-  color: #5e6278;
+  color:#181c32;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
   display: block;
   background-image: url(./img/arrowDown.png);
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 16px 12px;
-  width: 100%;
+  width: 55%;
   border: 1px solid #dcdfe6;
   padding: 0.4rem 3rem 0.4rem 1rem;
   -moz-padding-start: calc(1rem - 3px);
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: inherit;
   line-height: 1.5;
   border-radius: 0.475rem;
   appearance: none;
@@ -165,8 +202,8 @@ form button {
   background-color: #009ef7;
   border: none;
   color: #fff;
-  width: 250px;
-  margin-top: 1.5rem;
+  width: 300px;
+  margin-top: 50px;
 }
 
 .center {
@@ -179,16 +216,38 @@ form button:hover {
   background-color: #6672b4;
 }
 
+/*ERROR MESSAGE*/
+
+/* .error-message{
+  color:#d9214e;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+} */
+
 /* ----- MEDIA QUERIES ----- */
 
 @media (max-width: 900px) {
+  form {
+    margin: 4rem 1rem;
+  }
+
   form .group-form {
     margin: 10px;
     width: 100%;
+    flex-direction: column;
   }
 
-  .checkbox {
-    display: flex;
+  form .form,
+  textarea {
+    width: 100%;
+  }
+
+  form select {
+    width: 100%;
+  }
+
+  form .checkbox {
+    width: 90%;
     flex-direction: column;
   }
 }
