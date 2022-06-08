@@ -21,7 +21,7 @@ class Client
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255)]

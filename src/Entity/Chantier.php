@@ -42,7 +42,7 @@ class Chantier
     private $date;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    #[Groups(['read:chantier'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $dateModif;
 
     #[ORM\Column(type: 'integer')]
@@ -66,23 +66,15 @@ class Chantier
     private $noteClient;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
-    #[Groups(['read:collection', 'read:chantier'])]
-    private $urgent; 
-
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection', 'read:chantier'])]
-    private $typeChantier;
-
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'chantier')]
     #[Groups(['read:chantier'])]
     private $client;
 
     #[ORM\ManyToMany(targetEntity: CategorieChantier::class, inversedBy: 'chantiers')]
-    #[Groups(['read:chantier'])]
     private $category;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
-    #[Groups(['read:collection', 'read:chantier'])]
+    #[Groups(['read:collection','read:chantier'])]
     private $devis;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: ImageChantier::class)]
