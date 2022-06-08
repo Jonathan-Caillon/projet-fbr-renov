@@ -57,12 +57,6 @@
           />
         </div>
 
-<<<<<<< HEAD
-      <label for="document">Document : </label>
-      <input name="documents" id="documents" type="file"/>
-
-      <input type="hidden" name="chantier" v-model="chantier" />
-=======
         <!-- PAIEMENT FINAL -->
         <div class="group-form">
           <label>Paiement final : </label>
@@ -76,7 +70,6 @@
             name="paimentFinalForm"
           />
         </div>
->>>>>>> 8d068378994771da7c3658dcd2f5d2cab39c100c
 
         <!-- STATUT -->
         <div class="group-form">
@@ -116,28 +109,16 @@ export default {
   },
   methods: {
     async send() {
-<<<<<<< HEAD
-      let doc = document.getElementById("documents").files[0];
-=======
->>>>>>> 8d068378994771da7c3658dcd2f5d2cab39c100c
       let form = {
         numeroDevis: this.numeroDevis,
         prixDevis: this.prixDevis,
         statut: this.statut,
         paiementAcompte: this.paiementAcompte,
         paimentIntermed: this.paimentIntermed,
-<<<<<<< HEAD
-        paiementFinal: this.paiementFinal ,
-        documents: this.doc
-      };
-
-      console.log(this.doc)
-=======
         paiementFinal: this.paiementFinal,
       };
 
       console.log(this.paiementFinal);
->>>>>>> 8d068378994771da7c3658dcd2f5d2cab39c100c
 
       const headers = new Headers({
         "Content-Type": "application/json",

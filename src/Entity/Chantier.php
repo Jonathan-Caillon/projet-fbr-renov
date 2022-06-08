@@ -66,6 +66,9 @@ class Chantier
     private $noteClient;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
+    #[Groups(['read:collection','read:chantier'])]
+    private $urgent;
+
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'chantier')]
     #[Groups(['read:chantier'])]
     private $client;
