@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
+
 /**
  * @Vich\Uploadable
  */
@@ -26,7 +27,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             ],
         ],
     ],
-    
+
 )]
 
 class Devis
@@ -72,7 +73,7 @@ class Devis
     #[Groups(['devis:read', 'devis:write'])]
     public ?File $file = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
     public ?string $filePath = null;
 
     public function getId(): ?int
@@ -163,6 +164,4 @@ class Devis
 
         return $this;
     }
-
-
 }
