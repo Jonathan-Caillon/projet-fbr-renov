@@ -11,7 +11,14 @@
           <input placeholder="intitulé" class="form" v-model="intitule" type="text" name="intitule" required />
           </div>
           <!-- <br /> -->
-     
+          <!-- CATEGORIE -->
+          <div class="group-form">
+          <label>Catégorie chantier : </label>
+          <select v-model="category" type="text" name="category" >
+          <option value="" disabled selected>Choisir une catégorie...</option>
+          <option v-for="cat in data" :key="cat" :value="'/api/categorie_chantiers/'+cat.id" > {{ cat.NomCategorie }} </option>
+          </select>
+          </div>
           <!-- ADRESSE -->
           <div class="group-form">
           <label class="required" >Adresse </label>
