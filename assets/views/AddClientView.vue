@@ -210,13 +210,29 @@ export default {
         .then(async (response) => {
           if (response.status === 201) {
             const data = await response.json();
-            location.reload();
+            // sweetAlert
+            this.$swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Le fichier a bien été envoyé",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
             console.log("Success:", data);
             // console.log(data.id)
             // this.dataId = data.id
           }
         })
         .catch((error) => {
+           // sweetAlert
+          this.$swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Le fichier n'a pas été envoyé!",
+          });
           console.error("Error:", error);
         });
     },

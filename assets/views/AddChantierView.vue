@@ -11,6 +11,15 @@
           <input placeholder="intitulé" class="form" v-model="intitule" type="text" name="intitule" required />
           </div>
           <!-- <br /> -->
+
+          <!-- CATEGORIE -->
+          <div class="group-form">
+          <label>Catégorie chantier : </label>
+          <select v-model="category" type="text" name="category" >
+          <option value="" disabled selected>Choisir une catégorie...</option>
+          <option v-for="cat in data" :key="cat" :value="'/api/categorie_chantiers/'+cat.id" > {{ cat.NomCategorie }} </option>
+          </select>
+          </div>
      
           <!-- ADRESSE -->
           <div class="group-form">
@@ -52,7 +61,7 @@
           <!-- TRAVAUX SUPPLEMENTAIRE -->
           <div class="group-form">
           <label>Travaux supplémentaire : </label>
-          <input  placeholder="travaus supplémentaires" class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
+          <input  placeholder="travaux supplémentaires" class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
           <!-- <br /> -->
           </div>
 
@@ -161,7 +170,6 @@ export default {
           console.error("Error:", error);
         });
     },
-
     async send() {
       let urgentForm = false;
       if (this.urgent == "true") {
@@ -185,7 +193,6 @@ export default {
         urgent: urgentForm,
         typeChantier: typeCHantierForm,
         category: [this.category]
-
       };
        
       const headers = new Headers({
