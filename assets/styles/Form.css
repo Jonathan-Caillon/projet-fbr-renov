@@ -7,7 +7,7 @@ main {
   background-color: #181c32;
   background-clip: padding-box;
   outline: 0;
-  padding-left: 4rem;
+  /* padding-left: 4rem; */
 }
 
 form {
