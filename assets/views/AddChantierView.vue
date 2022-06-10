@@ -11,7 +11,6 @@
           <input placeholder="intitulé" class="form" v-model="intitule" type="text" name="intitule" required />
           </div>
           <!-- <br /> -->
-
           <!-- CATEGORIE -->
           <div class="group-form">
           <label>Catégorie chantier : </label>
