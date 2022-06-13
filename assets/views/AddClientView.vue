@@ -6,80 +6,104 @@
       <div class="row-3">
         <!--NOM-->
         <div class="group-form">
-          <label>Nom* : </label>
-          <input class="form" v-model="nom" type="text" name="nom" required />
+          <label class="required">Nom </label>
+          <input
+            placeholder="nom"
+            class="form"
+            v-model="nom"
+            type="text"
+            name="nom"
+            required
+          />
+          <!-- <p v-if="!nomIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
         <!--PRENOM-->
         <div class="group-form">
-          <label>Prénom* : </label>
+          <label class="required">Prénom </label>
           <input
+            placeholder="prénom"
             class="form"
             v-model="prenom"
             type="text"
             name="prenom"
             required
           />
+          <!-- <p v-if="!prenomIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
         <!--COMMUNE-->
         <div class="group-form">
-          <label>Commune* : </label>
+          <label class="required">Commune </label>
           <input
+            placeholder="commune"
             class="form"
             v-model="ville"
             type="text"
             name="ville"
             required
           />
+          <!-- <p v-if="!villeIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
         <!--ADRESSE-->
         <div class="group-form">
-          <label>Adresse* : </label>
+          <label class="required">Adresse </label>
           <input
+            placeholder="adresse"
             class="form"
             v-model="adresse"
             type="text"
             name="adresse"
             required
           />
+          <!-- <p v-if="!adresseIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
         <!--CP-->
         <div class="group-form">
-          <label>Code Postal* : </label>
+          <label class="required">Code Postal </label>
           <input
+            placeholder="code postal"
             class="form"
             v-model="codePostal"
             type="text"
             name="codePostal"
             required
           />
+          <!-- <p v-if="!codePostalIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
         <!--TELEPHONE-->
         <div class="group-form">
-          <label>Téléphone* : </label>
+          <label class="required">Téléphone </label>
           <input
+            placeholder="téléphone"
             class="form"
             v-model="telephone"
             type="telephone"
             name="telephone"
             required
           />
+          <!-- <p v-if="!telephoneIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
         <!--MAIL-->
         <div class="group-form">
           <label>E-mail : </label>
-          <input class="form" v-model="mail" type="email" name="email" />
+          <input
+            placeholder="email"
+            class="form"
+            v-model="mail"
+            type="email"
+            name="email"
+          />
         </div>
         <!-- <br /> -->
 
@@ -87,6 +111,7 @@
         <div class="group-form">
           <label>Raison sociale : </label>
           <input
+            placeholder="raison sociale"
             class="form"
             v-model="raisonSociale"
             type="text"
@@ -120,6 +145,39 @@ export default {
       dataId: "",
     };
   },
+
+  // computed: {
+    /*--- VALIDATION FORM ---*/
+    // nomIsValid() {
+    //   return !!this.$data.nom;
+    // },
+    // prenomIsValid() {
+    //   return !!this.$data.prenom;
+    // },
+    // villeIsValid() {
+    //   return !!this.$data.ville;
+    // },
+    // adresseIsValid() {
+    //   return !!this.$data.adresse;
+    // },
+    // codePostalIsValid() {
+    //   return !!this.$data.codePostal;
+    // },
+    // telephoneIsValid() {
+    //   return !!this.$data.telephone;
+    // },
+    // formIsValid(){
+    //   return this.nomIsValid &&
+    //     this.prenomIsValid &&
+    //     this.villeIsValid &&
+    //     this.adresseIsValid &&
+    //     this.codePostalIsValid &&
+    //     this.telephoneIsValid;
+    // },
+
+    /* --- */
+  // },
+
   methods: {
     async send() {
       let urgentForm = false;
@@ -162,6 +220,16 @@ export default {
           console.error("Error:", error);
         });
     },
+
+    /*--- VALIDATION FORM ---*/
+    // send() {
+    //   if (this.formIsValid) {
+    //     console.log("formulaire soumis", this.$data);
+    //   } else {
+    //     console.log("invalide");
+    //   }
+    // },
+    /* ---- */
   },
 };
 </script>

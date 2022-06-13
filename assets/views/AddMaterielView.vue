@@ -7,8 +7,8 @@
         <div class="row-3">
         <!-- MATERIEL -->
           <div class="group-form">
-            <label>Matériel* : </label>
-            <input class="form" v-model="nomMateriel" type="text" name="nomMateriel" required >
+            <label class="required" >Matériel </label>
+            <input placeholder="matériel" class="form" v-model="nomMateriel" type="text" name="nomMateriel" required >
             <!-- <br /> -->
           </div>
         </div> 

@@ -6,8 +6,9 @@
       <div class="row-3">
         <!-- INTITULE -->
         <div class="group-form">
-          <label>Intitulé* : </label>
+          <label class="required" >Intitulé </label>
           <input
+            placeholder="intitulé"
             class="form"
             v-model="intitule"
             type="text"
@@ -19,8 +20,9 @@
 
         <!-- NUMERO -->
         <div class="group-form">
-          <label>Numéro d'intervention* : </label>
+          <label class="required" >Numéro d'intervention </label>
           <input
+            placeholder="N°intervention"
             class="form"
             v-model="numeroIntervention"
             type="number"
@@ -32,8 +34,9 @@
 
         <!-- COMMUNE -->
         <div class="group-form">
-          <label>Commune* : </label>
+          <label class="required" >Commune </label>
           <input
+            placeholder="commune"
             class="form"
             v-model="ville"
             type="text"
@@ -45,8 +48,9 @@
 
         <!-- ADRESSE -->
         <div class="group-form">
-          <label>Adresse* : </label>
+          <label class="required" >Adresse</label>
           <input
+            placeholder="adresse"
             class="form"
             v-model="adresse"
             type="text"
@@ -58,8 +62,9 @@
 
         <!-- CP -->
         <div class="group-form">
-          <label>Code Postal* : </label>
+          <label class="required" >Code Postal</label>
           <input
+            placeholder="code postal"
             class="form"
             v-model="codePostal"
             type="text"
@@ -71,7 +76,7 @@
 
         <!-- HORAIRE -->
         <div class="group-form">
-          <label>Horaire* : </label>
+          <label class="required" >Horaire </label>
 
           <select
             v-model="horaireDepannage"
@@ -89,8 +94,9 @@
 
         <!-- PRIX -->
         <div class="group-form">
-          <label>Prix* : </label>
+          <label class="required" >Prix </label>
           <input
+            placeholder="prix"
             class="form"
             v-model="prixDepannage"
             type="number"
@@ -102,8 +108,9 @@
 
         <!-- DISTANCE -->
         <div class="group-form">
-          <label>Distance* : </label>
+          <label class="required" >Distance </label>
           <input
+            placeholder="distance"
             class="form"
             v-model="distance"
             type="number"

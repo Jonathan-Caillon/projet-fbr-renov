@@ -67,18 +67,13 @@ class Chantier
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     #[Groups(['read:collection','read:chantier'])]
-    private $urgent; 
-
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','read:chantier'])]
-    private $typeChantier;
+    private $urgent;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'chantier')]
     #[Groups(['read:chantier'])]
     private $client;
 
     #[ORM\ManyToMany(targetEntity: CategorieChantier::class, inversedBy: 'chantiers')]
-    #[Groups(['read:chantier'])]
     private $category;
 
     #[ORM\OneToMany(mappedBy: 'chantier', targetEntity: Devis::class)]
