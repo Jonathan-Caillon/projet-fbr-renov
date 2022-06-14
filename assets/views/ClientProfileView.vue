@@ -6,8 +6,8 @@
           <div>
             <h3>Profil Client TEST {{ idClient }}</h3>
           </div>
-          <div>
-            <router-link class="add" title="Editer un client" to="/add-client">
+          <div class="btn-actions">
+            <button class="add" title="Editer un client">
               <span
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -44,8 +44,15 @@
                   ></rect>
                 </svg>
               </span>
-              Editer</router-link
+              Editer
+            </button>
+            <button
+              class="delete"
+              v-on:click="deleteClient(idClient)"
+              title="Supprimer chantier"
             >
+              Supprimer
+            </button>
           </div>
         </div>
         <div class="tableau-content">
@@ -83,7 +90,7 @@
           </div>
         </div>
       </div>
-      <div class="tableau">
+      <!-- <div class="tableau">
         <div class="tableau-title">
           <div>
             <h3>Chantiers</h3>
@@ -177,34 +184,6 @@
                         </svg>
                       </button>
                     </router-link>
-                    <!-- <button
-                    v-on:click="deleteChantier(item.id)"
-                    title="Supprimer chantier"
-                    class="delete"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
-                        fill="currentColor"
-                      ></path>
-                      <path
-                        opacity="0.5"
-                        d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
-                        fill="currentColor"
-                      ></path>
-                      <path
-                        opacity="0.5"
-                        d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
-                  </button> -->
                   </div>
                 </td>
                 <td>{{ item.intitule }}</td>
@@ -221,7 +200,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
     </section>
     <router-view></router-view>
   </main>
@@ -261,33 +240,54 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch(`/api/clients/${idClient}`, getData)
-        .then(async (response) => {
-          if (response.status === 200) {
-            let data = await response.json();
-            this.chantier_data = data.chantier;
-            console.log("Success:", data);
-            this.nom = data.nom;
-            this.prenom = data.prenom;
-            this.commune = data.ville;
-            this.adresse = data.adresse;
-            this.codePostal = data.codePostal;
-            this.telephone = data.telephone;
-            this.email = data.email;
-            this.raison = data.raisonSociale;
-          }
-          // if (response.status === 404) {
-          //   window.location.replace("/404");
-          // }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      try {
+        let response = await fetch(`/api/clients/${idClient}`, getData);
+        if (response.status === 200) {
+          let data = await response.json();
+          this.chantier_data = data.chantier;
+          console.log("Success:", data);
+          this.nom = data.nom;
+          this.prenom = data.prenom;
+          this.commune = data.ville;
+          this.adresse = data.adresse;
+          this.codePostal = data.codePostal;
+          this.telephone = data.telephone;
+          this.email = data.email;
+          this.raison = data.raisonSociale;
+        }
+        if (response.status === 404) {
+          this.$router.push("/404");
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
     formatDate(value) {
       if (value) {
         let date = new Date(value);
         return date.toLocaleDateString();
+      }
+    },
+    async deleteClient(id) {
+      const deleteHeaders = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let deletetData = {
+        method: "DELETE",
+        headers: deleteHeaders,
+        mode: "cors",
+        cache: "default",
+      };
+      try {
+        let response = await fetch("/api/clients/" + id, deletetData);
+
+        if (response.status === 204) {
+          console.log("Success");
+          this.$router.push("/list-clients");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
     },
   },

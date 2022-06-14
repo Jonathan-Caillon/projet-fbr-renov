@@ -34,6 +34,12 @@ const router = createRouter({
       ],
     },
     {
+      path: "/edit-client/:idClient",
+      name: "edit-client",
+      props: true,
+      component: () => import("../views/EditClientView.vue"),
+    },
+    {
       path: "/list-chantiers",
       name: "list-chantiers",
       component: () => import("../views/ListChantiersView.vue"),

@@ -1,7 +1,7 @@
 <template>
   <main>
     <form id="formulaire" @submit.prevent="send">
-      <h1 class="titre">Ajouter un nouveau client :</h1>
+      <h1 class="titre">Editer un client :</h1>
 
       <div class="row-3">
         <!--NOM-->
@@ -15,9 +15,7 @@
             name="nom"
             required
           />
-          <!-- <p v-if="!nomIsValid" class="error-message">Le champs est vide</p> -->
         </div>
-        <!-- <br /> -->
 
         <!--PRENOM-->
         <div class="group-form">
@@ -30,9 +28,7 @@
             name="prenom"
             required
           />
-          <!-- <p v-if="!prenomIsValid" class="error-message">Le champs est vide</p> -->
         </div>
-        <!-- <br /> -->
 
         <!--COMMUNE-->
         <div class="group-form">
@@ -45,9 +41,7 @@
             name="ville"
             required
           />
-          <!-- <p v-if="!villeIsValid" class="error-message">Le champs est vide</p> -->
         </div>
-        <!-- <br /> -->
 
         <!--ADRESSE-->
         <div class="group-form">
@@ -60,10 +54,7 @@
             name="adresse"
             required
           />
-          <!-- <p v-if="!adresseIsValid" class="error-message">Le champs est vide</p> -->
         </div>
-        <!-- <br /> -->
-
         <!--CP-->
         <div class="group-form">
           <label class="required">Code Postal </label>
@@ -75,9 +66,7 @@
             name="codePostal"
             required
           />
-          <!-- <p v-if="!codePostalIsValid" class="error-message">Le champs est vide</p> -->
         </div>
-        <!-- <br /> -->
 
         <!--TELEPHONE-->
         <div class="group-form">
@@ -90,9 +79,7 @@
             name="telephone"
             required
           />
-          <!-- <p v-if="!telephoneIsValid" class="error-message">Le champs est vide</p> -->
         </div>
-        <!-- <br /> -->
 
         <!--MAIL-->
         <div class="group-form">
@@ -105,7 +92,6 @@
             name="email"
           />
         </div>
-        <!-- <br /> -->
 
         <!--RAISON SOCIALE-->
         <div class="group-form">
@@ -118,20 +104,18 @@
             name="raisonSociale"
           />
         </div>
-        <!-- <br /> -->
       </div>
 
       <div class="center">
         <button type="submit">Ajouter</button>
       </div>
-
-      <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
     </form>
   </main>
 </template>
 
 <script>
 export default {
+  props: ["idClient"],
   data() {
     return {
       nom: null,
@@ -145,42 +129,8 @@ export default {
       dataId: "",
     };
   },
-
-  // computed: {
-    /*--- VALIDATION FORM ---*/
-    // nomIsValid() {
-    //   return !!this.$data.nom;
-    // },
-    // prenomIsValid() {
-    //   return !!this.$data.prenom;
-    // },
-    // villeIsValid() {
-    //   return !!this.$data.ville;
-    // },
-    // adresseIsValid() {
-    //   return !!this.$data.adresse;
-    // },
-    // codePostalIsValid() {
-    //   return !!this.$data.codePostal;
-    // },
-    // telephoneIsValid() {
-    //   return !!this.$data.telephone;
-    // },
-    // formIsValid(){
-    //   return this.nomIsValid &&
-    //     this.prenomIsValid &&
-    //     this.villeIsValid &&
-    //     this.adresseIsValid &&
-    //     this.codePostalIsValid &&
-    //     this.telephoneIsValid;
-    // },
-
-    /* --- */
-  // },
-
   methods: {
     async send() {
-      
       let form = {
         nom: this.nom,
         prenom: this.prenom,
@@ -207,43 +157,14 @@ export default {
         .then(async (response) => {
           if (response.status === 201) {
             const data = await response.json();
-            // sweetAlert
-            this.$swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Le fichier a bien été envoyé",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            setTimeout(function () {
-              window.location.reload();
-            }, 2000);
+            location.reload();
             console.log("Success:", data);
-            // console.log(data.id)
-            // this.dataId = data.id
           }
         })
         .catch((error) => {
-           // sweetAlert
-          this.$swal.fire({
-            position: "center",
-            icon: "error",
-            title: "Oops...",
-            text: "Le fichier n'a pas été envoyé!",
-          });
           console.error("Error:", error);
         });
     },
-
-    /*--- VALIDATION FORM ---*/
-    // send() {
-    //   if (this.formIsValid) {
-    //     console.log("formulaire soumis", this.$data);
-    //   } else {
-    //     console.log("invalide");
-    //   }
-    // },
-    /* ---- */
   },
 };
 </script>

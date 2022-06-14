@@ -39,8 +39,8 @@ export default {
     <div class="menu">
       <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
       <SidebarLink to="/list-clients" icon="fa-solid fa-address-card">Clients</SidebarLink>
-      <SidebarLink to="/add-chantier" icon="fa-solid fa-person-digging">Chantiers</SidebarLink>
-      <SidebarLink to="/add-depannage" icon="fa-solid fa-screwdriver-wrench">Dépannage</SidebarLink>
+      <SidebarLink to="/list-chantiers" icon="fa-solid fa-person-digging">Chantiers</SidebarLink>
+      <SidebarLink to="/list-depannages" icon="fa-solid fa-screwdriver-wrench">Dépannage</SidebarLink>
       <SidebarLink to="/add-locatier" icon="fa-solid fa-truck-ramp-box">Locatiers</SidebarLink>
       <SidebarLink to="/Calendrier" icon="fa-solid fa-calendar-days">Calendrier</SidebarLink>
       <SidebarLink to="/Contacts" icon="fa-solid fa-address-book">Contacts</SidebarLink>
@@ -94,6 +94,10 @@ h1 {
   transform: rotate(180deg); 
   transition: 0.5s linear;
   font-size:30px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
 }
 
 </style>

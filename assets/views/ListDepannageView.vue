@@ -70,7 +70,7 @@
                   <div class="tableau-actions">
                     <router-link
                       title="Voir page depannage"
-                      v-bind:to="'/depannage/' + item.id"
+                      v-bind:to="'/list-depannages/' + item.id"
                     >
                       <button class="link">
                         <svg
