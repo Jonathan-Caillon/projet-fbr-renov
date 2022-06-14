@@ -1,5 +1,5 @@
 api_platform:
-  allow_plain_identifiers: true
+  allow_plain_identifiers: false
   eager_loading:
     enabled: false
   mapping:
@@ -14,7 +14,3 @@ api_platform:
     json: ["application/merge-patch+json"]
   swagger:
     versions: [3]
-    api_keys:
-      apiKey:
-        name: Authorization
-        type: header

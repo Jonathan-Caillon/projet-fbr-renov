@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="card">
+    <div class="card-login">
       <h1>FBR rénovation immobilière</h1>
       <form @submit.prevent="sendUser">
         <div class="row">
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
+.card-login {
   padding: 3.75rem;
   margin: auto;
   width: 500px;
