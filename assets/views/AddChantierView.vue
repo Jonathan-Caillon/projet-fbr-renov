@@ -19,7 +19,6 @@
           <option v-for="cat in data" :key="cat" :value="'/api/categorie_chantiers/'+cat.id" > {{ cat.NomCategorie }} </option>
           </select>
           </div>
-     
           <!-- ADRESSE -->
           <div class="group-form">
           <label class="required" >Adresse </label>
@@ -60,7 +59,7 @@
           <!-- TRAVAUX SUPPLEMENTAIRE -->
           <div class="group-form">
           <label>Travaux supplémentaire : </label>
-          <input  placeholder="travaux supplémentaires" class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
+          <input  placeholder="travaus supplémentaires" class="form" v-model="travauxSupl" type="number" step="0.01" name="travauxSupl" />
           <!-- <br /> -->
           </div>
 

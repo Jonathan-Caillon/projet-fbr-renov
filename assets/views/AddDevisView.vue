@@ -117,9 +117,7 @@ export default {
         paimentIntermed: this.paimentIntermed,
         paiementFinal: this.paiementFinal,
       };
-
       console.log(this.paiementFinal);
-
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",

@@ -185,7 +185,7 @@ export default {
             const data = await response.json();
             // sweetAlert
             this.$swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
               title: "Le fichier a bien été envoyé",
               showConfirmButton: false,
@@ -200,6 +200,7 @@ export default {
         .catch((error) => {
           // sweetAlert
           this.$swal.fire({
+            position: "center",
             icon: "error",
             title: "Oops...",
             text: "Le fichier n'a pas été envoyé!",
