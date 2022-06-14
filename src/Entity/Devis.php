@@ -2,9 +2,7 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Controller\CreateDevisAction;
 use App\Repository\DevisRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -18,35 +16,17 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 #[ORM\Entity(repositoryClass: DevisRepository::class)]
 #[ApiResource(
-    iri: 'http://schema.org/Devis',
-    normalizationContext: ['groups' => ['devis:read']],
-    denormalizationContext: ['groups' => ['devis:write']],
-    itemOperations: ['get','put','delete'],
+    iri: 'https://127.0.0.1:8000/api/devis',
+    normalizationContext: ['groups' => ['read:devis']],
+    denormalizationContext: ['groups' => ['write:devis']],
     collectionOperations: [
         'get',
-        'POST' => [
-            'controller' => CreateDevisAction::class,
-            'validation_groups' => ['Default', 'devis_create'],
-            'openapi_context' => [
-                'requestBody' => [
-                    'content' => [
-                        'multipart/form-data' => [
-                            'schema' => [
-                                'type' => 'object',
-                                'properties' => [
-                                    'file' => [
-                                        'type' => 'string',
-                                        'format' => 'binary',
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+        'post' => [
+            'input_formats' => [
+                'multipart' => ['multipart/form-data'],
             ],
-        ]
+        ],
     ],
-
 )]
 
 class Devis
@@ -54,51 +34,52 @@ class Devis
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['devis:read'])]
-    #[ApiProperty(identifier:true)]
+    #[Groups(['read:devis'])]
     private $id;
 
     #[ORM\Column(type: 'string')]
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['read:devis', 'write:devis'])]
     private $numeroDevis;
 
     #[ORM\Column(type: 'string')]
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['read:devis', 'write:devis'])]
     private $prixDevis;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['read:devis', 'write:devis'])]
     private $statut;
 
     #[ORM\ManyToOne(targetEntity: Chantier::class, inversedBy: 'devis')]
     private $chantier;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['read:devis', 'write:devis'])]
     private $paiementAcompte;
 
     #[ORM\Column(type: 'string', nullable: true)]
    
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['read:devis', 'write:devis'])]
     private $paiementIntermed;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['read:devis', 'write:devis'])]
     private $paiementFinal;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $updatedAt;
-
-    public ?string $contentUrl = null;
+    
+    
+    private ?string $fileUrl = null;
 
     /**
      * @Vich\UploadableField(mapping="document", fileNameProperty="filePath")
      */
-    #[Groups(['devis:read', 'devis:write'])]
+    #[Groups(['write:devis'])]
     private ?File $file = null;
 
     #[ORM\Column(nullable: true)]
-    public ?string $filePath = null;
+    #[Groups(['read:devis'])]
+    private ?string $filePath = null;
 
    
     public function getId(): ?string
@@ -193,9 +174,9 @@ class Devis
     /**
      * Get the value of contentUrl
      */ 
-    public function getContentUrl(): ?string
+    public function getFiletUrl(): ?string
     {
-        return $this->contentUrl;
+        return $this->fileUrl;
     }
 
     /**
@@ -203,9 +184,9 @@ class Devis
      *
      * @return  self
      */ 
-    public function setContentUrl(?string $contentUrl): self
+    public function setFileUrl(?string $fileUrl): self
     {
-        $this->contentUrl = $contentUrl;
+        $this->fileUrl = $fileUrl;
 
         return $this;
     }

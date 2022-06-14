@@ -1,12 +1,12 @@
 <template>
   <main>
-    <form id="formulaire" @submit.prevent="send">
+    <form id="formulaireDevis" @submit.prevent="send" enctype="multipart/form-data">
       <h1>Ajouter un devis :</h1>
 
       <div class="row-3">
         <!-- NUMERO DEVIS -->
         <div class="group-form">
-          <label class="required" >Numéro devis </label>
+          <label class="required" >Numéro devis : </label>
           <input
             placeholder="N°devis"
             class="form"
@@ -46,7 +46,7 @@
 
         <!-- PAIEMENT INTERMEDIAIRE -->
         <div class="group-form">
-          <label>Paiement Intermediaire: </label>
+          <label>Paiement Intermediaire : </label>
           <input
             placeholder="paiement intermédiaire"
             class="form"
@@ -73,8 +73,8 @@
 
         <!-- STATUT -->
         <div class="group-form">
-          <label class="required" >Statut </label>
-          <select v-model="statut" type="text" name="statut">
+          <label class="required" >Statut : </label>
+          <select v-model="statut" type="number" name="statut">
             <option value="" disabled selected>
               Choisir un statut du devis...
             </option>
@@ -82,6 +82,16 @@
             <option value="accepter">Devis accepté</option>
             <option value="refuser">Devis refusé</option>
           </select>
+        </div>
+        <!-- Document -->
+        <div class="group-form">
+          <label>Document : </label>
+          <input
+            id="file"
+            class="form"
+            type="file"
+            name="file"
+          />
         </div>
 
         <input type="hidden" name="chantier" v-model="chantier" />
@@ -95,6 +105,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
   data() {
     return {
@@ -108,61 +119,56 @@ export default {
     };
   },
   methods: {
+    
     async send() {
-      let form = {
-        numeroDevis: this.numeroDevis,
-        prixDevis: this.prixDevis,
-        statut: this.statut,
-        paiementAcompte: this.paiementAcompte,
-        paimentIntermed: this.paimentIntermed,
-        paiementFinal: this.paiementFinal,
-      };
-
-      console.log(this.paiementFinal);
-
-      const headers = new Headers({
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      });
-      let myData = {
-        method: "POST",
-        headers: headers,
-        mode: "cors",
-        cache: "default",
-        body: JSON.stringify(form),
-      };
-      await fetch("/api/devis", myData)
-        .then(async (response) => {
-          if (response.status === 201) {
-            const data = await response.json();
-            console.log("Success:", data);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      let formulaire = document.getElementById("formulaireDevis");
+      let formData = new FormData(formulaire)
+    
+      let request = new XMLHttpRequest(); 
+          request.open("POST", "/api/devis"); 
+          request.send(formData);
+          request.onload = () => 
+          Swal.fire({
+                    title: 'Souhaitez-vous enregistrer votre devis ?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Enregistrer',
+                    denyButtonText: `Annuler`,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      Swal.fire({
+                    title: 'Enregistré',
+                    confirmButtonText: 'Ok',
+                    }).then(() => {
+                    location.reload()
+                  })
+                    } else if (result.isDenied) {
+                      Swal.fire('Les modifications ne sont pas enregistrées', '', 'info')
+                    }
+                  });
+          
     },
   },
   mounted() {
     let prixDevis = document.getElementById("prixDevis");
     let paiementAcompte = document.getElementById("payAc");
     let paiementIntermed = document.getElementById("payIn");
+
     prixDevis.addEventListener("input", (e) => {
-      this.prixDevis = Number(e.target.value);
+      this.prixDevis = e.target.value;
       console.log(this.prixDevis);
       (this.paiementFinal =
         this.prixDevis - this.paiementAcompte - this.paiementIntermed),
         console.log(this.paiementFinal);
     });
     paiementAcompte.addEventListener("input", (e) => {
-      this.paiementAcompte = Number(e.target.value);
+      this.paiementAcompte = e.target.value;
       console.log(this.paiementAcompte);
       (this.paiementFinal =
         this.prixDevis - this.paiementAcompte - this.paiementIntermed),
         console.log(this.paiementFinal);
     });
     paiementIntermed.addEventListener("input", (e) => {
-      this.paiementIntermed = Number(e.target.value);
+      this.paiementIntermed = e.target.value;
       console.log(this.paiementIntermed);
       (this.paiementFinal =
         this.prixDevis - this.paiementAcompte - this.paiementIntermed),

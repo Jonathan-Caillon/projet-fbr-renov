@@ -9,6 +9,7 @@ api_platform:
     jsonld: ['application/ld+json']
     html: ['text/html']
     multipart: ['multipart/form-data']
+    # undefined: ['undefined']
   patch_formats:
     json: ["application/merge-patch+json"]
   swagger:
