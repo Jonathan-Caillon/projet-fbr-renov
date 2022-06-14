@@ -13,10 +13,6 @@ $btn-action-bg: #f5f8fa;
 $btn-action-color: #7e8299;
 $label-color: #a1a5b7;
 
-section {
-  padding-top: 80px;
-}
-
 .tableau-client {
   padding: 2.25rem 2rem;
   font-family: "Poppins", sans-serif;
@@ -24,17 +20,21 @@ section {
   background-color: $white;
   border-radius: 0.625rem;
   color: $texte-color;
-  margin: 0 2rem 2rem 2rem;
+  margin: 4rem 3rem;
+  max-width: 1200px;
   & .tableau-title {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid $border-bottom-color;
     padding-bottom: 16px;
-    & .add {
+    .btn-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    & button {
       padding: calc(0.4rem + 1px) calc(1rem + 1px);
-      color: $light-blue;
-      background-color: $light-blue-bg;
       font-size: 0.8rem;
       font-weight: 500;
       border-radius: 0.325rem;
@@ -44,6 +44,12 @@ section {
       align-items: center;
       line-height: 1.5;
       transition: 0.15s ease;
+      cursor: pointer;
+      border: none;
+    }
+    & .add {
+      color: $light-blue;
+      background-color: $light-blue-bg;
       & span {
         line-height: 0;
         margin-right: 0.5rem;
@@ -56,6 +62,14 @@ section {
     & .add:hover {
       color: $white;
       background-color: $light-blue;
+    }
+    & .delete {
+      color: $light-red;
+      background-color: $light-red-bg;
+    }
+    & .delete:hover {
+      color: $white;
+      background-color: $light-red;
     }
   }
   & .tableau-content {
@@ -78,7 +92,7 @@ section {
 
 @media (max-width: 767px) {
   .tableau-client {
-    margin: 0;
+    margin: 4rem 1rem;
     & .tableau-content {
       & .row {
         display: grid;

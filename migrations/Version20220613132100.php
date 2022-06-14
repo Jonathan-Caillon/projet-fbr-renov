@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220610095131 extends AbstractMigration
+final class Version20220613132100 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -60,10 +60,10 @@ final class Version20220610095131 extends AbstractMigration
         $this->addSql('DROP TABLE __temp__depannage');
         $this->addSql('CREATE INDEX IDX_F3C7E6B119EB6921 ON depannage (client_id)');
         $this->addSql('DROP INDEX IDX_8B27C52BD0C0049D');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__devis AS SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final, file_path, updated_at FROM devis');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__devis AS SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final FROM devis');
         $this->addSql('DROP TABLE devis');
-        $this->addSql('CREATE TABLE devis (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, chantier_id INTEGER DEFAULT NULL, numero_devis VARCHAR(255) NOT NULL, prix_devis VARCHAR(255) NOT NULL, statut VARCHAR(255) NOT NULL, paiement_acompte VARCHAR(255) DEFAULT NULL, paiement_intermed VARCHAR(255) DEFAULT NULL, paiement_final VARCHAR(255) DEFAULT NULL, file_path VARCHAR(255) DEFAULT NULL, updated_at DATETIME DEFAULT NULL, CONSTRAINT FK_8B27C52BD0C0049D FOREIGN KEY (chantier_id) REFERENCES chantier (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
-        $this->addSql('INSERT INTO devis (id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final, file_path, updated_at) SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final, file_path, updated_at FROM __temp__devis');
+        $this->addSql('CREATE TABLE devis (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, chantier_id INTEGER DEFAULT NULL, numero_devis VARCHAR(255) NOT NULL, prix_devis VARCHAR(255) NOT NULL, statut VARCHAR(255) NOT NULL, paiement_acompte VARCHAR(255) DEFAULT NULL, paiement_intermed VARCHAR(255) DEFAULT NULL, paiement_final VARCHAR(255) DEFAULT NULL, updated_at DATETIME DEFAULT NULL, file_path VARCHAR(255) DEFAULT NULL, CONSTRAINT FK_8B27C52BD0C0049D FOREIGN KEY (chantier_id) REFERENCES chantier (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
+        $this->addSql('INSERT INTO devis (id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final) SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final FROM __temp__devis');
         $this->addSql('DROP TABLE __temp__devis');
         $this->addSql('CREATE INDEX IDX_8B27C52BD0C0049D ON devis (chantier_id)');
         $this->addSql('DROP INDEX IDX_EC9FA95ED0C0049D');
@@ -99,7 +99,7 @@ final class Version20220610095131 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_636F27F619EB6921');
         $this->addSql('CREATE TEMPORARY TABLE __temp__chantier AS SELECT id, client_id, intitule, adresse, ville, code_postal, date, date_modif, duree_travaux, travaux_supl, distance, note_perso, note_client, urgent FROM chantier');
         $this->addSql('DROP TABLE chantier');
-        $this->addSql('CREATE TABLE chantier (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, client_id INTEGER DEFAULT NULL, intitule VARCHAR(255) NOT NULL, adresse VARCHAR(255) NOT NULL, ville VARCHAR(255) NOT NULL, code_postal VARCHAR(255) NOT NULL, date DATE NOT NULL, date_modif DATETIME DEFAULT NULL, duree_travaux INTEGER NOT NULL, travaux_supl DOUBLE PRECISION DEFAULT NULL, distance DOUBLE PRECISION NOT NULL, note_perso CLOB DEFAULT NULL, note_client CLOB DEFAULT NULL, urgent BOOLEAN DEFAULT NULL)');
+        $this->addSql('CREATE TABLE chantier (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, client_id INTEGER DEFAULT NULL, intitule VARCHAR(255) NOT NULL, adresse VARCHAR(255) NOT NULL, ville VARCHAR(255) NOT NULL, code_postal VARCHAR(255) NOT NULL, date DATE NOT NULL, date_modif DATETIME DEFAULT NULL, duree_travaux INTEGER NOT NULL, travaux_supl DOUBLE PRECISION DEFAULT NULL, distance DOUBLE PRECISION NOT NULL, note_perso CLOB DEFAULT NULL, note_client CLOB DEFAULT NULL, urgent BOOLEAN DEFAULT NULL, type_chantier VARCHAR(255) NOT NULL)');
         $this->addSql('INSERT INTO chantier (id, client_id, intitule, adresse, ville, code_postal, date, date_modif, duree_travaux, travaux_supl, distance, note_perso, note_client, urgent) SELECT id, client_id, intitule, adresse, ville, code_postal, date, date_modif, duree_travaux, travaux_supl, distance, note_perso, note_client, urgent FROM __temp__chantier');
         $this->addSql('DROP TABLE __temp__chantier');
         $this->addSql('CREATE INDEX IDX_636F27F619EB6921 ON chantier (client_id)');
@@ -136,10 +136,10 @@ final class Version20220610095131 extends AbstractMigration
         $this->addSql('DROP TABLE __temp__depannage');
         $this->addSql('CREATE INDEX IDX_F3C7E6B119EB6921 ON depannage (client_id)');
         $this->addSql('DROP INDEX IDX_8B27C52BD0C0049D');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__devis AS SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final, updated_at, file_path FROM devis');
+        $this->addSql('CREATE TEMPORARY TABLE __temp__devis AS SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final FROM devis');
         $this->addSql('DROP TABLE devis');
-        $this->addSql('CREATE TABLE devis (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, chantier_id INTEGER DEFAULT NULL, numero_devis VARCHAR(255) NOT NULL, prix_devis VARCHAR(255) NOT NULL, statut VARCHAR(255) NOT NULL, paiement_acompte VARCHAR(255) DEFAULT NULL, paiement_intermed VARCHAR(255) DEFAULT NULL, paiement_final VARCHAR(255) DEFAULT NULL, updated_at DATETIME DEFAULT NULL, file_path VARCHAR(255) DEFAULT NULL)');
-        $this->addSql('INSERT INTO devis (id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final, updated_at, file_path) SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final, updated_at, file_path FROM __temp__devis');
+        $this->addSql('CREATE TABLE devis (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, chantier_id INTEGER DEFAULT NULL, numero_devis INTEGER NOT NULL, prix_devis DOUBLE PRECISION NOT NULL, statut VARCHAR(255) NOT NULL, paiement_acompte DOUBLE PRECISION DEFAULT NULL, paiement_intermed DOUBLE PRECISION DEFAULT NULL, paiement_final DOUBLE PRECISION DEFAULT NULL)');
+        $this->addSql('INSERT INTO devis (id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final) SELECT id, chantier_id, numero_devis, prix_devis, statut, paiement_acompte, paiement_intermed, paiement_final FROM __temp__devis');
         $this->addSql('DROP TABLE __temp__devis');
         $this->addSql('CREATE INDEX IDX_8B27C52BD0C0049D ON devis (chantier_id)');
         $this->addSql('DROP INDEX IDX_EC9FA95ED0C0049D');
