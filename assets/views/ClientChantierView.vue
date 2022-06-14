@@ -155,14 +155,6 @@ export default {
   data() {
     return {
       data: null,
-      nom: null,
-      prenom: null,
-      commune: null,
-      adresse: null,
-      codePostal: null,
-      telephone: null,
-      email: null,
-      raison: null,
       chantier_data: null,
       chantier_adresse: null,
       chantier_codePostal: null,

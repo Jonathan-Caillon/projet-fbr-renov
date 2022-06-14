@@ -51,6 +51,7 @@ export default {
             const token = data.token;
             window.localStorage.setItem("access_token", token);
             console.log(token);
+            this.$router.push("/list-clients");
           }
         })
         .catch((error) => {

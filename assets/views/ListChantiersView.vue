@@ -74,7 +74,7 @@
                   <div class="tableau-actions">
                     <router-link
                       title="Voir page chantier"
-                      v-bind:to="'/chantier/' + item.id"
+                      v-bind:to="'/list-chantiers/' + item.id"
                     >
                       <button class="link">
                         <svg

@@ -18,13 +18,15 @@ final class DevisNormalizer implements ContextAwareNormalizerInterface, Normaliz
     public function __construct(private StorageInterface $storage)
     {
     }
-
+    /**
+     * @param Devis $object
+     */
     public function normalize($object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
+        
+        $object->setFileUrl($this->storage->resolveUri($object, 'file'));
         $context[self::ALREADY_CALLED] = true;
-
-        $object->contentUrl = $this->storage->resolveUri($object, 'file');
-
+        
         return $this->normalizer->normalize($object, $format, $context);
     }
 
@@ -33,7 +35,6 @@ final class DevisNormalizer implements ContextAwareNormalizerInterface, Normaliz
         if (isset($context[self::ALREADY_CALLED])) {
             return false;
         }
-
         return $data instanceof Devis;
     }
 }

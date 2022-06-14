@@ -145,7 +145,6 @@
         </div>
       </div>
     </section>
-    <router-view></router-view>
   </main>
 </template>
 
@@ -176,36 +175,35 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch(`/api/clients?page=${params}`, getData)
-        .then(async (response) => {
-          if (response.status === 200) {
-            let data = await response.json();
-            console.log("Success:", data);
-            this.current = params;
-            this.data = data["hydra:member"];
-            let page = data["hydra:totalItems"];
-            this.pages = Math.ceil(page / 5);
-            let previous = data["hydra:view"]["hydra:previous"] || null;
-            let next = data["hydra:view"]["hydra:next"] || null;
-            if (previous !== null) {
-              let previousSlice = previous.slice(12);
-              let previousParams = new URLSearchParams(previousSlice);
-              this.previous = previousParams.get("page");
-            } else {
-              this.previous = null;
-            }
-            if (next !== null) {
-              let nextSlice = next.slice(12);
-              let nextParams = new URLSearchParams(nextSlice);
-              this.next = nextParams.get("page");
-            } else {
-              this.next = null;
-            }
+      try {
+        let response = await fetch(`/api/clients?page=${params}`, getData);
+        if (response.status === 200) {
+          let data = await response.json();
+          console.log("Success:", data);
+          this.current = params;
+          this.data = data["hydra:member"];
+          let page = data["hydra:totalItems"];
+          this.pages = Math.ceil(page / 5);
+          let previous = data["hydra:view"]["hydra:previous"] || null;
+          let next = data["hydra:view"]["hydra:next"] || null;
+          if (previous !== null) {
+            let previousSlice = previous.slice(12);
+            let previousParams = new URLSearchParams(previousSlice);
+            this.previous = previousParams.get("page");
+          } else {
+            this.previous = null;
           }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+          if (next !== null) {
+            let nextSlice = next.slice(12);
+            let nextParams = new URLSearchParams(nextSlice);
+            this.next = nextParams.get("page");
+          } else {
+            this.next = null;
+          }
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     },
 
     async deleteClient(id) {
