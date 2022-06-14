@@ -180,10 +180,7 @@ export default {
 
   methods: {
     async send() {
-      let urgentForm = false;
-      if (this.urgent == "true") {
-        urgentForm = true;
-      }
+      
       let form = {
         nom: this.nom,
         prenom: this.prenom,

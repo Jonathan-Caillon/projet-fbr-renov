@@ -1,12 +1,16 @@
 <template>
   <main>
-    <form id="formulaireDevis" @submit.prevent="send" enctype="multipart/form-data">
+    <form
+      id="formulaireDevis"
+      @submit.prevent="send"
+      enctype="multipart/form-data"
+    >
       <h1>Ajouter un devis :</h1>
 
       <div class="row-3">
         <!-- NUMERO DEVIS -->
         <div class="group-form">
-          <label class="required" >Numéro devis : </label>
+          <label class="required">Numéro devis : </label>
           <input
             placeholder="N°devis"
             class="form"
@@ -19,7 +23,7 @@
 
         <!-- PRIX -->
         <div class="group-form">
-          <label class="required" >Prix</label>
+          <label class="required">Prix test</label>
           <input
             placeholder="prix"
             class="form"
@@ -73,7 +77,7 @@
 
         <!-- STATUT -->
         <div class="group-form">
-          <label class="required" >Statut : </label>
+          <label class="required">Statut : </label>
           <select v-model="statut" type="number" name="statut">
             <option value="" disabled selected>
               Choisir un statut du devis...
@@ -86,12 +90,7 @@
         <!-- Document -->
         <div class="group-form">
           <label>Document : </label>
-          <input
-            id="file"
-            class="form"
-            type="file"
-            name="file"
-          />
+          <input id="file" class="form" type="file" name="file" />
         </div>
 
         <input type="hidden" name="chantier" v-model="chantier" />
@@ -105,7 +104,7 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -119,33 +118,44 @@ export default {
     };
   },
   methods: {
-    
     async send() {
       let formulaire = document.getElementById("formulaireDevis");
-      let formData = new FormData(formulaire)
-    
-      let request = new XMLHttpRequest(); 
-          request.open("POST", "/api/devis"); 
+      let formData = new FormData(formulaire);
+
+      Swal.fire({
+        title: "Souhaitez-vous enregistrer votre devis ?",
+        showDenyButton: true,
+        confirmButtonText: "Enregistrer",
+        denyButtonText: `Annuler`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let request = new XMLHttpRequest();
+          request.open("POST", "/api/devis");
+          // request.responseText;
+
           request.send(formData);
-          request.onload = () => 
-          Swal.fire({
-                    title: 'Souhaitez-vous enregistrer votre devis ?',
-                    showDenyButton: true,
-                    confirmButtonText: 'Enregistrer',
-                    denyButtonText: `Annuler`,
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      Swal.fire({
-                    title: 'Enregistré',
-                    confirmButtonText: 'Ok',
-                    }).then(() => {
-                    location.reload()
-                  })
-                    } else if (result.isDenied) {
-                      Swal.fire('Les modifications ne sont pas enregistrées', '', 'info')
-                    }
-                  });
-          
+          request.onload = () => {
+            let json = JSON.parse(request.responseText);
+            let messageErreur = json.violations[0].message;
+            if (request.status === 201) {
+              Swal.fire({
+                title: "Enregistré",
+                confirmButtonText: "Ok",
+              }).then(() => {
+                location.reload();
+              });
+            }
+            if (request.status === 422) {
+              Swal.fire({
+                title: messageErreur,
+                confirmButtonText: "Ok",
+              }).then(() => {});
+            }
+          };
+        } else if (result.isDenied) {
+          Swal.fire("Les modifications ne sont pas enregistrées", "", "info");
+        }
+      });
     },
   },
   mounted() {
