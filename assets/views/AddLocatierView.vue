@@ -1,58 +1,102 @@
 <template>
   <main>
-    
-     <form id="formulaire" @submit.prevent="send">
-       <h1>Ajouter un nouveau locatier : </h1>
-
+    <form id="formulaire" @submit.prevent="send">
+      <h1>Ajouter un nouveau locatier :</h1>
 
       <div class="row-3">
         <!-- INTITULE -->
         <div class="group-form">
-          <label class="required" >Intitule </label>
-          <input placeholder="intitulé" class="form" v-model="intitule" type="text" name="intitule" required >
+          <label class="required">Intitule </label>
+          <input
+            placeholder="intitulé"
+            class="form"
+            v-model="intitule"
+            type="text"
+            name="intitule"
+            required
+          />
         </div>
-         <!-- <br /> -->
+        <!-- <br /> -->
 
-  
         <!-- COMMUNE -->
         <div class="group-form">
-          <label class="required" >Commune </label>
-          <input placeholder="commune" class="form" v-model="ville" type="text" name="ville" required >
+          <label class="required">Commune </label>
+          <input
+            placeholder="commune"
+            class="form"
+            v-model="ville"
+            type="text"
+            name="ville"
+            required
+          />
         </div>
         <!-- <br /> -->
 
         <!-- ADRESSE -->
         <div class="group-form">
-          <label class="required" >Adresse </label>
-          <input placeholder="adresse" class="form" v-model="adresse" type="text" name="adresse" required >
+          <label class="required">Adresse </label>
+          <input
+            placeholder="adresse"
+            class="form"
+            v-model="adresse"
+            type="text"
+            name="adresse"
+            required
+          />
         </div>
         <!-- <br /> -->
 
         <!-- CP -->
         <div class="group-form">
-          <label class="required" >Code Postal </label>
-          <input placeholder="code postal" class="form" v-model="codePostal" type="text" name="codePostal" required >
+          <label class="required">Code Postal </label>
+          <input
+            placeholder="code postal"
+            class="form"
+            v-model="codePostal"
+            type="text"
+            name="codePostal"
+            required
+          />
         </div>
         <!-- <br /> -->
 
         <!-- TEL -->
         <div class="group-form">
-          <label class="required" >Téléphone </label>
-          <input placeholder="téléphone" class="form" v-model="telephone" type="telephone" name="telephone" required >
+          <label class="required">Téléphone </label>
+          <input
+            placeholder="téléphone"
+            class="form"
+            v-model="telephone"
+            type="telephone"
+            name="telephone"
+            required
+          />
         </div>
         <!-- <br /> -->
 
         <!-- SITE WEB -->
         <div class="group-form">
           <label>Site internet : </label>
-          <input class="form" v-model="siteInternet" type="siteInternet" placeholder="https://www.fbrrenovation.fr" name="siteInternet">
+          <input
+            class="form"
+            v-model="siteInternet"
+            type="siteInternet"
+            placeholder="https://www.fbrrenovation.fr"
+            name="siteInternet"
+          />
         </div>
         <!-- <br /> -->
 
         <!-- MAIL -->
         <div class="group-form">
           <label>E-mail : </label>
-          <input placeholder="email" class="form" v-model="email" type="email" name="email">
+          <input
+            placeholder="email"
+            class="form"
+            v-model="email"
+            type="email"
+            name="email"
+          />
         </div>
         <!-- <br /> -->
       </div>
@@ -60,23 +104,26 @@
         <!-- NOTE PERSO -->
         <div class="group-form">
           <label>Note Personnelle : </label>
-          <textarea class="form" v-model="notePerso" type="text" name="notePerso" ></textarea>
+          <textarea
+            class="form"
+            v-model="notePerso"
+            type="text"
+            name="notePerso"
+          ></textarea>
         </div>
       </div>
-        <!-- <br /> -->
-      
+      <!-- <br /> -->
+
       <div class="center">
         <button type="submit">Envoyer</button>
       </div>
-      
-    </form> 
+    </form>
   </main>
 </template>
 
 <script>
 export default {
-    data() {
-
+  data() {
     return {
       intitule: null,
       ville: null,
@@ -85,8 +132,7 @@ export default {
       telephone: null,
       siteInternet: null,
       email: null,
-      notePerso: null
-      
+      notePerso: null,
     };
   },
   methods: {
@@ -99,8 +145,7 @@ export default {
         telephone: this.telephone,
         siteInternet: this.siteInternet,
         email: this.email,
-        notePerso: this.notePerso
-        
+        notePerso: this.notePerso,
       };
 
       const headers = new Headers({
@@ -115,22 +160,35 @@ export default {
         body: JSON.stringify(form),
       };
       await fetch("/api/locatiers", myData)
-        .then( async (response) => {
-            if(response.status === 201){
-                const data = await response.json();
-                location.reload();
-                console.log("Success:", data);
-            }
-        }
-        )
+        .then(async (response) => {
+          if (response.status === 201) {
+            const data = await response.json();
+            // sweetAlert
+            this.$swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Le fichier a bien été envoyé",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
+            console.log("Success:", data);
+          }
+        })
         .catch((error) => {
+          this.$swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Oops...",
+            text: "Le fichier n'a pas été envoyé!",
+          });
           console.error("Error:", error);
         });
     },
   },
 };
-
-
 </script>
 
 <style scoped>

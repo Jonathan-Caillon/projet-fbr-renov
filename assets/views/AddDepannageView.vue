@@ -6,7 +6,7 @@
       <div class="row-3">
         <!-- INTITULE -->
         <div class="group-form">
-          <label class="required" >Intitulé </label>
+          <label class="required">Intitulé </label>
           <input
             placeholder="intitulé"
             class="form"
@@ -20,7 +20,7 @@
 
         <!-- NUMERO -->
         <div class="group-form">
-          <label class="required" >Numéro d'intervention </label>
+          <label class="required">Numéro d'intervention </label>
           <input
             placeholder="N°intervention"
             class="form"
@@ -34,7 +34,7 @@
 
         <!-- COMMUNE -->
         <div class="group-form">
-          <label class="required" >Commune </label>
+          <label class="required">Commune </label>
           <input
             placeholder="commune"
             class="form"
@@ -48,7 +48,7 @@
 
         <!-- ADRESSE -->
         <div class="group-form">
-          <label class="required" >Adresse</label>
+          <label class="required">Adresse</label>
           <input
             placeholder="adresse"
             class="form"
@@ -62,7 +62,7 @@
 
         <!-- CP -->
         <div class="group-form">
-          <label class="required" >Code Postal</label>
+          <label class="required">Code Postal</label>
           <input
             placeholder="code postal"
             class="form"
@@ -76,16 +76,14 @@
 
         <!-- HORAIRE -->
         <div class="group-form">
-          <label class="required" >Horaire </label>
+          <label class="required">Horaire </label>
 
           <select
             v-model="horaireDepannage"
             type="text"
             name="horaireDepannage"
           >
-            <option value="" disabled selected>
-              Choisir un horaire...
-            </option>
+            <option value="" disabled selected>Choisir un horaire...</option>
             <option>Jour</option>
             <option>Nuit</option>
             <option>Week-end</option>
@@ -94,7 +92,7 @@
 
         <!-- PRIX -->
         <div class="group-form">
-          <label class="required" >Prix </label>
+          <label class="required">Prix </label>
           <input
             placeholder="prix"
             class="form"
@@ -108,7 +106,7 @@
 
         <!-- DISTANCE -->
         <div class="group-form">
-          <label class="required" >Distance </label>
+          <label class="required">Distance </label>
           <input
             placeholder="distance"
             class="form"
@@ -143,7 +141,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -186,11 +183,28 @@ export default {
         .then(async (response) => {
           if (response.status === 201) {
             const data = await response.json();
-            location.reload();
+            // sweetAlert
+            this.$swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Le fichier a bien été envoyé",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
             console.log("Success:", data);
           }
         })
         .catch((error) => {
+          // sweetAlert
+          this.$swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Oops...",
+            text: "Le fichier n'a pas été envoyé!",
+          });
           console.error("Error:", error);
         });
     },

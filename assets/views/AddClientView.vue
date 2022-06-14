@@ -180,10 +180,7 @@ export default {
 
   methods: {
     async send() {
-      let urgentForm = false;
-      if (this.urgent == "true") {
-        urgentForm = true;
-      }
+      
       let form = {
         nom: this.nom,
         prenom: this.prenom,
@@ -210,13 +207,30 @@ export default {
         .then(async (response) => {
           if (response.status === 201) {
             const data = await response.json();
-            location.reload();
+            // sweetAlert
+            this.$swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Le fichier a bien été envoyé",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setTimeout(function () {
+              window.location.reload();
+            }, 2000);
             console.log("Success:", data);
             // console.log(data.id)
             // this.dataId = data.id
           }
         })
         .catch((error) => {
+           // sweetAlert
+          this.$swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Oops...",
+            text: "Le fichier n'a pas été envoyé!",
+          });
           console.error("Error:", error);
         });
     },

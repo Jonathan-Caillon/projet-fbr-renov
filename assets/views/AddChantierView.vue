@@ -168,7 +168,6 @@ export default {
           console.error("Error:", error);
         });
     },
-
     async send() {
       let urgentForm = false;
       if (this.urgent == "true") {
@@ -192,7 +191,6 @@ export default {
         urgent: urgentForm,
         typeChantier: typeCHantierForm,
         category: [this.category]
-
       };
        
       const headers = new Headers({
