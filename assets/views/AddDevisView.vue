@@ -23,7 +23,7 @@
 
         <!-- PRIX -->
         <div class="group-form">
-          <label class="required">Prix test</label>
+          <label class="required">Prix : </label>
           <input
             placeholder="prix"
             class="form"
@@ -136,7 +136,6 @@ export default {
           request.send(formData);
           request.onload = () => {
             let json = JSON.parse(request.responseText);
-            let messageErreur = json.violations[0].message;
             if (request.status === 201) {
               Swal.fire({
                 title: "Enregistré",
@@ -146,10 +145,11 @@ export default {
               });
             }
             if (request.status === 422) {
+              let messageErreur = json.violations[0].message;
               Swal.fire({
                 title: messageErreur,
                 confirmButtonText: "Ok",
-              }).then(() => {});
+              });
             }
           };
         } else if (result.isDenied) {

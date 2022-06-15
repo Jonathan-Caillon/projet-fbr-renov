@@ -6,10 +6,10 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import "./styles/app.css";
 
 // start the Stimulus application
-import './bootstrap';
+import "./bootstrap";
 
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -19,7 +19,6 @@ import router from "./router";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 //ICONE
-import '@fortawesome/fontawesome-free/js/all'
-
+import "@fortawesome/fontawesome-free/js/all";
 
 createApp(App).use(router).use(VueSweetalert2).mount('#app');

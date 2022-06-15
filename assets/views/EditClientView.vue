@@ -1,6 +1,6 @@
 <template>
   <main>
-    <form id="formulaire" @submit.prevent="send">
+    <form id="formulaire" @submit.prevent="send(this.idClient)">
       <h1 class="titre">Editer un client :</h1>
 
       <div class="row-3">
@@ -107,7 +107,7 @@
       </div>
 
       <div class="center">
-        <button type="submit">Ajouter</button>
+        <button type="submit">Editer</button>
       </div>
     </form>
   </main>
@@ -130,7 +130,38 @@ export default {
     };
   },
   methods: {
-    async send() {
+    async getClient(id) {
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let getData = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+      };
+      try {
+        let response = await fetch(`/api/clients/${id}`, getData);
+        if (response.status === 200) {
+          let data = await response.json();
+          this.nom = data.nom;
+          this.prenom = data.prenom;
+          this.ville = data.ville;
+          this.adresse = data.adresse;
+          this.codePostal = data.codePostal;
+          this.telephone = data.telephone;
+          this.email = data.email;
+          this.raisonSociale = data.raisonSociale;
+        }
+        if (response.status === 404) {
+          this.$router.push("/404");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async send(id) {
       let form = {
         nom: this.nom,
         prenom: this.prenom,
@@ -147,17 +178,16 @@ export default {
         Accept: "application/json",
       });
       let myData = {
-        method: "POST",
+        method: "PUT",
         headers: headers,
         mode: "cors",
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/clients", myData)
+      await fetch(`/api/clients/${id}`, myData)
         .then(async (response) => {
-          if (response.status === 201) {
-            const data = await response.json();
-            location.reload();
+          if (response.status === 200) {
+            this.$router.push(`/list-clients/${id}`);
             console.log("Success:", data);
           }
         })
@@ -165,6 +195,9 @@ export default {
           console.error("Error:", error);
         });
     },
+  },
+  mounted() {
+    this.getClient(this.idClient);
   },
 };
 </script>
