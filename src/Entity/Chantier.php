@@ -69,6 +69,10 @@ class Chantier
     #[Groups(['read:collection','read:chantier'])]
     private $urgent;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Groups(['read:collection','read:chantier'])]
+    private $typeChantier;
+
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'chantier')]
     #[Groups(['read:chantier'])]
     private $client;
