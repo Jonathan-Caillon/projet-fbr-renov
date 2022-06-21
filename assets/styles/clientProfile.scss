@@ -32,6 +32,9 @@ $label-color: #a1a5b7;
     .btn-actions {
       display: flex;
       gap: 0.5rem;
+      & a {
+        text-decoration: none;
+      }
     }
     & button {
       padding: calc(0.4rem + 1px) calc(1rem + 1px);

@@ -190,7 +190,7 @@ export default {
     },
   },
   mounted() {
-    this.getClient(this.idClient);
+    this.getClientChantier(this.idChantier);
   },
 };
 </script>
