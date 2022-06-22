@@ -121,7 +121,6 @@ export default {
     async send() {
       let formulaire = document.getElementById("formulaireDevis");
       let formData = new FormData(formulaire);
-
       Swal.fire({
         title: "Souhaitez-vous enregistrer votre devis ?",
         showDenyButton: true,
@@ -131,11 +130,10 @@ export default {
         if (result.isConfirmed) {
           let request = new XMLHttpRequest();
           request.open("POST", "/api/devis");
-          // request.responseText;
-
           request.send(formData);
           request.onload = () => {
             let json = JSON.parse(request.responseText);
+            console.log(json);
             if (request.status === 201) {
               Swal.fire({
                 title: "Enregistré",
@@ -153,7 +151,7 @@ export default {
             }
           };
         } else if (result.isDenied) {
-          Swal.fire("Les modifications ne sont pas enregistrées", "", "info");
+          Swal.fire("Votre devis n'a pas été enregistré", "", "info");
         }
       });
     },

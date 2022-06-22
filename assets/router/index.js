@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -9,14 +8,14 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    // {
+    //   path: "/about",
+    //   name: "about",
+    //   component: () => import("../views/AboutView.vue"),
+    // },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
-      path: "/list-clients",
       name: "list-clients",
+      path: "/list-clients",
       component: () => import("../views/ListClientsView.vue"),
     },
     {
@@ -26,7 +25,7 @@ const router = createRouter({
       component: () => import("../views/ClientProfileView.vue"),
       children: [
         {
-          path: "chantier/:idChantier",
+          path: '/chantier/:idChantier',
           name: "client-chantier-id",
           props: true,
           component: () => import("../views/ClientChantierView.vue"),
@@ -48,6 +47,11 @@ const router = createRouter({
       path: "/list-depannages",
       name: "list-depannages",
       component: () => import("../views/ListDepannageView.vue"),
+    },
+    {
+      path: "/list-locatiers",
+      name: "list-locatiers",
+      component: () => import("../views/ListLocatiersView.vue"),
     },
     {
       path: "/add-client",
@@ -82,18 +86,12 @@ const router = createRouter({
       path: "/location",
       name: "location",
       props: true,
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("../views/LocationView.vue"),
     },
     {
       path: "/add-devis",
       name: "add-devis",
       props: true,
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("../views/AddDevisView.vue"),
     },
     // {

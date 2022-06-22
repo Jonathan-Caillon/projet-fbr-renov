@@ -7,44 +7,61 @@ use App\Repository\DepannageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DepannageRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:depannage']]
+)]
+#[UniqueEntity(fields :"numeroIntervention",
+ message: "Ce numero d'intervention est déjà utilisé !")]
 class Depannage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection','read:depannage'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection','read:depannage'])]
     private $intitule;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection','read:depannage'])]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection','read:depannage'])]
     private $ville;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection','read:depannage'])]
     private $codePostal;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection','read:depannage'])]
     private $horaireDepannage;
 
     #[ORM\Column(type: 'float')]
+    #[Groups(['read:collection','read:depannage'])]
     private $prixDepannage;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection','read:depannage'])]
     private $numeroIntervention;
 
     #[ORM\Column(type: 'float', nullable: true)]
+    #[Groups(['read:collection','read:depannage'])]
     private $distance;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['read:collection','read:depannage'])]
     private $notePerso;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'depannages')]
+    #[Groups(['read:depannage'])]
     private $client;
 
     #[ORM\OneToMany(mappedBy: 'depannage', targetEntity: ImageDepannage::class)]

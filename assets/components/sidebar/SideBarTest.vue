@@ -41,7 +41,7 @@ export default {
       <SidebarLink to="/list-clients" icon="fa-solid fa-address-card">Clients</SidebarLink>
       <SidebarLink to="/list-chantiers" icon="fa-solid fa-person-digging">Chantiers</SidebarLink>
       <SidebarLink to="/list-depannages" icon="fa-solid fa-screwdriver-wrench">Dépannage</SidebarLink>
-      <SidebarLink to="/add-locatier" icon="fa-solid fa-truck-ramp-box">Locatiers</SidebarLink>
+      <SidebarLink to="/list-locatiers" icon="fa-solid fa-truck-ramp-box">Locatiers</SidebarLink>
       <SidebarLink to="/Calendrier" icon="fa-solid fa-calendar-days">Calendrier</SidebarLink>
       <SidebarLink to="/Contacts" icon="fa-solid fa-address-book">Contacts</SidebarLink>
       <SidebarLink to="/Statistiques" icon="fa-solid fa-chart-line">Statistiques</SidebarLink>

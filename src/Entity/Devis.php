@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Repository\DevisRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +17,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 #[ORM\Entity(repositoryClass: DevisRepository::class)]
 #[ApiResource(
-    iri: 'https://127.0.0.1:8000/api/devis',
     normalizationContext: ['groups' => ['read:devis']],
     denormalizationContext: ['groups' => ['write:devis']],
     collectionOperations: [
@@ -32,7 +30,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 )]
 #[UniqueEntity(fields :"numeroDevis",
  message: "Ce numero de devis est déjà utilisé !")]
-
 
 class Devis
 {

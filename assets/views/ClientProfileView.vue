@@ -4,7 +4,7 @@
       <div class="tableau-client">
         <div class="tableau-title">
           <div>
-            <h3>Profil Client TEST {{ idClient }}</h3>
+            <h3>Profil Client N° : {{ idClient }}</h3>
           </div>
           <div class="btn-actions">
             <button class="add" title="Editer un client">
@@ -90,6 +90,7 @@
           </div>
         </div>
       </div>
+     
       <!-- <div class="tableau">
         <div class="tableau-title">
           <div>

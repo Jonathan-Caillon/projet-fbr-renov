@@ -4,13 +4,13 @@
       <div class="tableau">
         <div class="tableau-title">
           <div>
-            <h3>Chantiers</h3>
+            <h3>Locatiers</h3>
           </div>
           <div>
             <router-link
-              title="Ajouter un chantier"
+              title="Ajouter un locatier"
               class="add"
-              to="/add-chantier"
+              to="/add-locatier"
             >
               <span
                 ><svg
@@ -58,24 +58,23 @@
               <tr>
                 <th>Actions</th>
                 <th>Intitule</th>
-                <th>Nom client</th>
-                <th>Date de création</th>
                 <th>Commune</th>
+                <th>Adresse</th>
                 <th>Code postal</th>
-                <th>Urgent</th>
+                <th>Site internete</th>
+                <th>E-mail</th>
               </tr>
             </thead>
             <tbody>
               <tr
                 v-for="item in data"
                 :key="item"
-                :class="{ urgentRow: item.urgent }"
               >
                 <td>
                   <div class="tableau-actions">
                     <router-link
                       title="Voir page chantier"
-                      v-bind:to="'/list-chantiers/' + item.id"
+                      v-bind:to="'/list-locatiers/' + item.id"
                     >
                       <button class="link">
                         <svg
@@ -94,17 +93,12 @@
                   </div>
                 </td>
                 <td>{{ item.intitule }}</td>
-                <td v-if="item.client">{{nomClient(item.client)}}</td>
-                <td v-else></td>
-                <td>{{formatDate(item.date)}}</td>
                 <td>{{ item.ville }}</td>
+                <td>{{ item.adresse }}</td>
                 <td>{{ item.codePostal }}</td>
-                <td v-if="item.urgent == true">
-                  <div class="urgent">Oui</div>
-                </td>
-                <td v-if="item.urgent == false">
-                  <div class="nonUrgent">Non</div>
-                </td>
+                <td>{{ item.telephone }}</td>
+                <td>{{ item.siteInternet }}</td>
+                <td>{{ item.mail }}</td>
               </tr>
             </tbody>
           </table>
@@ -126,12 +120,7 @@ export default {
     };
   },
   methods: {
-    nomClient(json){
-      const obj = json;
-      console.log(obj.nom)
-      return obj.nom;
-    } ,
-    async getChantier() {
+    async getLocatier() {
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -142,7 +131,7 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch("/api/chantiers", getData)
+      await fetch("/api/locatiers", getData)
         .then(async (response) => {
           if (response.status === 200) {
             this.data = await response.json();
@@ -155,14 +144,8 @@ export default {
           console.error("Error:", error);
         });
     },
-    formatDate(value) {
-      if (value) {
-        let date = new Date(value);
-        return date.toLocaleDateString();
-      }
-    },
 
-    async deleteChantier(id) {
+    async deleteLocatier(id) {
       const deleteHeaders = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -173,7 +156,7 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch("/api/chantiers/" + id, deletetData)
+      await fetch("/api/locatiers/" + id, deletetData)
         .then(async (response) => {
           if (response.status === 204) {
             console.log("Success");
@@ -186,7 +169,7 @@ export default {
     },
   },
   mounted() {
-    this.getChantier();
+    this.getLocatier();
   },
 };
 </script>

@@ -195,9 +195,19 @@ export default {
               window.location.reload();
             }, 2000);
             console.log("Success:", data);
-          }
-        })
-        .catch((error) => {
+          } if(response.status === 422){
+            const rep = response.statusText;
+            console.log(rep);
+            // let messageErreur = rep.violations[0].message;
+            
+            this.$swal.fire({
+              position: "center",
+              icon: "error",
+              title: messageErreur,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else if ((error) => {
           // sweetAlert
           this.$swal.fire({
             position: "center",
@@ -207,6 +217,8 @@ export default {
           });
           console.error("Error:", error);
         });
+        })
+        
     },
   },
 };

@@ -57,7 +57,7 @@ class Client
     private $user;
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Depannage::class)]
-    #[Groups(['read:collection'])]
+    #[Groups(['read:collection', 'read:depannage'])]
     private $depannages;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
