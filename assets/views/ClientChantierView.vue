@@ -1,85 +1,192 @@
 <template>
   <main>
     <section>
-      <div class="tableau">
+      <div class="tableau-client">
         <div class="tableau-title">
           <div>
-            <h3>Chantiers</h3>
+            <h3>Chantier</h3>
           </div>
-          <div>
+          <div class="btn-actions">
             <router-link
-              title="Ajouter un chantier"
-              class="add"
-              to="/add-chantier"
+              title="Editer un client"
+              v-bind:to="'/edit-client/' + idChantier"
+              ><button class="add">
+                <span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <rect
+                      opacity="0.3"
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="5"
+                      fill="currentColor"
+                    ></rect>
+                    <rect
+                      x="10.8891"
+                      y="17.8033"
+                      width="12"
+                      height="2"
+                      rx="1"
+                      transform="rotate(-90 10.8891 17.8033)"
+                      fill="currentColor"
+                    ></rect>
+                    <rect
+                      x="6.01041"
+                      y="10.9247"
+                      width="12"
+                      height="2"
+                      rx="1"
+                      fill="currentColor"
+                    ></rect>
+                  </svg>
+                </span>
+                Editer
+              </button>
+            </router-link>
+            <button
+              class="delete"
+              v-on:click="deleteChantier(idChantier)"
+              title="Supprimer chantier"
             >
-              <span
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <rect
-                    opacity="0.3"
-                    x="2"
-                    y="2"
-                    width="20"
-                    height="20"
-                    rx="5"
-                    fill="currentColor"
-                  ></rect>
-                  <rect
-                    x="10.8891"
-                    y="17.8033"
-                    width="12"
-                    height="2"
-                    rx="1"
-                    transform="rotate(-90 10.8891 17.8033)"
-                    fill="currentColor"
-                  ></rect>
-                  <rect
-                    x="6.01041"
-                    y="10.9247"
-                    width="12"
-                    height="2"
-                    rx="1"
-                    fill="currentColor"
-                  ></rect>
-                </svg>
-              </span>
-              Ajouter</router-link
-            >
+              Supprimer
+            </button>
           </div>
         </div>
         <div class="tableau-content">
+          <div class="row">
+            <div class="label">Intitulé</div>
+            <div class="info">{{ this.intitule }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Adresse</div>
+            <div class="info">{{ this.adresse }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Commune</div>
+            <div class="info">{{ this.commune }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Code Postal</div>
+            <div class="info">{{ this.codePostal }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Type</div>
+            <div class="info">{{ this.typeChantier }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Date de création :</div>
+            <div class="info">{{ this.date }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Date dernière Modifications :</div>
+            <div class="info">{{ this.dateModif }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Notes personnelles :</div>
+            <div class="info">{{ this.notePerso }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Notes client :</div>
+            <div class="info">{{ this.noteClient }}</div>
+          </div>
+          <div class="row">
+            <div class="label">Distance Dépôt :</div>
+            <div class="info">{{ this.distance }}km</div>
+          </div>
+          <div class="row">
+            <div class="label">Nombre d’heures :</div>
+            <div class="info">{{ this.dureeTravaux }}h</div>
+          </div>
+          <div class="row">
+            <div class="label">Travaux Supplémentaires :</div>
+            <div class="info">{{ this.travauxSupl }}€</div>
+          </div>
+          <div class="row">
+            <div class="label">Urgent :</div>
+            <div v-if="this.urgent" class="info">Oui</div>
+            <div v-else class="info">Non</div>
+          </div>
+        </div>
+        <div class="tableau-title">
+          <div>
+            <h3>Devis</h3>
+          </div>
+          <div class="btn-actions">
+            <router-link
+              title="Editer un client"
+              v-bind:to="'/list-clients/'+ idClient +'/chantier/' + idChantier + '/add-devis'"
+              ><button class="add">
+                <span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <rect
+                      opacity="0.3"
+                      x="2"
+                      y="2"
+                      width="20"
+                      height="20"
+                      rx="5"
+                      fill="currentColor"
+                    ></rect>
+                    <rect
+                      x="10.8891"
+                      y="17.8033"
+                      width="12"
+                      height="2"
+                      rx="1"
+                      transform="rotate(-90 10.8891 17.8033)"
+                      fill="currentColor"
+                    ></rect>
+                    <rect
+                      x="6.01041"
+                      y="10.9247"
+                      width="12"
+                      height="2"
+                      rx="1"
+                      fill="currentColor"
+                    ></rect>
+                  </svg>
+                </span>
+                Ajouter
+              </button>
+            </router-link>
+          </div>
+        </div>
+        <div class="tableau-list">
           <table>
             <thead>
               <tr>
-                <th>Actions</th>
-                <th>Intitule</th>
-                <th>Nom</th>
-                <th>Commune</th>
-                <th>Code postal</th>
-                <th>Urgent</th>
+                <th>Edit</th>
+                <th>Numéro</th>
+                <th>Prix</th>
+                <th>Acompte</th>
+                <th>Intermédiaire</th>
+                <th>Final</th>
+                <th>Statut</th>
               </tr>
             </thead>
             <tbody>
               <tr
-                v-for="item in chantier_data"
+                v-for="item in devis"
                 :key="item"
-                :class="{ urgentRow: item.urgent }"
               >
                 <td>
                   <div class="tableau-actions">
                     <router-link
-                      title="Voir page chantier"
-                      v-bind:to="
-                        '/list-clients/' +
-                        this.idClient +
-                        '/chantier/' +
-                        item.id
-                      "
+                      title="Editer devis"
+                      v-bind:to="'/list-chantiers/' + item.id"
                     >
                       <button class="link">
                         <svg
@@ -95,46 +202,15 @@
                         </svg>
                       </button>
                     </router-link>
-                    <!-- <button
-                    v-on:click="deleteChantier(item.id)"
-                    title="Supprimer chantier"
-                    class="delete"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
-                        fill="currentColor"
-                      ></path>
-                      <path
-                        opacity="0.5"
-                        d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
-                        fill="currentColor"
-                      ></path>
-                      <path
-                        opacity="0.5"
-                        d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
-                  </button> -->
                   </div>
                 </td>
-                <td>{{ item.intitule }}</td>
-                <td>{{ this.nom }}</td>
-                <td>{{ item.ville }}</td>
-                <td>{{ item.codePostal }}</td>
-                <td v-if="item.urgent == true">
-                  <div class="urgent">Oui</div>
-                </td>
-                <td v-if="item.urgent == false">
-                  <div class="nonUrgent">Non</div>
-                </td>
+                <td>{{ item.numeroDevis }}</td>
+                <td>{{ item.prixDevis }}€</td>
+                <td>{{ item.paiementAcompte }}€</td>
+                <td v-if="item.paiementIntermed">{{ item.paiementIntermed }}€</td>
+                <td v-else>0€</td>
+                <td>{{ this.devisFinal(item.prixDevis,item.paiementAcompte,item.paiementIntermed) }}€</td>
+                <td class="uppercase">{{ item.statut }}</td>
               </tr>
             </tbody>
           </table>
@@ -145,25 +221,36 @@
 </template>
 
 <style lang="scss" scoped>
+@import "@/styles/clientProfile.scss";
 @import "@/styles/viewList.scss";
 </style>
 
 <script>
 export default {
-  props: ["idClient"],
-  props: ["idChantier"],
+  props: ["idChantier","idClient"],
   data() {
     return {
       data: null,
+      intitule: null,
+      prenom: null,
+      commune: null,
+      adresse: null,
+      codePostal: null,
+      typeChantier: null,
+      travauxSupl: null,
+      distance: null,
+      dureeTravaux: null,
       chantier_data: null,
-      chantier_adresse: null,
-      chantier_codePostal: null,
-      chantier_intitule: null,
-      chantier_urgent: null,
+      date: null,
+      dateModif: null,
+      notePerso: null,
+      noteClient: null,
+      urgent: null,
+      devis: null,
     };
   },
   methods: {
-    async getClientChantier(id) {
+    async getChantier(idChantier) {
       const headers = new Headers({
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -174,23 +261,68 @@ export default {
         mode: "cors",
         cache: "default",
       };
-      await fetch(`/api/clients/${id}`, getData)
-        .then(async (response) => {
-          if (response.status === 200) {
-            let data = await response.json();
-            console.log("Success:", data);
-          }
-          // if (response.status === 404) {
-          //   window.location.replace("/404");
-          // }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      try {
+        let response = await fetch(`/api/chantiers/${idChantier}`, getData);
+        if (response.status === 200) {
+          let data = await response.json();
+          console.log("Success:", data);
+          this.intitule = data.intitule;
+          this.commune = data.ville;
+          this.adresse = data.adresse;
+          this.codePostal = data.codePostal;
+          this.typeChantier = data.typeChantier;
+          this.travauxSupl = data.travauxSupl;
+          this.distance = data.distance;
+          this.dureeTravaux = data.dureeTravaux;
+          this.notePerso = data.notePerso;
+          this.noteClient = data.noteClient;
+          this.urgent = data.urgent;
+          this.devis = data.devis;
+          this.date = this.formatDate(data.date);
+          this.dateModif = this.formatDate(data.dateModif);
+        }
+        if (response.status === 404) {
+          this.$router.push("/404");
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    formatDate(value) {
+      if (value) {
+        let date = new Date(value);
+        return date.toLocaleDateString();
+      }
+    },
+    devisFinal(devis, acompte, inter) {
+        let final = devis - acompte - inter;
+        return final;
+    },
+    async deleteChantier(id) {
+      const deleteHeaders = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let deletetData = {
+        method: "DELETE",
+        headers: deleteHeaders,
+        mode: "cors",
+        cache: "default",
+      };
+      try {
+        let response = await fetch("/api/chantiers/" + id, deletetData);
+
+        if (response.status === 204) {
+          console.log("Success");
+          this.$router.push("/list-clients");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
     },
   },
   mounted() {
-   getClientChantier(this.idChantier);
+    this.getChantier(this.idChantier);
   },
 };
 </script>

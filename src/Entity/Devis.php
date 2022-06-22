@@ -41,31 +41,31 @@ class Devis
 
 
     #[ORM\Column(type: 'string')]
-    #[Groups(['read:devis', 'write:devis'])]
+    #[Groups(['read:devis', 'write:devis','read:chantier'])]
     private $numeroDevis;
 
     #[ORM\Column(type: 'string')]
-    #[Groups(['read:devis', 'write:devis'])]
+    #[Groups(['read:devis', 'write:devis','read:chantier'])]
     private $prixDevis;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:devis', 'write:devis'])]
+    #[Groups(['read:devis', 'write:devis','read:chantier'])]
     private $statut;
 
     #[ORM\ManyToOne(targetEntity: Chantier::class, inversedBy: 'devis')]
+    #[Groups(['read:devis', 'write:devis'])]
     private $chantier;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Groups(['read:devis', 'write:devis'])]
+    #[Groups(['read:devis', 'write:devis','read:chantier'])]
     private $paiementAcompte;
 
     #[ORM\Column(type: 'string', nullable: true)]
-   
-    #[Groups(['read:devis', 'write:devis'])]
+    #[Groups(['read:devis', 'write:devis','read:chantier'])]
     private $paiementIntermed;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Groups(['read:devis', 'write:devis'])]
+    #[Groups(['read:devis', 'write:devis','read:chantier'])]
     private $paiementFinal;
 
     #[ORM\Column(type: 'datetime', nullable: true)]

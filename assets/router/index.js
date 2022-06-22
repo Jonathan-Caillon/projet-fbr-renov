@@ -25,10 +25,22 @@ const router = createRouter({
       component: () => import("../views/ClientProfileView.vue"),
       children: [
         {
-          path: '/chantier/:idChantier',
+          path: "",
+          name: "client-chantier-list",
+          props: true,
+          component: () => import("../components/client/ClientList.vue"),
+        },
+        {
+          path: "chantier/:idChantier/details",
           name: "client-chantier-id",
           props: true,
           component: () => import("../views/ClientChantierView.vue"),
+        },
+        {
+          path: "chantier/:idChantier/add-devis",
+          name: "client-chantier-devis-id",
+          props: true,
+          component: () => import("../views/AddDevisView.vue"),
         },
       ],
     },

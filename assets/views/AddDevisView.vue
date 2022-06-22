@@ -78,7 +78,7 @@
         <!-- STATUT -->
         <div class="group-form">
           <label class="required">Statut : </label>
-          <select v-model="statut" type="number" name="statut">
+          <select v-model="statut" name="statut">
             <option value="" disabled selected>
               Choisir un statut du devis...
             </option>
@@ -106,11 +106,13 @@
 <script>
 import Swal from "sweetalert2";
 export default {
+  props: ["idChantier"],
   data() {
     return {
       numeroDevis: null,
       prixDevis: null,
       statut: "",
+      chantier: "/api/chantiers/" + this.idChantier,
       paiementAcompte: null,
       paiementIntermed: null,
       paiementFinal: null,
@@ -139,7 +141,7 @@ export default {
                 title: "Enregistré",
                 confirmButtonText: "Ok",
               }).then(() => {
-                location.reload();
+                this.$router.push(`/list-clients/1/chantier/${idChantier}/details`)
               });
             }
             if (request.status === 422) {
@@ -163,24 +165,18 @@ export default {
 
     prixDevis.addEventListener("input", (e) => {
       this.prixDevis = e.target.value;
-      console.log(this.prixDevis);
       (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed),
-        console.log(this.paiementFinal);
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
     });
     paiementAcompte.addEventListener("input", (e) => {
       this.paiementAcompte = e.target.value;
-      console.log(this.paiementAcompte);
       (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed),
-        console.log(this.paiementFinal);
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
     });
     paiementIntermed.addEventListener("input", (e) => {
       this.paiementIntermed = e.target.value;
-      console.log(this.paiementIntermed);
       (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed),
-        console.log(this.paiementFinal);
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
     });
   },
 };
