@@ -1,9 +1,11 @@
 .card-login {
     padding: 3.75rem;
-    margin: auto;
-    width: 500px;
+    margin: 4rem auto;
+    max-width: 500px;
     box-shadow: 0 0.1rem 1rem 0.25rem rgb(0 0 0 / 5%);
     border-radius: 0.475rem;
+    background-color: white;
+    color: #181c32;
     & h1 {
       text-align: center;
       margin-bottom: 2.5rem;

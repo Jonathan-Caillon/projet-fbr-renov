@@ -36,7 +36,7 @@ class Devis
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:devis'])]
+    #[Groups(['read:devis','read:chantier'])]
     private $id;
 
 
@@ -81,7 +81,7 @@ class Devis
     private ?File $file = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['read:devis'])]
+    #[Groups(['read:devis','read:chantier'])]
     private ?string $filePath = null;
 
    

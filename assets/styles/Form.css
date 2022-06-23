@@ -214,6 +214,30 @@ form button {
 
 form button:hover {
   background-color: #6672b4;
+  cursor: pointer;
+}
+
+.link-doc{
+  color: #009ef7;
+  background-color: #f1faff;
+  text-decoration: none;
+  padding: calc(0.4rem + 1px) calc(1rem + 1px);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 0.325rem;
+  text-decoration: none;
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  line-height: 1.5;
+  transition: 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.link-doc:hover{
+  color: white;
+  background-color: #009ef7;
 }
 
 

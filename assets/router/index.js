@@ -37,10 +37,22 @@ const router = createRouter({
           component: () => import("../views/ClientChantierView.vue"),
         },
         {
+          path: "chantier/:idChantier/edit-chantier",
+          name: "client-chantier-edit",
+          props: true,
+          component: () => import("../components/client/ClientChantierEdit.vue"),
+        },
+        {
           path: "chantier/:idChantier/add-devis",
           name: "client-chantier-devis-id",
           props: true,
           component: () => import("../views/AddDevisView.vue"),
+        },
+        {
+          path: "chantier/:idChantier/edit-devis/:idDevis",
+          name: "client-chantier-edit-devis-id",
+          props: true,
+          component: () => import("../components/client/EditDevis.vue"),
         },
       ],
     },
