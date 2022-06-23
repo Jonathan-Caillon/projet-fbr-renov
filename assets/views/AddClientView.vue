@@ -15,7 +15,6 @@
             name="nom"
             required
           />
-          <!-- <p v-if="!nomIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
@@ -30,7 +29,6 @@
             name="prenom"
             required
           />
-          <!-- <p v-if="!prenomIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
@@ -45,7 +43,6 @@
             name="ville"
             required
           />
-          <!-- <p v-if="!villeIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
@@ -60,7 +57,6 @@
             name="adresse"
             required
           />
-          <!-- <p v-if="!adresseIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
@@ -75,7 +71,6 @@
             name="codePostal"
             required
           />
-          <!-- <p v-if="!codePostalIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
@@ -90,7 +85,6 @@
             name="telephone"
             required
           />
-          <!-- <p v-if="!telephoneIsValid" class="error-message">Le champs est vide</p> -->
         </div>
         <!-- <br /> -->
 
@@ -124,8 +118,6 @@
       <div class="center">
         <button type="submit">Ajouter</button>
       </div>
-
-      <!-- <a :href="'/addChantier/' +dataId">Créer un chantier</a> -->
     </form>
   </main>
 </template>
@@ -145,39 +137,6 @@ export default {
       dataId: "",
     };
   },
-
-  // computed: {
-    /*--- VALIDATION FORM ---*/
-    // nomIsValid() {
-    //   return !!this.$data.nom;
-    // },
-    // prenomIsValid() {
-    //   return !!this.$data.prenom;
-    // },
-    // villeIsValid() {
-    //   return !!this.$data.ville;
-    // },
-    // adresseIsValid() {
-    //   return !!this.$data.adresse;
-    // },
-    // codePostalIsValid() {
-    //   return !!this.$data.codePostal;
-    // },
-    // telephoneIsValid() {
-    //   return !!this.$data.telephone;
-    // },
-    // formIsValid(){
-    //   return this.nomIsValid &&
-    //     this.prenomIsValid &&
-    //     this.villeIsValid &&
-    //     this.adresseIsValid &&
-    //     this.codePostalIsValid &&
-    //     this.telephoneIsValid;
-    // },
-
-    /* --- */
-  // },
-
   methods: {
     async send() {
       
@@ -203,8 +162,8 @@ export default {
         cache: "default",
         body: JSON.stringify(form),
       };
-      await fetch("/api/clients", myData)
-        .then(async (response) => {
+      try{
+        let response = await fetch("/api/clients", myData)
           if (response.status === 201) {
             const data = await response.json();
             // sweetAlert
@@ -219,12 +178,10 @@ export default {
               window.location.reload();
             }, 2000);
             console.log("Success:", data);
-            // console.log(data.id)
-            // this.dataId = data.id
           }
-        })
-        .catch((error) => {
-           // sweetAlert
+       
+      }catch(error){
+          // sweetAlert
           this.$swal.fire({
             position: "center",
             icon: "error",
@@ -232,18 +189,10 @@ export default {
             text: "Le fichier n'a pas été envoyé!",
           });
           console.error("Error:", error);
-        });
+      }
+      
     },
 
-    /*--- VALIDATION FORM ---*/
-    // send() {
-    //   if (this.formIsValid) {
-    //     console.log("formulaire soumis", this.$data);
-    //   } else {
-    //     console.log("invalide");
-    //   }
-    // },
-    /* ---- */
   },
 };
 </script>

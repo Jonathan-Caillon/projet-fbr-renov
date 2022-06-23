@@ -65,7 +65,7 @@ class Devis
     private $paiementIntermed;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Groups(['read:devis', 'write:devis','read:chantier'])]
+    #[Groups(['read:devis','read:chantier'])]
     private $paiementFinal;
 
     #[ORM\Column(type: 'datetime', nullable: true)]

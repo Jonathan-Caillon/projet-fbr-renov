@@ -188,7 +188,7 @@ export default {
         .then(async (response) => {
           if (response.status === 200) {
             this.$router.push(`/list-clients/${id}`);
-            console.log("Success:", data);
+        
           }
         })
         .catch((error) => {
