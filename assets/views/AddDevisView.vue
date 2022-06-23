@@ -106,7 +106,7 @@
 <script>
 import Swal from "sweetalert2";
 export default {
-  props: ["idChantier"],
+  props: ["idChantier", "idClient"],
   data() {
     return {
       numeroDevis: null,
@@ -141,7 +141,9 @@ export default {
                 title: "Enregistré",
                 confirmButtonText: "Ok",
               }).then(() => {
-                this.$router.push(`/list-clients/1/chantier/${idChantier}/details`)
+                this.$router.push(
+                  `/list-clients/${idClient}/chantier/${idChantier}/details`
+                );
               });
             }
             if (request.status === 422) {
@@ -165,18 +167,18 @@ export default {
 
     prixDevis.addEventListener("input", (e) => {
       this.prixDevis = e.target.value;
-      (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
+      this.paiementFinal =
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
     paiementAcompte.addEventListener("input", (e) => {
       this.paiementAcompte = e.target.value;
-      (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
+      this.paiementFinal =
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
     paiementIntermed.addEventListener("input", (e) => {
       this.paiementIntermed = e.target.value;
-      (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
+      this.paiementFinal =
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
   },
 };
