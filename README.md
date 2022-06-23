@@ -35,16 +35,9 @@ npm run watch
 ### Create database
 
 ```
+symfony console make:migration
 symfony console d:m:m
 ```
-
-### Generate JWT keypair
-
-```
-symfony console lexik:jwt:generate-keypair
-```
-
----
 
 ## FYI
 

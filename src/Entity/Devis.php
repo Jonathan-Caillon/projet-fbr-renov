@@ -27,6 +27,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             ],
         ],
     ],
+    itemOperations:[
+        'delete',
+        'patch',
+        'get',
+        'put' => [
+            'input_formats' => [
+                'multipart' => ['multipart/form-data'],
+            ],
+        ],
+    ]
 )]
 #[UniqueEntity(fields :"numeroDevis",
  message: "Ce numero de devis est déjà utilisé !")]
@@ -36,7 +46,7 @@ class Devis
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:devis'])]
+    #[Groups(['read:devis','read:chantier'])]
     private $id;
 
 
@@ -81,7 +91,7 @@ class Devis
     private ?File $file = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['read:devis'])]
+    #[Groups(['read:devis','read:chantier'])]
     private ?string $filePath = null;
 
    

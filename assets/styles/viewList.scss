@@ -121,20 +121,6 @@ $btn-action-color: #7e8299;
               }
             }
           }
-          & .urgent {
-            color: $light-red;
-            background-color: $light-red-bg;
-            padding: 0.6rem 0.8rem;
-            border-radius: 0.325rem;
-            text-align: center;
-          }
-          & .nonUrgent {
-            color: $light-green;
-            background-color: $light-green-bg;
-            padding: 0.6rem 0.8rem;
-            border-radius: 0.325rem;
-            text-align: center;
-          }
         }
       }
     }
@@ -177,6 +163,24 @@ $btn-action-color: #7e8299;
       }
     }
   }
+}
+.urgent {
+  color: $light-red;
+  background-color: $light-red-bg;
+  padding: calc(0.4rem + 1px) calc(1rem + 1px);
+  border-radius: 0.325rem;
+  text-align: center;
+}
+.nonUrgent {
+  color: $light-green;
+  background-color: $light-green-bg;
+  padding: calc(0.4rem + 1px) calc(1rem + 1px);
+  border-radius: 0.325rem;
+  text-align: center;
+}
+
+.urgent.info, .nonUrgent.info{
+  max-width: fit-content;
 }
 
 .tableau-list {

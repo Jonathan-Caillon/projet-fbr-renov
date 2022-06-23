@@ -2,10 +2,10 @@
   <main>
     <form
       id="formulaireDevis"
-      @submit.prevent="send"
+      @submit.prevent="send(this.idDevis)"
       enctype="multipart/form-data"
     >
-      <h1>Ajouter un devis :</h1>
+      <h1>Editer devis :</h1>
 
       <div class="row-3">
         <!-- NUMERO DEVIS -->
@@ -92,6 +92,16 @@
           <label>Document : </label>
           <input id="file" class="form" type="file" name="file" />
         </div>
+        <div v-if="this.filePath" class="group-form">
+          <label>Document actuel : </label>
+          <router-link
+            title="Document"
+            class="link-doc"
+            target="_blank"
+            :to="'/document/devis/' + this.filePath"
+            >Document actuel</router-link
+          >
+        </div>
 
         <input type="hidden" name="chantier" v-model="chantier" />
       </div>
@@ -106,7 +116,7 @@
 <script>
 import Swal from "sweetalert2";
 export default {
-  props: ["idChantier", "idClient"],
+  props: ["idChantier", "idDevis"],
   data() {
     return {
       numeroDevis: null,
@@ -116,11 +126,12 @@ export default {
       paiementAcompte: null,
       paiementIntermed: null,
       paiementFinal: null,
+      filePath: null,
       data: "",
     };
   },
   methods: {
-    async send() {
+    async send(id) {
       let formulaire = document.getElementById("formulaireDevis");
       let formData = new FormData(formulaire);
       Swal.fire({
@@ -131,7 +142,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           let request = new XMLHttpRequest();
-          request.open("POST", "/api/devis");
+          request.open("PUT", `/api/devis/${id}`);
           request.send(formData);
           request.onload = () => {
             let json = JSON.parse(request.responseText);
@@ -142,7 +153,7 @@ export default {
                 confirmButtonText: "Ok",
               }).then(() => {
                 this.$router.push(
-                  `/list-clients/${idClient}/chantier/${idChantier}/details`
+                  `/list-clients/1/chantier/${idChantier}/details`
                 );
               });
             }
@@ -158,6 +169,39 @@ export default {
           Swal.fire("Votre devis n'a pas été enregistré", "", "info");
         }
       });
+    },
+    async getChantier(idDevis) {
+      const headers = new Headers({
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      });
+      let getData = {
+        method: "GET",
+        headers: headers,
+        mode: "cors",
+        cache: "default",
+      };
+      try {
+        let response = await fetch(`/api/devis/${idDevis}`, getData);
+        if (response.status === 200) {
+          let data = await response.json();
+          console.log("Success:", data);
+          this.numeroDevis = data.numeroDevis;
+          this.paiementAcompte = data.paiementAcompte;
+          this.paiementIntermed = data.paiementIntermed;
+          this.prixDevis = data.prixDevis;
+          this.paiementFinal =
+            data.prixDevis - data.paiementAcompte - data.paiementIntermed;
+          this.chantier = data.chantier;
+          this.filePath = data.filePath;
+          this.statut = data.statut;
+        }
+        if (response.status === 404) {
+          this.$router.push("/404");
+        }
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
   mounted() {
@@ -180,10 +224,11 @@ export default {
       this.paiementFinal =
         this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
+    this.getChantier(this.idDevis);
   },
 };
 </script>
 
-<style>
+<style scoped>
 @import "@/styles/Form.css";
 </style>
