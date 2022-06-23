@@ -27,6 +27,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             ],
         ],
     ],
+    itemOperations:[
+        'delete',
+        'patch',
+        'get',
+        'put' => [
+            'input_formats' => [
+                'multipart' => ['multipart/form-data'],
+            ],
+        ],
+    ]
 )]
 #[UniqueEntity(fields :"numeroDevis",
  message: "Ce numero de devis est déjà utilisé !")]

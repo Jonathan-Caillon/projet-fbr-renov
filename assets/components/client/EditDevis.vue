@@ -90,13 +90,19 @@
         <!-- Document -->
         <div class="group-form">
           <label>Document : </label>
-          <input id="file" class="form" type="file" name="file"/>
+          <input id="file" class="form" type="file" name="file" />
         </div>
         <div v-if="this.filePath" class="group-form">
-            <label>Document actuel : </label>
-            <router-link title="Document" class="link-doc" target="_blank" :to='"/document/devis/" + this.filePath'>Document actuel</router-link>
+          <label>Document actuel : </label>
+          <router-link
+            title="Document"
+            class="link-doc"
+            target="_blank"
+            :to="'/document/devis/' + this.filePath"
+            >Document actuel</router-link
+          >
         </div>
-        
+
         <input type="hidden" name="chantier" v-model="chantier" />
       </div>
 
@@ -110,13 +116,13 @@
 <script>
 import Swal from "sweetalert2";
 export default {
-  props: ["idChantier","idDevis"],
+  props: ["idChantier", "idDevis"],
   data() {
     return {
       numeroDevis: null,
       prixDevis: null,
       statut: "",
-      chantier: null,
+      chantier: "/api/chantiers/" + this.idChantier,
       paiementAcompte: null,
       paiementIntermed: null,
       paiementFinal: null,
@@ -146,7 +152,9 @@ export default {
                 title: "Enregistré",
                 confirmButtonText: "Ok",
               }).then(() => {
-                this.$router.push(`/list-clients/1/chantier/${idChantier}/details`)
+                this.$router.push(
+                  `/list-clients/1/chantier/${idChantier}/details`
+                );
               });
             }
             if (request.status === 422) {
@@ -182,7 +190,8 @@ export default {
           this.paiementAcompte = data.paiementAcompte;
           this.paiementIntermed = data.paiementIntermed;
           this.prixDevis = data.prixDevis;
-          this.paiementFinal = data.prixDevis - data.paiementAcompte - data.paiementIntermed;
+          this.paiementFinal =
+            data.prixDevis - data.paiementAcompte - data.paiementIntermed;
           this.chantier = data.chantier;
           this.filePath = data.filePath;
           this.statut = data.statut;
@@ -202,20 +211,20 @@ export default {
 
     prixDevis.addEventListener("input", (e) => {
       this.prixDevis = e.target.value;
-      (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
+      this.paiementFinal =
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
     paiementAcompte.addEventListener("input", (e) => {
       this.paiementAcompte = e.target.value;
-      (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
+      this.paiementFinal =
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
     paiementIntermed.addEventListener("input", (e) => {
       this.paiementIntermed = e.target.value;
-      (this.paiementFinal =
-        this.prixDevis - this.paiementAcompte - this.paiementIntermed)
+      this.paiementFinal =
+        this.prixDevis - this.paiementAcompte - this.paiementIntermed;
     });
-    this.getChantier(this.idDevis)
+    this.getChantier(this.idDevis);
   },
 };
 </script>
