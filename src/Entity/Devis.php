@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -88,6 +89,13 @@ class Devis
      * @Vich\UploadableField(mapping="document", fileNameProperty="filePath")
      */
     #[Groups(['write:devis'])]
+    /**
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Please upload a valid PDF"
+     * )
+     */
     private ?File $file = null;
 
     #[ORM\Column(nullable: true)]

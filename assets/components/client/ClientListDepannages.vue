@@ -4,7 +4,7 @@
       <div class="tableau">
         <div class="tableau-title">
           <div>
-            <h3>Chantiers</h3>
+            <h3>Depannages</h3>
           </div>
           <div>
             <router-link

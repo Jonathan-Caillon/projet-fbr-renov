@@ -175,8 +175,8 @@ export default {
               timer: 1500,
             });
             setTimeout(function () {
-              window.location.reload();
-            }, 2000);
+              // window.location.reload();
+            }, 10000000000);
             console.log("Success:", data);
           }
        

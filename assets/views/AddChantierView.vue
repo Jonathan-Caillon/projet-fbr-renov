@@ -206,7 +206,7 @@ export default {
       };
       await fetch("/api/chantiers", myData)
         .then(async (response) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             const data = await response.json();
             location.reload();
             console.log("Success:", data);

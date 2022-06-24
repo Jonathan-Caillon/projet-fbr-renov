@@ -1,7 +1,7 @@
 <template>
     <div>
         <ClientListChantiers :idClient="this.idClient" :clientDataChantier="this.clientDataChantier"/>
-        <ClientListDepannages :idClient="this.idClient" :clientDataDepannage="this.clientDataChantier"/>
+        <ClientListDepannages :idClient="this.idClient" :clientDataDepannage="this.clientDataDepannage"/>
     </div>
 </template>
 
